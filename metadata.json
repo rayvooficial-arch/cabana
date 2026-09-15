@@ -1,0 +1,8 @@
+{
+  "name": "Cabana das Mansões",
+  "description": "Cabana das Mansões — Mais do que uma hospedagem, uma experiência única e imersiva no campo. Spa em meio à natureza com hidromassagens privativas, fazendinha interativa, cinema ao ar livre e aconchego.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
