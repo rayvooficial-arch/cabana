@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { EXPERIENCE_SPRITE } from '../data/experienceMedia';
 import { HYDRO_SPRITE } from '../data/hydroMedia';
+import { CINEMA_SPRITE } from '../data/cinemaMedia';
 
 interface GalleryPhoto {
   title: string;
@@ -67,9 +68,27 @@ const galleries: GalleryGroup[] = [
     shortDescription: 'Telão em meio à natureza',
     icon: Film,
     photos: [
-      { title: 'Cinema das Mansões', caption: 'Estrutura iluminada à noite', row: 1, col: 0 },
-      { title: 'Sessão de cinema', caption: 'Tela preparada para a sessão', row: 1, col: 1 },
-      { title: 'Cinema durante o dia', caption: 'Vista completa da estrutura', row: 1, col: 2 },
+      {
+        title: 'Cinema ao ar livre',
+        caption: 'Estrutura do cinema durante o dia',
+        src: CINEMA_SPRITE,
+        position: 'left center',
+        size: '300% auto',
+      },
+      {
+        title: 'Sessão de cinema',
+        caption: 'Tela preparada para a sessão',
+        src: CINEMA_SPRITE,
+        position: 'center center',
+        size: '300% auto',
+      },
+      {
+        title: 'Cinema à noite',
+        caption: 'Estrutura iluminada em meio à natureza',
+        src: CINEMA_SPRITE,
+        position: 'right center',
+        size: '300% auto',
+      },
     ],
   },
   {
