@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Calendar, Sparkles } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
 import { includedExperiences } from '../data/experiences';
+import { BookingButton } from './BookingButton';
 
 interface NavbarProps {
-  onOpenBooking: (accommodationId?: string) => void;
+  onOpenBooking?: (accommodationId?: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
+export const Navbar: React.FC<NavbarProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -20,9 +21,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
   const navLinks = [
     { label: 'Início', href: '#inicio' },
-    { label: 'Experiência', href: '#experiencia' },
     { label: 'Acomodações', href: '#acomodacoes' },
+    { label: 'Modalidades', href: '#modalidades' },
     ...(includedExperiences.length > 0 ? [{ label: 'Estrutura', href: '#estrutura' }] : []),
+    { label: 'Cestas & Experiências', href: '#personalize-experiencia' },
     { label: 'Tarifário', href: '#tarifario' },
     { label: 'Como Chegar', href: '#como-chegar' },
   ];
@@ -68,14 +70,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
           {/* Action CTA */}
           <div className="hidden sm:flex items-center gap-4">
-            <button
-              onClick={() => onOpenBooking()}
+            <BookingButton
               id="nav-reservation-button"
-              className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#C29B48] hover:bg-[#d6af57] text-[#14241A] font-semibold text-xs tracking-wider uppercase shadow-lg shadow-black/20 hover:shadow-[#C29B48]/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-            >
-              <Calendar className="w-4 h-4 text-[#14241A]" />
-              <span>Reservar</span>
-            </button>
+              label="RESERVAR"
+              variant="nav"
+              size="sm"
+              className="px-6 py-2.5 rounded-full"
+            />
           </div>
 
           {/* Mobile Menu Button */}
@@ -110,17 +111,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           </div>
 
           <div className="pt-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenBooking();
-              }}
+            <BookingButton
               id="mobile-menu-reserve-btn"
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#C29B48] text-[#14241A] font-bold text-xs uppercase tracking-wider shadow-md hover:bg-[#d6af57] transition-all cursor-pointer"
-            >
-              <Calendar className="w-4 h-4 text-[#14241A]" />
-              <span>Consultar Disponibilidade / Reservar</span>
-            </button>
+              label="RESERVAR AGORA"
+              variant="nav"
+              size="md"
+              className="w-full py-3.5 rounded-xl text-center"
+              onClick={() => setMobileMenuOpen(false)}
+            />
           </div>
         </div>
       )}

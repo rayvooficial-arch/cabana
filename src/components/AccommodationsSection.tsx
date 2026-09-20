@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { accommodations } from '../data/accommodations';
 import { Accommodation } from '../types';
-import { createDirectAccommodationWhatsAppLink, trackWhatsAppClick } from '../utils/whatsapp';
+import { BookingButton } from './BookingButton';
 import {
   Users,
   Sparkles,
   Bath,
   Tv,
   Heart,
-  Calendar,
   Check,
   Flame,
   Armchair,
@@ -16,12 +15,11 @@ import {
   ChevronRight,
   ShieldCheck,
   Percent,
-  MessageSquare,
   Eye,
 } from 'lucide-react';
 
 interface AccommodationsSectionProps {
-  onOpenBooking: (accommodationId?: string) => void;
+  onOpenBooking?: (accommodationId?: string) => void;
   onOpenDetails?: (accommodation: Accommodation) => void;
 }
 
@@ -329,29 +327,15 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
 
                     {/* Botões de Ação Direta (Sem Fricção) */}
                     <div className="pt-6 mt-6 border-t border-[#E8DED1] space-y-2.5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        <button
-                          onClick={() => {
-                            trackWhatsAppClick('accommodation_card_whatsapp', { accommodation: acc.name });
-                            const link = createDirectAccommodationWhatsAppLink(acc.name);
-                            window.open(link, '_blank');
-                          }}
-                          id={`whatsapp-direct-btn-${acc.id}`}
-                          className="w-full py-3.5 rounded-2xl bg-white hover:bg-[#F3ECE2] text-[#14241A] border border-[#C29B48] font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                          <MessageSquare className="w-4 h-4 text-[#C29B48]" />
-                          <span>WhatsApp Direto</span>
-                        </button>
-
-                        <button
-                          onClick={() => onOpenBooking(acc.id)}
-                          id={`direct-reserve-btn-${acc.id}`}
-                          className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#1c3224] to-[#2d4f3b] hover:from-[#2d4f3b] hover:to-[#3e6850] text-[#FAF7F2] font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01]"
-                        >
-                          <Calendar className="w-4 h-4 text-[#C29B48]" />
-                          <span>Reservar {acc.name}</span>
-                        </button>
-                      </div>
+                      <BookingButton
+                        id={`direct-reserve-btn-${acc.id}`}
+                        accommodationId={acc.id}
+                        accommodationName={acc.name}
+                        label="VER DISPONIBILIDADE"
+                        variant="primary"
+                        size="md"
+                        className="w-full py-4 text-xs font-bold uppercase tracking-wider"
+                      />
 
                       {onOpenDetails && (
                         <button
@@ -379,20 +363,20 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
         <div className="mt-16 bg-[#F3ECE2] border border-[#E8DED1] rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
           <div className="space-y-1">
             <h4 className="font-serif text-lg sm:text-xl font-bold text-[#14241A]">
-              Deseja ajuda para escolher a melhor opção?
+              Planejando seus dias de descanso?
             </h4>
             <p className="text-xs sm:text-sm text-[#526048]">
-              Consulte nossa equipe no WhatsApp para tirar dúvidas sobre datas, pacotes e animais de estimação.
+              Consulte as datas disponíveis em nosso calendário online e garanta sua cabana exclusiva.
             </p>
           </div>
 
-          <button
-            onClick={() => onOpenBooking()}
+          <BookingButton
             id="accommodations-bottom-help-btn"
-            className="px-8 py-3.5 rounded-full bg-[#C29B48] hover:bg-[#d6af57] text-[#14241A] font-bold text-xs uppercase tracking-wider shadow-md transition-all cursor-pointer whitespace-nowrap hover:scale-105"
-          >
-            Falar com Atendimento
-          </button>
+            label="VER DISPONIBILIDADE GERAL"
+            variant="compact"
+            size="md"
+            className="px-8 py-3.5 rounded-full whitespace-nowrap"
+          />
         </div>
       </div>
     </section>

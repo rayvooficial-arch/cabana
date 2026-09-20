@@ -1,13 +1,13 @@
 import React from 'react';
 import { propertyAddress } from '../data/pricingAndInfo';
 import { WHATSAPP_NUMBER_FORMATTED, BRAND_NAME } from '../config/constants';
-import { createGeneralInquiryWhatsAppLink, trackWhatsAppClick } from '../utils/whatsapp';
+import { createInstitutionalSupportLink, trackInstitutionalContactClick } from '../utils/whatsapp';
 import { Sparkles, MapPin, Heart, MessageSquare } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const handleWhatsAppClick = () => {
-    trackWhatsAppClick('footer_link');
-    window.open(createGeneralInquiryWhatsAppLink('Rodapé do Site'), '_blank');
+    trackInstitutionalContactClick('footer_link');
+    window.open(createInstitutionalSupportLink('Rodapé do Site'), '_blank');
   };
 
   return (
@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-[#E8D4A2] text-xs font-semibold uppercase tracking-wider transition-colors border border-[#C29B48]/30 cursor-pointer"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-[#C29B48]" />
-                <span>WhatsApp: {WHATSAPP_NUMBER_FORMATTED}</span>
+                <span>Atendimento: {WHATSAPP_NUMBER_FORMATTED}</span>
               </button>
             </div>
           </div>

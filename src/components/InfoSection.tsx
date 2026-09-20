@@ -1,5 +1,6 @@
 import React from 'react';
 import { bookingRules } from '../data/pricingAndInfo';
+import { createInstitutionalSupportLink, trackInstitutionalContactClick } from '../utils/whatsapp';
 import {
   Clock,
   CreditCard,
@@ -80,12 +81,13 @@ export const InfoSection: React.FC = () => {
             </p>
           </div>
           <a
-            href="https://wa.me/67992788230"
+            href={createInstitutionalSupportLink('Dúvidas Gerais')}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackInstitutionalContactClick('info_section')}
             className="px-6 py-3 rounded-full bg-[#1c3224] hover:bg-[#2d4f3b] text-white font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
           >
-            Fale Conosco via WhatsApp
+            Falar com Atendimento
           </a>
         </div>
       </div>

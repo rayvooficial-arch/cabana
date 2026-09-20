@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { includedExperiences } from '../data/experiences';
+import { BookingButton } from './BookingButton';
+import { CinemaGuideModal } from './CinemaGuideModal';
 import {
   Bath,
   Trees,
@@ -14,10 +16,11 @@ import {
   CookingPot,
   ShieldCheck,
   Sparkles,
+  BookOpen,
 } from 'lucide-react';
 
 interface ExperiencesSectionProps {
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
 }
 
 const iconMap: Record<string, React.ElementType> = {
@@ -36,6 +39,8 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export const ExperiencesSection: React.FC<ExperiencesSectionProps> = ({ onOpenBooking }) => {
+  const [isCinemaGuideOpen, setIsCinemaGuideOpen] = useState(false);
+
   if (includedExperiences.length === 0) {
     return null;
   }
@@ -108,29 +113,51 @@ export const ExperiencesSection: React.FC<ExperiencesSectionProps> = ({ onOpenBo
           })}
         </div>
 
-        {/* Cinema Highlight Feature Card */}
+        {/* Cinema Highlight Feature Card — Cinema das Mansões */}
         <div className="bg-gradient-to-r from-[#14241A] via-[#1c3224] to-[#14241A] rounded-3xl p-8 sm:p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 border border-[#C29B48]/30">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C29B48]/20 text-[#E8D4A2] text-xs font-semibold uppercase tracking-wider">
               <Tv className="w-3.5 h-3.5 text-[#C29B48]" />
-              <span>Destaque Exclusivo</span>
+              <span>Cinema das Mansões</span>
             </div>
+
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-              Cinema ao Ar Livre com Telão de 100 Polegadas
+              “Quando a noite chega, a natureza vira sua sala de cinema.”
             </h3>
+
             <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light">
-              Projetor de altíssima definição, som acolhedor e o céu estrelado do campo. Uma experiência mágica e imersiva para reunir quem você ama, preparar a pipoca inclusa e curtir momentos inesquecíveis.
+              Desfrute de sessões inesquecíveis sob o céu estrelado com o projetor inteligente Samsung The Freestyle em telão de até 100 polegadas. Imagem de altíssima definição, som imersivo via Bluetooth e pipoca quentinha pronta para o seu filme.
             </p>
+
+            <div className="pt-2">
+              <button
+                onClick={() => setIsCinemaGuideOpen(true)}
+                id="open-cinema-guide-btn"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#E8D4A2] hover:text-white transition-colors cursor-pointer underline underline-offset-4"
+              >
+                <BookOpen className="w-4 h-4 text-[#C29B48]" />
+                <span>Ver Guia de Uso do Cinema (Samsung The Freestyle)</span>
+              </button>
+            </div>
           </div>
 
-          <button
-            onClick={onOpenBooking}
-            className="whitespace-nowrap px-8 py-3.5 rounded-full bg-[#C29B48] hover:bg-[#d6af57] text-[#14241A] font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 transition-all cursor-pointer"
-          >
-            Viver Essa Experiência
-          </button>
+          <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3 w-full sm:w-auto">
+            <BookingButton
+              id="experiences-cinema-cta-btn"
+              label="VER DISPONIBILIDADE"
+              variant="gold"
+              size="md"
+              className="whitespace-nowrap px-8 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs"
+            />
+          </div>
         </div>
       </div>
+
+      {/* Modal Guia de Uso Samsung The Freestyle */}
+      <CinemaGuideModal
+        isOpen={isCinemaGuideOpen}
+        onClose={() => setIsCinemaGuideOpen(false)}
+      />
     </section>
   );
 };

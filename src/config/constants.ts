@@ -19,20 +19,43 @@ export const BRAND_LOCATION = 'Chácara das Mansões, Campo Grande - MS';
 export const CHECK_IN_TIME = '15h00';
 export const CHECK_OUT_TIME = '12h00';
 
+// Importa fonte única da verdade para dados comerciais
+import { STAY_MODES } from '../data/commercial';
+
 // Tarifas Oficiais (Fonte Única da Verdade)
 export const PRICING_CONFIG = {
-  // Cabana Éden e Cabana Manancial
+  // Modalidade Temporada Express (Oficial)
+  express: {
+    cabanas: {
+      weekdayPrice: STAY_MODES.express.pricing.cabanas.weekday ?? 890,
+      weekendPrice: STAY_MODES.express.pricing.cabanas.weekend ?? 1090,
+    },
+    casa: {
+      weekdayPrice: STAY_MODES.express.pricing.casa.weekday ?? 1350,
+      weekendPrice: STAY_MODES.express.pricing.casa.weekend ?? 1690,
+    },
+  },
+  // Modalidade Temporada Conforto (Oficial)
+  conforto: {
+    cabanas: {
+      weekdayPrice: STAY_MODES.conforto.pricing.cabanas.weekday,
+      weekendPrice: STAY_MODES.conforto.pricing.cabanas.weekend,
+      statusText: STAY_MODES.conforto.pricing.cabanas.statusText,
+    },
+    casa: {
+      weekdayPrice: STAY_MODES.conforto.pricing.casa.weekday ?? 1530,
+      weekendPrice: STAY_MODES.conforto.pricing.casa.weekend ?? 1870,
+    },
+  },
+  // Padrão de capacidade máxima
   cabanas: {
-    weekendPrice: 1200, // Quinta a Domingo
-    weekdayPrice: 960,  // Segunda a Quarta (20% OFF)
-    discountPercentage: 20,
+    weekendPrice: STAY_MODES.express.pricing.cabanas.weekend ?? 1090,
+    weekdayPrice: STAY_MODES.express.pricing.cabanas.weekday ?? 890,
     maxGuests: 4,
   },
-  // Casa Pedacinho do Céu
   casa: {
-    weekendPrice: 1800, // Quinta a Domingo
-    weekdayPrice: 1440, // Segunda a Quarta (20% OFF)
-    discountPercentage: 20,
+    weekendPrice: STAY_MODES.express.pricing.casa.weekend ?? 1690,
+    weekdayPrice: STAY_MODES.express.pricing.casa.weekday ?? 1350,
     maxGuests: 8,
   },
   // Serviços e adicionais

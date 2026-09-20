@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, MessageSquare, Sparkles } from 'lucide-react';
-import { createGeneralInquiryWhatsAppLink, trackWhatsAppClick } from '../utils/whatsapp';
+import { createInstitutionalSupportLink, trackInstitutionalContactClick } from '../utils/whatsapp';
 
 interface FaqItem {
   id: string;
@@ -55,7 +55,7 @@ const faqs: FaqItem[] = [
     id: 'reserva',
     question: 'Como faço para consultar as datas e reservar?',
     answer:
-      'Basta clicar em qualquer botão de reserva ou entrar em contato direto pelo nosso WhatsApp oficial. Respondemos com atenção e agilidade todas as suas dúvidas sobre datas disponíveis e valores.',
+      'Basta clicar nos botões "Reservar Agora" ou "Ver Disponibilidade" para acessar nosso motor de reservas online, selecionar as datas desejadas e garantir sua cabana com confirmação imediata e transparente.',
   },
 ];
 
@@ -66,9 +66,9 @@ export const FaqSection: React.FC = () => {
     setOpenFaqId((prev) => (prev === id ? null : id));
   };
 
-  const handleWhatsAppClick = () => {
-    trackWhatsAppClick('faq_section');
-    window.open(createGeneralInquiryWhatsAppLink('Dúvidas Gerais'), '_blank');
+  const handleSupportClick = () => {
+    trackInstitutionalContactClick('faq_section');
+    window.open(createInstitutionalSupportLink('Dúvidas Gerais'), '_blank');
   };
 
   return (
@@ -143,12 +143,12 @@ export const FaqSection: React.FC = () => {
           </div>
 
           <button
-            onClick={handleWhatsAppClick}
-            id="faq-whatsapp-btn"
+            onClick={handleSupportClick}
+            id="faq-support-btn"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#1c3224] hover:bg-[#2d4f3b] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-md cursor-pointer whitespace-nowrap"
           >
             <MessageSquare className="w-4 h-4 text-[#C29B48]" />
-            <span>Falar no WhatsApp Agora</span>
+            <span>Contato Institucional</span>
           </button>
         </div>
       </div>

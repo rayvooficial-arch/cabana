@@ -1,6 +1,6 @@
 import { Accommodation } from '../types';
 import { PRICING_CONFIG } from '../config/constants';
-import edenCoverImage from '../assets/images/imagem.exemplo.png';
+import edenCoverImage from '../assets/images/regenerated_image_1789430982222.jpg';
 import manancialCoverImage from '../assets/images/imagem1.jpg';
 import manancialImg11 from '../assets/images/Design sem nome (11).jpg';
 import manancialImg12 from '../assets/images/Design sem nome (12).jpg';

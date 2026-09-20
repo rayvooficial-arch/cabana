@@ -158,7 +158,7 @@ export const KitchenAndPantrySection: React.FC = () => {
               Conforto em Cada Detalhe
             </h3>
             <p className="text-sm text-[#526048] mt-2">
-              As roupas de cama e banho estão inclusas em todas as estadias, com padrão de maciez impecável.
+              Itens essenciais de higiene para o seu bem-estar, com enxoval completo e maciez impecável disponível conforme a modalidade escolhida.
             </p>
           </div>
 

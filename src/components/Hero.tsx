@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { Calendar, ChevronDown, Compass, Sparkles, Volume2, VolumeX, ShieldCheck, Bath, Heart, Film } from 'lucide-react';
+import { ChevronDown, Compass, Sparkles, Volume2, VolumeX, ShieldCheck, Bath, Heart, Film } from 'lucide-react';
+import { BookingButton } from './BookingButton';
 
 interface HeroProps {
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
   videoUrl?: string;
 }
 
@@ -113,14 +114,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, videoUrl }) => {
 
           {/* Botões de Ação */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <button
-              onClick={onOpenBooking}
+            <BookingButton
               id="hero-reserve-btn"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#C29B48] to-[#D8B466] hover:from-[#d6af57] hover:to-[#e4c278] text-[#14241A] font-bold text-xs sm:text-sm tracking-wider uppercase shadow-xl hover:shadow-[#C29B48]/40 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-[#C29B48]/50 ring-offset-2 ring-offset-[#122118]"
-            >
-              <Calendar className="w-4 h-4 text-[#14241A]" />
-              <span>Consultar Disponibilidade</span>
-            </button>
+              label="VER DISPONIBILIDADE"
+              variant="gold"
+              size="lg"
+              className="w-full sm:w-auto"
+            />
 
             <a
               href="#acomodacoes"
@@ -134,7 +134,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, videoUrl }) => {
 
           {/* Microcopy de Confiança & Redução de Fricção */}
           <p className="mt-3 text-[11px] sm:text-xs text-white/70 tracking-wide flex items-center justify-center gap-1.5 font-light">
-            <span className="text-[#C29B48]">✓</span> Atendimento personalizado via WhatsApp • Datas exclusivas e limitadas
+            <span className="text-[#C29B48]">✓</span> Reserva 100% segura • Datas exclusivas e limitadas
           </p>
         </div>
       </div>
@@ -144,21 +144,27 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, videoUrl }) => {
         2. SEÇÃO ABAIXO DO VÍDEO (FORA DO VÍDEO) COM DEGRADÊ SOFISTICADO & DESCUBRA
         ========================================================================
       */}
-      <div className="relative z-10 w-full bg-gradient-to-b from-[#122118] via-[#16271D] to-[#FAF7F2] pt-8 pb-14 px-4 sm:px-6 border-t border-[#C29B48]/25 shadow-2xl">
-        <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 w-full bg-gradient-to-b from-[#112017] via-[#14261C] via-60% via-[#1b3123] via-82% to-[#FAF7F2] pt-8 sm:pt-10 pb-14 sm:pb-16 px-4 sm:px-6 shadow-2xl overflow-hidden">
+        {/* Fio de Luz Dourado no Topo */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#C29B48]/60 to-transparent pointer-events-none" />
+
+        {/* Brilho Atmosférico Central (Luz Âmbar Suave de Campo) */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_0%,rgba(194,155,72,0.14),transparent_75%)] pointer-events-none" />
+
+        <div className="relative z-10 max-w-5xl mx-auto">
           {/* Frase de Conexão com a Natureza */}
-          <p className="text-center font-sans text-xs sm:text-sm text-[#E8D4A2]/90 max-w-xl mx-auto mb-8 uppercase tracking-widest font-medium">
+          <p className="text-center font-sans text-xs sm:text-sm text-[#E8D4A2] max-w-xl mx-auto mb-8 uppercase tracking-[0.2em] font-medium drop-shadow-sm">
             Desacelere, respire fundo e viva momentos especiais
           </p>
 
           {/* Grid dos 4 Diferenciais com Acabamento Sofisticado */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-10 sm:mb-12">
             {/* Card 1: Privacidade */}
-            <div className="bg-[#14241A]/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-[#C29B48]/30 shadow-lg text-center hover:border-[#C29B48] transition-all group">
-              <div className="w-9 h-9 rounded-full bg-[#C29B48]/15 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="bg-[#14241A]/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-[#C29B48]/25 hover:border-[#C29B48] shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(194,155,72,0.18)] hover:-translate-y-1 transition-all duration-300 text-center group">
+              <div className="w-10 h-10 rounded-full bg-[#C29B48]/15 border border-[#C29B48]/30 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#C29B48]/25 transition-all">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <span className="block font-serif text-base sm:text-lg font-bold text-[#E8D4A2] mb-1">
+              <span className="block font-serif text-base sm:text-lg font-bold text-[#FAF7F2] group-hover:text-[#E8D4A2] transition-colors mb-1">
                 Privacidade
               </span>
               <span className="text-[11px] sm:text-xs text-white/70 uppercase tracking-wider block">
@@ -167,11 +173,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, videoUrl }) => {
             </div>
 
             {/* Card 2: Relaxamento */}
-            <div className="bg-[#14241A]/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-[#C29B48]/30 shadow-lg text-center hover:border-[#C29B48] transition-all group">
-              <div className="w-9 h-9 rounded-full bg-[#C29B48]/15 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="bg-[#14241A]/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-[#C29B48]/25 hover:border-[#C29B48] shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(194,155,72,0.18)] hover:-translate-y-1 transition-all duration-300 text-center group">
+              <div className="w-10 h-10 rounded-full bg-[#C29B48]/15 border border-[#C29B48]/30 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#C29B48]/25 transition-all">
                 <Bath className="w-5 h-5" />
               </div>
-              <span className="block font-serif text-base sm:text-lg font-bold text-[#E8D4A2] mb-1">
+              <span className="block font-serif text-base sm:text-lg font-bold text-[#FAF7F2] group-hover:text-[#E8D4A2] transition-colors mb-1">
                 Relaxamento
               </span>
               <span className="text-[11px] sm:text-xs text-white/70 uppercase tracking-wider block">
@@ -180,11 +186,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, videoUrl }) => {
             </div>
 
             {/* Card 3: Fazendinha */}
-            <div className="bg-[#14241A]/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-[#C29B48]/30 shadow-lg text-center hover:border-[#C29B48] transition-all group">
-              <div className="w-9 h-9 rounded-full bg-[#C29B48]/15 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="bg-[#14241A]/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-[#C29B48]/25 hover:border-[#C29B48] shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(194,155,72,0.18)] hover:-translate-y-1 transition-all duration-300 text-center group">
+              <div className="w-10 h-10 rounded-full bg-[#C29B48]/15 border border-[#C29B48]/30 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#C29B48]/25 transition-all">
                 <Heart className="w-5 h-5" />
               </div>
-              <span className="block font-serif text-base sm:text-lg font-bold text-[#E8D4A2] mb-1">
+              <span className="block font-serif text-base sm:text-lg font-bold text-[#FAF7F2] group-hover:text-[#E8D4A2] transition-colors mb-1">
                 Fazendinha
               </span>
               <span className="text-[11px] sm:text-xs text-white/70 uppercase tracking-wider block">
@@ -193,11 +199,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, videoUrl }) => {
             </div>
 
             {/* Card 4: Cinema 100" */}
-            <div className="bg-[#14241A]/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-[#C29B48]/30 shadow-lg text-center hover:border-[#C29B48] transition-all group">
-              <div className="w-9 h-9 rounded-full bg-[#C29B48]/15 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="bg-[#14241A]/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-[#C29B48]/25 hover:border-[#C29B48] shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(194,155,72,0.18)] hover:-translate-y-1 transition-all duration-300 text-center group">
+              <div className="w-10 h-10 rounded-full bg-[#C29B48]/15 border border-[#C29B48]/30 text-[#C29B48] mx-auto mb-3 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#C29B48]/25 transition-all">
                 <Film className="w-5 h-5" />
               </div>
-              <span className="block font-serif text-base sm:text-lg font-bold text-[#E8D4A2] mb-1">
+              <span className="block font-serif text-base sm:text-lg font-bold text-[#FAF7F2] group-hover:text-[#E8D4A2] transition-colors mb-1">
                 Cinema 100"
               </span>
               <span className="text-[11px] sm:text-xs text-white/70 uppercase tracking-wider block">
@@ -206,19 +212,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, videoUrl }) => {
             </div>
           </div>
 
-          {/* Indicador DESCUBRA com Animação Fluida */}
-          <div className="text-center">
+          {/* Indicador DESCUBRA com UX refinada, excelente contraste e affordance tátil */}
+          <div className="text-center pt-1">
             <a
               href="#experiencia"
               id="hero-scroll-indicator"
               aria-label="Rolar para a seção de experiência"
-              className="inline-flex flex-col items-center gap-1.5 px-6 py-2 rounded-full text-[#14241A] hover:text-[#1c3224] transition-all cursor-pointer group"
+              className="inline-flex flex-col items-center gap-2 group cursor-pointer"
             >
-              <span className="text-xs uppercase tracking-[0.25em] font-bold text-[#14241A] group-hover:tracking-[0.3em] transition-all">
-                Descubra a Experiência
-              </span>
-              <div className="w-7 h-7 rounded-full bg-[#1c3224]/10 text-[#1c3224] flex items-center justify-center group-hover:bg-[#1c3224] group-hover:text-[#E8D4A2] transition-colors">
-                <ChevronDown className="w-4 h-4 animate-bounce text-current" />
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#14241A] hover:bg-[#1c3224] text-[#E8D4A2] hover:text-white border border-[#C29B48]/40 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:border-[#C29B48]">
+                <span className="text-[11px] sm:text-xs uppercase tracking-[0.22em] font-semibold">
+                  Descubra a Experiência
+                </span>
+                <ChevronDown className="w-3.5 h-3.5 text-[#C29B48] group-hover:translate-y-0.5 transition-transform animate-bounce" />
               </div>
             </a>
           </div>

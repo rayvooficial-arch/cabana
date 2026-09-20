@@ -6,7 +6,9 @@ import { ExperiencesSection } from './components/ExperiencesSection';
 import { ExperienceMatcher } from './components/ExperienceMatcher';
 import { AccommodationsSection } from './components/AccommodationsSection';
 import { AccommodationDetailModal } from './components/AccommodationDetailModal';
+import { StayModesSection } from './components/StayModesSection';
 import { KitchenAndPantrySection } from './components/KitchenAndPantrySection';
+import { PersonalizeExperienceSection } from './components/PersonalizeExperienceSection';
 import { PricingSection } from './components/PricingSection';
 import { SocialProofSection } from './components/SocialProofSection';
 import { FaqSection } from './components/FaqSection';
@@ -14,22 +16,16 @@ import { InfoSection } from './components/InfoSection';
 import { LocationSection } from './components/LocationSection';
 import { FinalCta } from './components/FinalCta';
 import { Footer } from './components/Footer';
-import { BookingModal } from './components/BookingModal';
+import { PendingBookingModal } from './components/PendingBookingModal';
 import { MobileReservationBar } from './components/MobileReservationBar';
+import { openBookingEngine } from './utils/booking';
 import { Accommodation } from './types';
 
 export default function App() {
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [initialAccForBooking, setInitialAccForBooking] = useState<string | undefined>();
   const [selectedAccForDetail, setSelectedAccForDetail] = useState<Accommodation | null>(null);
 
   const handleOpenBooking = (accommodationId?: string) => {
-    setInitialAccForBooking(accommodationId);
-    setIsBookingModalOpen(true);
-  };
-
-  const handleCloseBooking = () => {
-    setIsBookingModalOpen(false);
+    openBookingEngine({ accommodationId });
   };
 
   const handleOpenDetailModal = (acc: Accommodation) => {
@@ -55,22 +51,28 @@ export default function App() {
         {/* 02 & 03 — PROMESSA / POSICIONAMENTO ("Por que a Cabana das Mansões?") */}
         <ConceptSection />
 
-        {/* 04 — EXPERIÊNCIAS DA PROPRIEDADE (Hidromassagens, Cinema 100", Fazendinha, Lazer) */}
-        <ExperiencesSection onOpenBooking={() => handleOpenBooking()} />
-
-        {/* 05 — GUIA "QUAL EXPERIÊNCIA COMBINA COM VOCÊ?" (Casal, Família, Grupo, Pet) */}
+        {/* 04 — GUIA "QUAL EXPERIÊNCIA COMBINA COM VOCÊ?" (Casal, Família, Grupo, Pet) */}
         <ExperienceMatcher onSelectAccommodation={handleOpenBooking} />
 
-        {/* 06 — ESCOLHA SUA ACOMODAÇÃO (Fotos reais sem popup, comodidades & reservas) */}
+        {/* 05 — ESCOLHA SUA ACOMODAÇÃO (Cabana Éden, Manancial e Casa Pedacinho do Céu) */}
         <AccommodationsSection
           onOpenBooking={handleOpenBooking}
           onOpenDetails={handleOpenDetailModal}
         />
 
-        {/* 08 — O QUE ESTÁ INCLUSO / GASTRONOMIA, COZINHA & CONFORTO */}
+        {/* 06 — ESCOLHA SUA MODALIDADE (Temporada Express × Temporada Conforto + Detalhes do Enxoval) */}
+        <StayModesSection onOpenBooking={handleOpenBooking} />
+
+        {/* 07 — VEJA O QUE ESTÁ INCLUSO: EXPERIÊNCIAS DA PROPRIEDADE (Hidromassagem, Cinema 100", Fazendinha) */}
+        <ExperiencesSection onOpenBooking={() => handleOpenBooking()} />
+
+        {/* 08 — O QUE ESTÁ INCLUSO: GASTRONOMIA, COZINHA & CONFORTO */}
         <KitchenAndPantrySection />
 
-        {/* 10 — TARIFÁRIO & OFERTAS (Seg-Qua 20% OFF vs Qui-Dom) */}
+        {/* 09 — PERSONALIZE SUA EXPERIÊNCIA (Fogareiro Premium, Cestas Café da Manhã, Boas-Vindas) */}
+        <PersonalizeExperienceSection />
+
+        {/* 10 — CONSULTE DATA / TARIFÁRIO (Modalidades, Natal, Réveillon, Janeiro 2027) */}
         <PricingSection onOpenBooking={handleOpenBooking} />
 
         {/* 11 — PROVA SOCIAL / AVALIAÇÕES REAIS (5.0 Estrelas) */}
@@ -89,20 +91,15 @@ export default function App() {
         <FinalCta onOpenBooking={() => handleOpenBooking()} />
       </main>
 
-      {/* 16 — FOOTER COM DADOS & CONTATO WHATSAPP */}
+      {/* 16 — FOOTER COM DADOS & CONTATO INSTITUCIONAL */}
       <Footer />
 
-      {/* Reservation Drawer / Modal Completo com cálculo transparente */}
-      <BookingModal
-        isOpen={isBookingModalOpen}
-        onClose={handleCloseBooking}
-        initialAccommodationId={initialAccForBooking}
-      />
+      {/* Modal elegante para quando a URL do motor estiver pendente */}
+      <PendingBookingModal />
 
       {/* Modal de Detalhes da Acomodação (quando solicitado) */}
       <AccommodationDetailModal
         accommodation={selectedAccForDetail}
-        isOpen={!!selectedAccForDetail}
         onClose={handleCloseDetailModal}
         onOpenBooking={(accId) => {
           handleCloseDetailModal();
@@ -110,7 +107,7 @@ export default function App() {
         }}
       />
 
-      {/* Barra Fixa Mobile de Alta Conversão */}
+      {/* Barra Fixa Mobile Discreta com "Seu refúgio começa aqui" */}
       <MobileReservationBar onOpenBooking={() => handleOpenBooking()} />
     </div>
   );

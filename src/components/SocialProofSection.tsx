@@ -20,7 +20,7 @@ const reviews: Review[] = [
     stayType: 'Final de Semana Romântico',
     accommodation: 'Cabana Éden',
     rating: 5,
-    text: 'Ficamos na Cabana Éden para comemorar nosso aniversário de casamento e superou tudo o que imaginávamos. A hidromassagem com vista para a mata, os sais de banho, o cinema sob as estrelas e a cama com lençóis 600 fios fizeram a gente desligar completamente do mundo. Atendimento impecável pelo WhatsApp!',
+    text: 'Ficamos na Cabana Éden para comemorar nosso aniversário de casamento e superou tudo o que imaginávamos. A hidromassagem com vista para a mata, os sais de banho, o cinema sob as estrelas e a cama com lençóis 600 fios fizeram a gente desligar completamente do mundo. Atendimento impecável da equipe de anfitriões!',
     date: 'Estadia recente',
   },
   {
@@ -143,10 +143,10 @@ export const SocialProofSection: React.FC = () => {
           </div>
           <div className="space-y-1">
             <span className="font-serif font-bold text-xl text-[#E8D4A2] block">
-              Atendimento Direto
+              Reserva Confiável
             </span>
             <p className="text-xs text-white/60">
-              Tire todas as dúvidas e faça sua reserva diretamente no WhatsApp
+              Reserva online direta sem comissões e suporte dedicado à sua estadia
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Heart, Users, Sparkles, Dog, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { createDirectAccommodationWhatsAppLink, trackWhatsAppClick } from '../utils/whatsapp';
+import { BookingButton } from './BookingButton';
 
 interface ProfileOption {
   id: string;
@@ -32,7 +32,7 @@ const profiles: ProfileOption[] = [
       'Ambiente intimista e silencioso integrado à mata',
     ],
     capacity: 'Até 4 pessoas',
-    startingPrice: 'R$ 960/diária (dias de semana)',
+    startingPrice: 'A partir de R$ 890/diária (Temporada Express)',
     anchorId: 'cabana-eden',
   },
   {
@@ -50,7 +50,7 @@ const profiles: ProfileOption[] = [
       'Espaço seguro, amplo e cercado de natureza',
     ],
     capacity: 'De 4 a 8 pessoas',
-    startingPrice: 'A partir de R$ 960/diária',
+    startingPrice: 'A partir de R$ 890/diária',
     anchorId: 'cabana-manancial',
   },
   {
@@ -62,13 +62,13 @@ const profiles: ProfileOption[] = [
     recommendedName: 'Casa Pedacinho do Céu',
     recommendedTag: 'Mais Espaço & Tradição',
     reasons: [
-      '3 quartos completos e confortáveis com enxoval 600 fios',
+      '3 quartos completos e confortáveis',
       '2 fogões a lenha tradicionais e churrasqueira privativa',
       'Hidromassagem privativa para recarregar as energias',
-      'Ampla área de convivência e despensa abastecida',
+      'Ampla área de convivência e cozinha equipada',
     ],
     capacity: 'Até 8 pessoas',
-    startingPrice: 'R$ 1.440/diária (dias de semana)',
+    startingPrice: 'A partir de R$ 1.350/diária (Temporada Express)',
     anchorId: 'casa-pedacinho-do-ceu',
   },
   {
@@ -86,7 +86,7 @@ const profiles: ProfileOption[] = [
       'Acesso livre aos recantos arborizados da propriedade',
     ],
     capacity: 'Até 8 pessoas + Pets',
-    startingPrice: 'R$ 1.440/diária (dias de semana)',
+    startingPrice: 'A partir de R$ 1.350/diária (Temporada Express)',
     anchorId: 'casa-pedacinho-do-ceu',
   },
 ];
@@ -102,17 +102,6 @@ export const ExperienceMatcher: React.FC<ExperienceMatcherProps> = ({
 
   const selectedProfile =
     profiles.find((p) => p.id === activeProfileId) || profiles[0];
-
-  const handleWhatsAppConsult = () => {
-    trackWhatsAppClick('experience_matcher', {
-      profile: selectedProfile.id,
-      recommended: selectedProfile.recommendedName,
-    });
-    const link = createDirectAccommodationWhatsAppLink(
-      selectedProfile.recommendedName
-    );
-    window.open(link, '_blank');
-  };
 
   return (
     <section
@@ -231,13 +220,15 @@ export const ExperienceMatcher: React.FC<ExperienceMatcherProps> = ({
               <ArrowRight className="w-4 h-4 text-[#C29B48]" />
             </a>
 
-            <button
-              onClick={handleWhatsAppConsult}
-              id="matcher-whatsapp-consult-btn"
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#C29B48] hover:bg-[#d6af57] text-[#14241A] font-bold text-xs tracking-wider uppercase transition-all shadow-md hover:scale-[1.02] cursor-pointer"
-            >
-              <span>Consultar no WhatsApp</span>
-            </button>
+            <BookingButton
+              id="matcher-reserve-btn"
+              accommodationId={selectedProfile.recommendedAccId}
+              accommodationName={selectedProfile.recommendedName}
+              label="VER DISPONIBILIDADE"
+              variant="gold"
+              size="md"
+              className="w-full text-center rounded-full"
+            />
           </div>
         </div>
       </div>

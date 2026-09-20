@@ -1,4 +1,5 @@
 import { PRICING_CONFIG, CHECK_IN_TIME, CHECK_OUT_TIME } from '../config/constants';
+import { STAY_MODES } from './commercial';
 
 export interface PricingTier {
   id: string;
@@ -6,7 +7,6 @@ export interface PricingTier {
   category: 'cabanas' | 'casa';
   regularPrice: number;
   promoPrice: number;
-  discountPercentage: number;
   appliesTo: string;
   description: string;
   capacityText: string;
@@ -18,37 +18,35 @@ export const pricingTiers: PricingTier[] = [
     id: 'cabanas',
     name: 'Cabanas (Éden ou Manancial)',
     category: 'cabanas',
-    regularPrice: PRICING_CONFIG.cabanas.weekendPrice,
-    promoPrice: PRICING_CONFIG.cabanas.weekdayPrice,
-    discountPercentage: PRICING_CONFIG.cabanas.discountPercentage,
+    regularPrice: STAY_MODES.express.pricing.cabanas.weekend ?? 1090,
+    promoPrice: STAY_MODES.express.pricing.cabanas.weekday ?? 890,
     appliesTo: 'Cabana Éden & Cabana Manancial',
-    description: 'Experiência exclusiva para casais ou pequenos grupos em busca de privacidade e spa.',
+    description: 'Experiência exclusiva para casais ou famílias em busca de aconchego, spa e conexão.',
     capacityText: `Até ${PRICING_CONFIG.cabanas.maxGuests} pessoas`,
     perks: [
-      'Hidromassagem privativa',
-      'Cozinha completa e equipada',
-      'Alimentos não perecíveis inclusos',
-      'Roupas de cama 600 fios e banho inclusas',
-      'Acesso à fazendinha e todas as áreas da propriedade',
-      'Cinema ao ar livre com telão de 100"',
+      'Hidromassagem privativa aquecida',
+      'Cozinha completa equipada',
+      'Itens essenciais para início de estadia inclusos',
+      'Acesso livre à fazendinha e recantos da propriedade',
+      'Cinema das Mansões com projetor Samsung The Freestyle 100"',
+      'Opção de Temporada Express ou Conforto',
     ],
   },
   {
     id: 'casa-pedacinho-do-ceu',
     name: 'Casa Pedacinho do Céu',
     category: 'casa',
-    regularPrice: PRICING_CONFIG.casa.weekendPrice,
-    promoPrice: PRICING_CONFIG.casa.weekdayPrice,
-    discountPercentage: PRICING_CONFIG.casa.discountPercentage,
+    regularPrice: STAY_MODES.express.pricing.casa.weekend ?? 1690,
+    promoPrice: STAY_MODES.express.pricing.casa.weekday ?? 1350,
     appliesTo: 'Casa Pedacinho do Céu',
-    description: 'Imersão espaçosa com 3 quartos, 2 fogões a lenha, churrasqueira e pet friendly.',
+    description: 'Imersão espaçosa com 3 quartos, 2 fogões a lenha, churrasqueira e 100% pet friendly.',
     capacityText: `Até ${PRICING_CONFIG.casa.maxGuests} pessoas`,
     perks: [
       'Espaço Pet Friendly amplo e cercado de verde',
-      '3 quartos completos com cama King/casal 600 fios',
-      'Hidromassagem privativa',
-      '2 fogões a lenha e churrasqueira gourmet',
-      'Alimentos não perecíveis e ovos da fazenda inclusos',
+      '3 quartos completos e confortáveis',
+      'Hidromassagem privativa aquecida',
+      '2 fogões a lenha tradicionais e churrasqueira',
+      'Cozinha completa e equipada',
       'Acesso livre a toda a infraestrutura da propriedade',
     ],
   },
@@ -81,14 +79,14 @@ export const bookingRules = [
     description: 'Parcelamos no cartão conforme taxas da maquininha',
   },
   {
-    label: 'Enxoval Completo',
-    value: 'Incluso',
-    description: 'Roupas de cama 600 fios e toalhas de banho inclusas',
+    label: 'Modalidades de Estadia',
+    value: 'Express ou Conforto',
+    description: 'Escolha entre economia prática trazendo seu enxoval ou conveniência total pronta para uso',
   },
   {
-    label: 'Alimentos da Despensa',
-    value: 'Inclusos',
-    description: 'Itens não perecíveis e ovos caipiras à sua disposição',
+    label: 'Itens de Chegada',
+    value: 'Disponíveis',
+    description: 'Itens essenciais de apoio e acolhimento na cozinha para sua comodidade imediata',
   },
 ];
 

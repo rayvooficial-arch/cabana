@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Accommodation } from '../types';
-import { createDirectAccommodationWhatsAppLink, trackWhatsAppClick } from '../utils/whatsapp';
+import { BookingButton } from './BookingButton';
 import {
   X,
   Users,
@@ -9,17 +9,15 @@ import {
   Tv,
   Utensils,
   Heart,
-  Calendar,
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
-  MessageSquare,
 } from 'lucide-react';
 
 interface AccommodationDetailModalProps {
   accommodation: Accommodation | null;
   onClose: () => void;
-  onOpenBooking: (accommodationId?: string) => void;
+  onOpenBooking?: (accommodationId?: string) => void;
 }
 
 export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> = ({
@@ -230,30 +228,16 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-              <button
-                onClick={() => {
-                  trackWhatsAppClick('accommodation_modal_direct', { accommodation: accommodation.name });
-                  const link = createDirectAccommodationWhatsAppLink(accommodation.name);
-                  window.open(link, '_blank');
-                }}
-                id={`modal-whatsapp-btn-${accommodation.id}`}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-white/15 hover:bg-white/25 text-white font-semibold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 border border-white/20"
-              >
-                <MessageSquare className="w-4 h-4 text-[#C29B48]" />
-                <span>Conversar no WhatsApp</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  onClose();
-                  onOpenBooking(accommodation.id);
-                }}
+              <BookingButton
                 id={`modal-reserve-btn-${accommodation.id}`}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#C29B48] hover:bg-[#d6af57] text-[#14241A] font-bold text-xs uppercase tracking-wider transition-all hover:scale-105 cursor-pointer shadow-lg flex items-center justify-center gap-2"
-              >
-                <Calendar className="w-4 h-4 text-[#14241A]" />
-                <span>Reservar Agora</span>
-              </button>
+                accommodationId={accommodation.id}
+                accommodationName={accommodation.name}
+                label="VER DISPONIBILIDADE"
+                variant="gold"
+                size="md"
+                className="w-full sm:w-auto px-8 py-3.5"
+                onClick={onClose}
+              />
             </div>
           </div>
         </div>

@@ -1,18 +1,12 @@
 import React from 'react';
-import { Calendar, MessageSquare, Sparkles, Heart } from 'lucide-react';
-import { createGeneralInquiryWhatsAppLink, trackWhatsAppClick } from '../utils/whatsapp';
+import { Compass } from 'lucide-react';
+import { BookingButton } from './BookingButton';
 
 interface FinalCtaProps {
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
 }
 
-export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenBooking }) => {
-  const handleWhatsAppClick = () => {
-    trackWhatsAppClick('final_cta');
-    const link = createGeneralInquiryWhatsAppLink('CTA Final da Página');
-    window.open(link, '_blank');
-  };
-
+export const FinalCta: React.FC<FinalCtaProps> = () => {
   return (
     <section className="py-28 bg-[#122118] text-white relative overflow-hidden text-center">
       {/* Background with luxury mood photography and dark forest vignette */}
@@ -49,31 +43,29 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenBooking }) => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-          <button
-            onClick={onOpenBooking}
+          <BookingButton
             id="final-cta-reserve-btn"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-gradient-to-r from-[#C29B48] to-[#D8B466] hover:from-[#d6af57] hover:to-[#e4c278] text-[#14241A] font-bold text-sm tracking-wider uppercase shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
-          >
-            <Calendar className="w-4 h-4 text-[#14241A]" />
-            <span>Consultar Disponibilidade</span>
-          </button>
+            label="RESERVAR AGORA"
+            variant="gold"
+            size="lg"
+            className="w-full sm:w-auto px-10 py-4 shadow-2xl"
+          />
 
-          <button
-            onClick={handleWhatsAppClick}
-            id="final-cta-whatsapp-btn"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-[#FAF7F2] border border-white/25 hover:border-white/40 font-semibold text-sm tracking-wider uppercase backdrop-blur-md transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+          <a
+            href="#acomodacoes"
+            id="final-cta-explore-btn"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-[#FAF7F2] border border-white/25 hover:border-white/40 font-semibold text-sm tracking-wider uppercase backdrop-blur-md transition-all duration-300 hover:scale-[1.02] cursor-pointer"
           >
-            <MessageSquare className="w-4 h-4 text-[#C29B48]" />
-            <span>Fale Conosco via WhatsApp</span>
-          </button>
+            <Compass className="w-4 h-4 text-[#C29B48]" />
+            <span>Conhecer as Acomodações</span>
+          </a>
         </div>
 
         {/* Trust microcopy */}
         <p className="mt-6 text-xs text-white/60">
-          Atendimento acolhedor e direto pelos anfitriões • Confirmação rápida de datas
+          Reserva 100% segura • Menor tarifa garantida direto com a propriedade
         </p>
       </div>
     </section>
   );
 };
-
