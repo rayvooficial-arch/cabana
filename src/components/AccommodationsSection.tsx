@@ -2,7 +2,7 @@ import React from 'react';
 import { accommodations } from '../data/accommodations';
 import { Accommodation } from '../types';
 import { BookingButton } from './BookingButton';
-import { Check, Heart, ImageOff, Users } from 'lucide-react';
+import { CalendarDays, Check, Heart, ImageOff, Users } from 'lucide-react';
 
 interface AccommodationsSectionProps {
   onOpenBooking?: (accommodationId?: string) => void;
@@ -25,7 +25,7 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
             Escolha onde você quer ficar
           </h2>
           <p className="text-sm sm:text-base text-[#526048] leading-relaxed max-w-2xl">
-            Três opções com propostas diferentes. Compare capacidade e principais comodidades e veja os detalhes antes de consultar sua data.
+            Compare capacidade, principais comodidades e valores da Temporada Express antes de consultar sua data.
           </p>
         </div>
 
@@ -81,13 +81,39 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
                       {acc.tagline}
                     </p>
 
-                    <div className="space-y-2 mb-6">
+                    <div className="space-y-2 mb-5">
                       {acc.highlightBadges.slice(0, 4).map((badge) => (
                         <div key={badge} className="flex items-center gap-2 text-sm text-[#445247]">
                           <Check className="w-4 h-4 text-[#8B6A2F] shrink-0" />
                           <span>{badge}</span>
                         </div>
                       ))}
+                    </div>
+
+                    <div className="rounded-2xl bg-[#F6F1EA] border border-[#E8DED1] p-4 mb-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <CalendarDays className="w-4 h-4 text-[#8B6A2F]" />
+                        <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#526048]">
+                          Temporada Express
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <span className="block text-[11px] text-[#6B746D] mb-1">Segunda a quarta</span>
+                          <strong className="font-serif text-xl text-[#14241A]">
+                            R$ {acc.weekdayPrice.toLocaleString('pt-BR')}
+                          </strong>
+                          <span className="text-[11px] text-[#6B746D]"> / diária</span>
+                        </div>
+                        <div className="border-l border-[#DDD2C5] pl-3">
+                          <span className="block text-[11px] text-[#6B746D] mb-1">Quinta a domingo</span>
+                          <strong className="font-serif text-xl text-[#14241A]">
+                            R$ {acc.weekendPrice.toLocaleString('pt-BR')}
+                          </strong>
+                          <span className="text-[11px] text-[#6B746D]"> / diária</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -120,7 +146,7 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
         </div>
 
         <p className="mt-6 text-xs text-[#6B746D] text-center">
-          Valores e disponibilidade são confirmados no motor oficial de reservas.
+          Valores acima são referência da Temporada Express. Disponibilidade, pacotes e condições finais são confirmados no motor oficial de reservas.
         </p>
       </div>
     </section>
