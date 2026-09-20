@@ -4,15 +4,19 @@ import { Accommodation } from '../types';
 import { BookingButton } from './BookingButton';
 import { CalendarDays, Check, Heart, Users } from 'lucide-react';
 
-const cardPhotoOffset: Record<Accommodation['id'], string> = {
-  eden: '0%',
-  manancial: '-100%',
-  'pedacinho-do-ceu': '-200%',
+const cardPhotos: Record<Accommodation['id'], string> = {
+  eden: '/accommodations/eden.webp',
+  manancial: '/accommodations/manancial.webp',
+  'pedacinho-do-ceu': '/accommodations/pedacinho-do-ceu.webp',
+};
+
+const cardPhotoPosition: Record<Accommodation['id'], string> = {
+  eden: 'center 58%',
+  manancial: 'center 58%',
+  'pedacinho-do-ceu': 'center 50%',
 };
 
 export const AccommodationsSection: React.FC = () => {
-  const accommodationSprite = '/accommodation-cards-sprite.webp';
-
   return (
     <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,13 +41,12 @@ export const AccommodationsSection: React.FC = () => {
             >
               <div className="relative aspect-[20/13] bg-[#EEE8DF] overflow-hidden">
                 <img
-                  src={accommodationSprite}
+                  src={cardPhotos[acc.id]}
                   alt={`Foto de ${acc.name}`}
-                  className="absolute top-0 h-full max-w-none select-none pointer-events-none"
-                  style={{
-                    width: '300%',
-                    left: cardPhotoOffset[acc.id],
-                  }}
+                  className="absolute inset-0 h-full w-full object-cover select-none pointer-events-none"
+                  style={{ objectPosition: cardPhotoPosition[acc.id] }}
+                  loading="lazy"
+                  decoding="async"
                   draggable={false}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
