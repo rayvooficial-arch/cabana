@@ -1,7 +1,7 @@
 import React from 'react';
 import { Accommodation } from '../types';
 import { BookingButton } from './BookingButton';
-import { Check, Heart, ImageOff, Users, X } from 'lucide-react';
+import { Check, Heart, Users, X } from 'lucide-react';
 
 interface AccommodationDetailModalProps {
   accommodation: Accommodation | null;
@@ -9,16 +9,14 @@ interface AccommodationDetailModalProps {
   onOpenBooking?: (accommodationId?: string) => void;
 }
 
-const isLocalImage = (src: string) => !/^https?:\/\//i.test(src);
-
 export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> = ({
   accommodation,
   onClose,
 }) => {
   if (!accommodation) return null;
 
-  const localImages = Array.from(
-    new Set([accommodation.coverImage, ...accommodation.galleryImages].filter(isLocalImage))
+  const galleryImages = Array.from(
+    new Set([accommodation.coverImage, ...accommodation.galleryImages])
   );
 
   return (
@@ -65,29 +63,21 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
         </div>
 
         <div className="p-5 sm:p-8 space-y-8">
-          {localImages.length > 0 ? (
-            <div className={`grid gap-3 ${localImages.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-              {localImages.slice(0, 4).map((image, index) => (
-                <div
-                  key={`${image}-${index}`}
-                  className={`rounded-2xl overflow-hidden bg-stone-200 ${index === 0 ? 'col-span-2 h-72 sm:h-96' : 'h-44 sm:h-56'}`}
-                >
-                  <img
-                    src={image}
-                    alt={`${accommodation.name} - foto ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-2xl bg-[#EEE8DF] min-h-56 flex flex-col items-center justify-center text-center px-6 text-[#526048]">
-              <ImageOff className="w-8 h-8 text-[#8B6A2F] mb-3" />
-              <strong className="text-[#14241A]">Fotos em atualização</strong>
-              <span className="text-sm mt-1">Consulte disponibilidade e detalhes atuais no motor de reservas.</span>
-            </div>
-          )}
+          <div className={`grid gap-3 ${galleryImages.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+            {galleryImages.slice(0, 6).map((image, index) => (
+              <div
+                key={`${image}-${index}`}
+                className={`rounded-2xl overflow-hidden bg-stone-200 ${index === 0 ? 'col-span-2 h-72 sm:h-96' : 'h-44 sm:h-56'}`}
+              >
+                <img
+                  src={image}
+                  alt={`${accommodation.name} - foto ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
