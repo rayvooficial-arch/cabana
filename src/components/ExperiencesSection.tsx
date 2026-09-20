@@ -18,8 +18,10 @@ import { EXPERIENCE_SPRITE } from '../data/experienceMedia';
 interface GalleryPhoto {
   title: string;
   caption: string;
-  row: number;
-  col: number;
+  row?: number;
+  col?: number;
+  src?: string;
+  position?: string;
 }
 
 interface GalleryGroup {
@@ -70,21 +72,59 @@ const galleries: GalleryGroup[] = [
       { title: 'Mesas de piquenique', caption: 'Área verde da propriedade', row: 3, col: 2 },
     ],
   },
+  {
+    title: 'Fazendinha',
+    shortDescription: 'Mini animais e contato com a natureza',
+    icon: Heart,
+    photos: [
+      {
+        title: 'Coelhinhos da fazendinha',
+        caption: 'Contato com os mini animais da propriedade',
+        src: '/fazendinha-coelhos.webp',
+        position: 'center 60%',
+      },
+      {
+        title: 'Patinhos no lago',
+        caption: 'Animais da fazendinha em meio à natureza',
+        src: '/fazendinha-patinhos.webp',
+        position: 'center 58%',
+      },
+      {
+        title: 'Cabritinhos',
+        caption: 'Mini animais da fazendinha',
+        src: '/fazendinha-cabras.webp',
+        position: 'center 48%',
+      },
+    ],
+  },
 ];
 
 const otherExperiences = [
-  { title: 'Fazendinha', icon: Heart },
   { title: 'Playground e campinho', icon: Baby },
   { title: 'Churrasqueiras', icon: Utensils },
   { title: 'Áreas verdes', icon: Trees },
 ];
 
-const spriteStyle = (photo: GalleryPhoto): React.CSSProperties => ({
-  backgroundImage: `url(${EXPERIENCE_SPRITE})`,
-  backgroundSize: '300% 400%',
-  backgroundPosition: `${photo.col * 50}% ${photo.row * (100 / 3)}%`,
-  backgroundRepeat: 'no-repeat',
-});
+const photoStyle = (
+  photo: GalleryPhoto,
+  directImageFit: 'cover' | 'contain' = 'cover'
+): React.CSSProperties => {
+  if (photo.src) {
+    return {
+      backgroundImage: `url(${photo.src})`,
+      backgroundSize: directImageFit,
+      backgroundPosition: photo.position ?? 'center',
+      backgroundRepeat: 'no-repeat',
+    };
+  }
+
+  return {
+    backgroundImage: `url(${EXPERIENCE_SPRITE})`,
+    backgroundSize: '300% 400%',
+    backgroundPosition: `${(photo.col ?? 0) * 50}% ${(photo.row ?? 0) * (100 / 3)}%`,
+    backgroundRepeat: 'no-repeat',
+  };
+};
 
 export const ExperiencesSection: React.FC = () => {
   const [activeGroup, setActiveGroup] = useState<number | null>(null);
@@ -147,7 +187,7 @@ export const ExperiencesSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-5">
           {galleries.map((group, groupIndex) => {
             const Icon = group.icon;
             const cover = group.photos[0];
@@ -163,7 +203,7 @@ export const ExperiencesSection: React.FC = () => {
                 <div
                   role="img"
                   aria-label={cover.title}
-                  style={spriteStyle(cover)}
+                  style={photoStyle(cover)}
                   className="aspect-[3/4] w-full transition-transform duration-500 group-hover:scale-[1.03]"
                 />
 
@@ -238,7 +278,7 @@ export const ExperiencesSection: React.FC = () => {
             <div
               role="img"
               aria-label={`${selectedGroup.photos[activePhoto].title} — ${selectedGroup.photos[activePhoto].caption}`}
-              style={spriteStyle(selectedGroup.photos[activePhoto])}
+              style={photoStyle(selectedGroup.photos[activePhoto], 'contain')}
               className="w-[min(76vw,430px)] aspect-[3/4] rounded-2xl sm:rounded-3xl shadow-2xl bg-[#14241A]"
             />
 
