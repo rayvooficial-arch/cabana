@@ -4,20 +4,15 @@ import { Accommodation } from '../types';
 import { BookingButton } from './BookingButton';
 import { CalendarDays, Check, Heart, Users } from 'lucide-react';
 
-interface AccommodationsSectionProps {
-  onOpenBooking?: (accommodationId?: string) => void;
-  onOpenDetails?: (accommodation: Accommodation) => void;
-}
-
 const cardPhotoPosition: Record<Accommodation['id'], string> = {
   eden: 'left center',
   manancial: 'center center',
   'pedacinho-do-ceu': 'right center',
 };
 
-export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
-  onOpenDetails,
-}) => {
+export const AccommodationsSection: React.FC = () => {
+  const accommodationSprite = `${import.meta.env.BASE_URL}accommodation-cards-sprite.webp`;
+
   return (
     <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,25 +35,20 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
               id={`accommodation-card-${acc.id}`}
               className="bg-white rounded-3xl border border-[#E3D9CC] overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col"
             >
-              <button
-                type="button"
-                onClick={() => onOpenDetails?.(acc)}
-                aria-label={`Ver fotos e detalhes de ${acc.name}`}
-                className="relative h-64 sm:h-72 bg-[#EEE8DF] overflow-hidden text-left cursor-pointer group"
-              >
-                <span
+              <div className="relative h-64 sm:h-72 bg-[#EEE8DF] overflow-hidden">
+                <div
                   role="img"
-                  aria-label={acc.name}
-                  className="absolute inset-0 bg-no-repeat transition-transform duration-500 group-hover:scale-[1.03]"
+                  aria-label={`Foto de ${acc.name}`}
+                  className="absolute inset-0 bg-no-repeat bg-cover"
                   style={{
-                    backgroundImage: "url('/accommodation-cards-sprite.webp')",
-                    backgroundSize: '300% auto',
+                    backgroundImage: `url(${accommodationSprite})`,
+                    backgroundSize: '300% 100%',
                     backgroundPosition: cardPhotoPosition[acc.id],
                   }}
                 />
-                <span className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
-                <span className="absolute top-4 left-4 flex gap-2 flex-wrap">
+                <div className="absolute top-4 left-4 flex gap-2 flex-wrap pointer-events-none">
                   <span className="inline-flex items-center gap-1.5 bg-[#14241A]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
                     <Users className="w-3.5 h-3.5 text-[#C29B48]" />
                     {acc.capacity}
@@ -69,12 +59,8 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
                       Pet friendly
                     </span>
                   )}
-                </span>
-
-                <span className="absolute bottom-4 right-4 rounded-full bg-black/55 text-white text-[11px] font-semibold px-3 py-1.5 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                  Ver fotos
-                </span>
-              </button>
+                </div>
+              </div>
 
               <div className="p-6 sm:p-7 flex flex-col flex-1">
                 <div className="flex-1">
@@ -121,18 +107,7 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
                   </div>
                 </div>
 
-                <div className="pt-5 border-t border-[#E8DED1] space-y-2.5">
-                  {onOpenDetails && (
-                    <button
-                      type="button"
-                      onClick={() => onOpenDetails(acc)}
-                      id={`view-details-${acc.id}`}
-                      className="w-full px-5 py-3 rounded-xl border border-[#D9CDBE] text-[#14241A] text-xs font-bold uppercase tracking-wider hover:bg-[#F3ECE2] transition-colors cursor-pointer"
-                    >
-                      Ver fotos e detalhes
-                    </button>
-                  )}
-
+                <div className="pt-5 border-t border-[#E8DED1]">
                   <BookingButton
                     id={`reserve-${acc.id}`}
                     accommodationId={acc.id}
