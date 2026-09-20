@@ -16,6 +16,7 @@ import {
 import { EXPERIENCE_SPRITE } from '../data/experienceMedia';
 import { HYDRO_SPRITE } from '../data/hydroMedia';
 import { CINEMA_SPRITE } from '../data/cinemaMedia';
+import { FISHING_SPRITE } from '../data/fishingMedia';
 
 interface GalleryPhoto {
   title: string;
@@ -96,9 +97,27 @@ const galleries: GalleryGroup[] = [
     shortDescription: 'Pesca recreativa no lago',
     icon: Waves,
     photos: [
-      { title: 'Pesca no lago', caption: 'Momentos no deck do pesqueiro', row: 2, col: 0 },
-      { title: 'Pesque e solte', caption: 'Experiência junto ao lago', row: 2, col: 1 },
-      { title: 'Espécies do lago', caption: 'Informações disponíveis no pesqueiro', row: 2, col: 2 },
+      {
+        title: 'Pesque e solte',
+        caption: 'Experiência de pesca e solte junto ao lago',
+        src: FISHING_SPRITE,
+        position: 'right center',
+        size: '300% auto',
+      },
+      {
+        title: 'Pesca no lago',
+        caption: 'Momentos de pesca na propriedade',
+        src: FISHING_SPRITE,
+        position: 'center center',
+        size: '300% auto',
+      },
+      {
+        title: 'Espécies do lago',
+        caption: 'Peixes disponíveis para pesca e solte',
+        src: FISHING_SPRITE,
+        position: 'left center',
+        size: '300% auto',
+      },
     ],
   },
   {
