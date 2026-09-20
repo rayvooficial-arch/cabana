@@ -14,6 +14,7 @@ import {
   X,
 } from 'lucide-react';
 import { EXPERIENCE_SPRITE } from '../data/experienceMedia';
+import { HYDRO_SPRITE } from '../data/hydroMedia';
 
 interface GalleryPhoto {
   title: string;
@@ -22,6 +23,7 @@ interface GalleryPhoto {
   col?: number;
   src?: string;
   position?: string;
+  size?: string;
 }
 
 interface GalleryGroup {
@@ -37,9 +39,27 @@ const galleries: GalleryGroup[] = [
     shortDescription: 'Privativas nas acomodações',
     icon: Bath,
     photos: [
-      { title: 'Hidromassagem no deck', caption: 'Cabana Éden à noite', row: 0, col: 0 },
-      { title: 'Hidromassagem ao ar livre', caption: 'Deck da Cabana Manancial', row: 0, col: 1 },
-      { title: 'Hidromassagem interna', caption: 'Cabana Manancial', row: 0, col: 2 },
+      {
+        title: 'Hidromassagem interna',
+        caption: 'Cabana Manancial',
+        src: HYDRO_SPRITE,
+        position: 'left center',
+        size: '300% auto',
+      },
+      {
+        title: 'Hidromassagem ao ar livre',
+        caption: 'Deck da Cabana Manancial',
+        src: HYDRO_SPRITE,
+        position: 'center center',
+        size: '300% auto',
+      },
+      {
+        title: 'Hidromassagem no deck',
+        caption: 'Cabana Éden à noite',
+        src: HYDRO_SPRITE,
+        position: 'right center',
+        size: '300% auto',
+      },
     ],
   },
   {
@@ -112,7 +132,7 @@ const photoStyle = (
   if (photo.src) {
     return {
       backgroundImage: `url(${photo.src})`,
-      backgroundSize: directImageFit,
+      backgroundSize: photo.size ?? directImageFit,
       backgroundPosition: photo.position ?? 'center',
       backgroundRepeat: 'no-repeat',
     };
