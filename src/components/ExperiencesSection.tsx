@@ -1,163 +1,57 @@
-import React, { useState } from 'react';
-import { includedExperiences } from '../data/experiences';
-import { BookingButton } from './BookingButton';
-import { CinemaGuideModal } from './CinemaGuideModal';
+import React from 'react';
 import {
   Bath,
-  Trees,
-  Tv,
+  Film,
   Flame,
-  Sprout,
-  Compass,
-  Anchor,
+  Heart,
+  Trees,
   Utensils,
-  Smile,
-  Activity,
-  CookingPot,
-  ShieldCheck,
-  Sparkles,
-  BookOpen,
+  Waves,
+  Baby,
 } from 'lucide-react';
 
-interface ExperiencesSectionProps {
-  onOpenBooking?: () => void;
-}
+const experiences = [
+  { title: 'Hidromassagens', description: 'Momentos de descanso dentro da proposta de cada acomodação.', icon: Bath },
+  { title: 'Cinema ao ar livre', description: 'Sessões em telão de até 100 polegadas em meio à natureza.', icon: Film },
+  { title: 'Fazendinha', description: 'Contato com mini animais e a rotina da propriedade.', icon: Heart },
+  { title: 'Fogareiros', description: 'Espaços para aproveitar o fim do dia ao redor do fogo.', icon: Flame },
+  { title: 'Redários e piquenique', description: 'Áreas ao ar livre para descansar e passar o tempo sem pressa.', icon: Trees },
+  { title: 'Playground e campinho', description: 'Espaços para crianças e momentos em família.', icon: Baby },
+  { title: 'Pesque e solte', description: 'Uma atividade tranquila para aproveitar o ambiente rural.', icon: Waves },
+  { title: 'Churrasqueiras', description: 'Estrutura para preparar refeições durante a estadia.', icon: Utensils },
+];
 
-const iconMap: Record<string, React.ElementType> = {
-  Bath,
-  Trees,
-  Tv,
-  Flame,
-  Sprout,
-  Compass,
-  Anchor,
-  Utensils,
-  Smile,
-  Activity,
-  CookingPot,
-  ShieldCheck,
-};
-
-export const ExperiencesSection: React.FC<ExperiencesSectionProps> = ({ onOpenBooking }) => {
-  const [isCinemaGuideOpen, setIsCinemaGuideOpen] = useState(false);
-
-  if (includedExperiences.length === 0) {
-    return null;
-  }
-
+export const ExperiencesSection: React.FC = () => {
   return (
-    <section id="estrutura" className="py-24 bg-[#F3ECE2] text-[#2C332D] relative">
+    <section id="estrutura" className="py-20 sm:py-24 bg-[#F3ECE2] text-[#2C332D]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1c3224]/10 text-[#1c3224] text-xs font-semibold uppercase tracking-widest mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-[#C29B48]" />
-            <span>Infraestrutura Completa</span>
-          </div>
-
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#14241A] tracking-tight mb-4">
-            Experiências Inclusas
+        <div className="max-w-3xl mb-10 sm:mb-12">
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B6A2F]">
+            Na propriedade
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#14241A] mt-2 mb-4">
+            O que você encontra por aqui
           </h2>
-
-          <p className="font-sans text-base sm:text-lg text-[#526048] leading-relaxed">
-            Cada cantinho da propriedade foi planejado para proporcionar bem-estar, momentos em família, romance e tranquilidade genuína.
+          <p className="text-sm sm:text-base text-[#526048] leading-relaxed max-w-2xl">
+            Estrutura para descansar, aproveitar em família e curtir o campo sem precisar sair da propriedade.
           </p>
         </div>
 
-        {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-          {includedExperiences.map((exp) => {
-            const IconComponent = iconMap[exp.iconName] || Sparkles;
-            return (
-              <div
-                key={exp.id}
-                id={`exp-card-${exp.id}`}
-                className="group bg-white rounded-2xl overflow-hidden border border-[#E3D9CC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1"
-              >
-                {/* Visual Image with Zoom on Hover */}
-                <div className="relative h-44 w-full overflow-hidden bg-stone-200">
-                  <img
-                    src={exp.image}
-                    alt={exp.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                  {/* Badge */}
-                  {exp.badge && (
-                    <span className="absolute top-3 left-3 bg-[#14241A]/85 backdrop-blur-md text-[#E8D4A2] text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full border border-white/10">
-                      {exp.badge}
-                    </span>
-                  )}
-
-                  {/* Icon Circle */}
-                  <div className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-[#1c3224] flex items-center justify-center shadow-md">
-                    <IconComponent className="w-5 h-5 text-[#1c3224]" />
-                  </div>
-                </div>
-
-                {/* Card Text Content */}
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-[#14241A] mb-2 leading-snug group-hover:text-[#8B5A2B] transition-colors">
-                      {exp.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#526048] leading-relaxed">
-                      {exp.subtitle}
-                    </p>
-                  </div>
-                </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+          {experiences.map(({ title, description, icon: Icon }) => (
+            <article
+              key={title}
+              className="bg-white rounded-2xl border border-[#E3D9CC] p-5 sm:p-6 min-h-44"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#1c3224]/8 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-[#8B6A2F]" />
               </div>
-            );
-          })}
-        </div>
-
-        {/* Cinema Highlight Feature Card — Cinema das Mansões */}
-        <div className="bg-gradient-to-r from-[#14241A] via-[#1c3224] to-[#14241A] rounded-3xl p-8 sm:p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 border border-[#C29B48]/30">
-          <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C29B48]/20 text-[#E8D4A2] text-xs font-semibold uppercase tracking-wider">
-              <Tv className="w-3.5 h-3.5 text-[#C29B48]" />
-              <span>Cinema das Mansões</span>
-            </div>
-
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-              “Quando a noite chega, a natureza vira sua sala de cinema.”
-            </h3>
-
-            <p className="text-white/80 text-sm sm:text-base leading-relaxed font-light">
-              Desfrute de sessões inesquecíveis sob o céu estrelado com o projetor inteligente Samsung The Freestyle em telão de até 100 polegadas. Imagem de altíssima definição, som imersivo via Bluetooth e pipoca quentinha pronta para o seu filme.
-            </p>
-
-            <div className="pt-2">
-              <button
-                onClick={() => setIsCinemaGuideOpen(true)}
-                id="open-cinema-guide-btn"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-[#E8D4A2] hover:text-white transition-colors cursor-pointer underline underline-offset-4"
-              >
-                <BookOpen className="w-4 h-4 text-[#C29B48]" />
-                <span>Ver Guia de Uso do Cinema (Samsung The Freestyle)</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3 w-full sm:w-auto">
-            <BookingButton
-              id="experiences-cinema-cta-btn"
-              label="VER DISPONIBILIDADE"
-              variant="gold"
-              size="md"
-              className="whitespace-nowrap px-8 py-3.5 rounded-full font-bold uppercase tracking-wider text-xs"
-            />
-          </div>
+              <h3 className="font-serif text-lg font-bold text-[#14241A] mb-2">{title}</h3>
+              <p className="text-xs sm:text-sm text-[#526048] leading-relaxed">{description}</p>
+            </article>
+          ))}
         </div>
       </div>
-
-      {/* Modal Guia de Uso Samsung The Freestyle */}
-      <CinemaGuideModal
-        isOpen={isCinemaGuideOpen}
-        onClose={() => setIsCinemaGuideOpen(false)}
-      />
     </section>
   );
 };
