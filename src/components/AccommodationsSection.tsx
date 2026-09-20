@@ -4,14 +4,14 @@ import { Accommodation } from '../types';
 import { BookingButton } from './BookingButton';
 import { CalendarDays, Check, Heart, Users } from 'lucide-react';
 
-const cardPhotoPosition: Record<Accommodation['id'], string> = {
-  eden: 'left center',
-  manancial: 'center center',
-  'pedacinho-do-ceu': 'right center',
+const cardPhotoOffset: Record<Accommodation['id'], string> = {
+  eden: '0%',
+  manancial: '-100%',
+  'pedacinho-do-ceu': '-200%',
 };
 
 export const AccommodationsSection: React.FC = () => {
-  const accommodationSprite = `${import.meta.env.BASE_URL}accommodation-cards-sprite.webp`;
+  const accommodationSprite = '/accommodation-cards-sprite.webp';
 
   return (
     <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
@@ -35,16 +35,16 @@ export const AccommodationsSection: React.FC = () => {
               id={`accommodation-card-${acc.id}`}
               className="bg-white rounded-3xl border border-[#E3D9CC] overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col"
             >
-              <div className="relative h-64 sm:h-72 bg-[#EEE8DF] overflow-hidden">
-                <div
-                  role="img"
-                  aria-label={`Foto de ${acc.name}`}
-                  className="absolute inset-0 bg-no-repeat bg-cover"
+              <div className="relative aspect-[20/13] bg-[#EEE8DF] overflow-hidden">
+                <img
+                  src={accommodationSprite}
+                  alt={`Foto de ${acc.name}`}
+                  className="absolute top-0 h-full max-w-none select-none pointer-events-none"
                   style={{
-                    backgroundImage: `url(${accommodationSprite})`,
-                    backgroundSize: '300% 100%',
-                    backgroundPosition: cardPhotoPosition[acc.id],
+                    width: '300%',
+                    left: cardPhotoOffset[acc.id],
                   }}
+                  draggable={false}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
