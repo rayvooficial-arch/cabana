@@ -17,6 +17,12 @@ import { EXPERIENCE_SPRITE } from '../data/experienceMedia';
 import { HYDRO_SPRITE } from '../data/hydroMedia';
 import { CINEMA_SPRITE } from '../data/cinemaMedia';
 import { FISHING_SPRITE } from '../data/fishingMedia';
+import { HYDRO_COVER } from '../data/hydroCoverHQ';
+import { CINEMA_COVER } from '../data/cinemaCover';
+import { FISHING_COVER } from '../data/fishingCover';
+import { FOGUEIRA_PIQUENIQUE } from '../data/fogueiraPiquenique';
+import { FOGUEIRA_REDARIO } from '../data/fogueiraRedario';
+import { FOGUEIRA_NOITE } from '../data/fogueiraNoite';
 
 interface GalleryPhoto {
   title: string;
@@ -33,6 +39,8 @@ interface GalleryGroup {
   shortDescription: string;
   icon: React.ComponentType<{ className?: string }>;
   photos: GalleryPhoto[];
+  coverSrc?: string;
+  coverPosition?: string;
 }
 
 const galleries: GalleryGroup[] = [
@@ -40,6 +48,8 @@ const galleries: GalleryGroup[] = [
     title: 'Hidromassagens',
     shortDescription: 'Privativas nas acomodações',
     icon: Bath,
+    coverSrc: HYDRO_COVER,
+    coverPosition: 'center 55%',
     photos: [
       {
         title: 'Hidromassagem interna',
@@ -68,6 +78,8 @@ const galleries: GalleryGroup[] = [
     title: 'Cinema ao ar livre',
     shortDescription: 'Telão em meio à natureza',
     icon: Film,
+    coverSrc: CINEMA_COVER,
+    coverPosition: 'center',
     photos: [
       {
         title: 'Cinema ao ar livre',
@@ -96,6 +108,8 @@ const galleries: GalleryGroup[] = [
     title: 'Pesque e solte',
     shortDescription: 'Pesca recreativa no lago',
     icon: Waves,
+    coverSrc: FISHING_COVER,
+    coverPosition: 'center 38%',
     photos: [
       {
         title: 'Pesque e solte',
@@ -124,16 +138,35 @@ const galleries: GalleryGroup[] = [
     title: 'Fogueira e descanso',
     shortDescription: 'Fogo, redários e área verde',
     icon: Flame,
+    coverSrc: FOGUEIRA_PIQUENIQUE,
+    coverPosition: 'center 58%',
     photos: [
-      { title: 'Noite junto à fogueira', caption: 'Área de fogo ao ar livre', row: 3, col: 0 },
-      { title: 'Redário', caption: 'Um canto para ler e descansar', row: 3, col: 1 },
-      { title: 'Mesas de piquenique', caption: 'Área verde da propriedade', row: 3, col: 2 },
+      {
+        title: 'Mesas de piquenique',
+        caption: 'Área verde e espaço para descansar',
+        src: FOGUEIRA_PIQUENIQUE,
+        position: 'center',
+      },
+      {
+        title: 'Redário',
+        caption: 'Um canto para ler, relaxar e aproveitar a noite',
+        src: FOGUEIRA_REDARIO,
+        position: 'center',
+      },
+      {
+        title: 'Noite junto à fogueira',
+        caption: 'Área de fogo ao ar livre em frente às cabanas',
+        src: FOGUEIRA_NOITE,
+        position: 'center',
+      },
     ],
   },
   {
     title: 'Fazendinha',
     shortDescription: 'Mini animais e contato com a natureza',
     icon: Heart,
+    coverSrc: '/fazendinha-coelhos.webp',
+    coverPosition: 'center 60%',
     photos: [
       {
         title: 'Coelhinhos da fazendinha',
@@ -248,7 +281,14 @@ export const ExperiencesSection: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-5">
           {galleries.map((group, groupIndex) => {
             const Icon = group.icon;
-            const cover = group.photos[0];
+            const cover: GalleryPhoto = group.coverSrc
+              ? {
+                  title: group.photos[0].title,
+                  caption: group.photos[0].caption,
+                  src: group.coverSrc,
+                  position: group.coverPosition ?? 'center',
+                }
+              : group.photos[0];
 
             return (
               <button
