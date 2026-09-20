@@ -18,9 +18,6 @@ import { HYDRO_SPRITE } from '../data/hydroMedia';
 import { CINEMA_SPRITE } from '../data/cinemaMedia';
 import { FISHING_SPRITE } from '../data/fishingMedia';
 import { HYDRO_COVER } from '../data/hydroCoverHQ';
-import { CINEMA_COVER } from '../data/cinemaCover';
-import { FISHING_COVER } from '../data/fishingCover';
-import { FOGUEIRA_PIQUENIQUE } from '../data/fogueiraPiquenique';
 import { FOGUEIRA_REDARIO } from '../data/fogueiraRedario';
 import { FOGUEIRA_NOITE } from '../data/fogueiraNoite';
 
@@ -41,6 +38,7 @@ interface GalleryGroup {
   photos: GalleryPhoto[];
   coverSrc?: string;
   coverPosition?: string;
+  coverSize?: string;
 }
 
 const galleries: GalleryGroup[] = [
@@ -78,8 +76,9 @@ const galleries: GalleryGroup[] = [
     title: 'Cinema ao ar livre',
     shortDescription: 'Telão em meio à natureza',
     icon: Film,
-    coverSrc: CINEMA_COVER,
-    coverPosition: 'center',
+    coverSrc: CINEMA_SPRITE,
+    coverPosition: 'left center',
+    coverSize: '300% auto',
     photos: [
       {
         title: 'Cinema ao ar livre',
@@ -108,8 +107,9 @@ const galleries: GalleryGroup[] = [
     title: 'Pesque e solte',
     shortDescription: 'Pesca recreativa no lago',
     icon: Waves,
-    coverSrc: FISHING_COVER,
-    coverPosition: 'center 38%',
+    coverSrc: FISHING_SPRITE,
+    coverPosition: 'right center',
+    coverSize: '300% auto',
     photos: [
       {
         title: 'Pesque e solte',
@@ -138,14 +138,15 @@ const galleries: GalleryGroup[] = [
     title: 'Fogueira e descanso',
     shortDescription: 'Fogo, redários e área verde',
     icon: Flame,
-    coverSrc: FOGUEIRA_PIQUENIQUE,
-    coverPosition: 'center 58%',
+    coverSrc: EXPERIENCE_SPRITE,
+    coverPosition: '100% 100%',
+    coverSize: '300% 400%',
     photos: [
       {
         title: 'Mesas de piquenique',
         caption: 'Área verde e espaço para descansar',
-        src: FOGUEIRA_PIQUENIQUE,
-        position: 'center',
+        row: 3,
+        col: 2,
       },
       {
         title: 'Redário',
@@ -287,6 +288,7 @@ export const ExperiencesSection: React.FC = () => {
                   caption: group.photos[0].caption,
                   src: group.coverSrc,
                   position: group.coverPosition ?? 'center',
+                  size: group.coverSize,
                 }
               : group.photos[0];
 
