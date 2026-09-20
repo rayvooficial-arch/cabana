@@ -38,8 +38,8 @@ export const PRICING_CONFIG = {
   // Modalidade Temporada Conforto (Oficial)
   conforto: {
     cabanas: {
-      weekdayPrice: STAY_MODES.conforto.pricing.cabanas.weekday,
-      weekendPrice: STAY_MODES.conforto.pricing.cabanas.weekend,
+      weekdayPrice: STAY_MODES.conforto.pricing.cabanas.weekday ?? 960,
+      weekendPrice: STAY_MODES.conforto.pricing.cabanas.weekend ?? 1200,
       statusText: STAY_MODES.conforto.pricing.cabanas.statusText,
     },
     casa: {
