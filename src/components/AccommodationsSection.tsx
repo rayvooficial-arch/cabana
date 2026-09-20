@@ -9,6 +9,12 @@ interface AccommodationsSectionProps {
   onOpenDetails?: (accommodation: Accommodation) => void;
 }
 
+const cardPhotoPosition: Record<Accommodation['id'], string> = {
+  eden: 'left center',
+  manancial: 'center center',
+  'pedacinho-do-ceu': 'right center',
+};
+
 export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
   onOpenDetails,
 }) => {
@@ -32,17 +38,27 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
             <article
               key={acc.id}
               id={`accommodation-card-${acc.id}`}
-              className="bg-white rounded-3xl border border-[#E3D9CC] overflow-hidden shadow-sm flex flex-col"
+              className="bg-white rounded-3xl border border-[#E3D9CC] overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col"
             >
-              <div className="relative h-64 sm:h-72 bg-[#EEE8DF] overflow-hidden">
-                <img
-                  src={acc.coverImage}
-                  alt={acc.name}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+              <button
+                type="button"
+                onClick={() => onOpenDetails?.(acc)}
+                aria-label={`Ver fotos e detalhes de ${acc.name}`}
+                className="relative h-64 sm:h-72 bg-[#EEE8DF] overflow-hidden text-left cursor-pointer group"
+              >
+                <span
+                  role="img"
+                  aria-label={acc.name}
+                  className="absolute inset-0 bg-no-repeat transition-transform duration-500 group-hover:scale-[1.03]"
+                  style={{
+                    backgroundImage: "url('/accommodation-cards-sprite.webp')",
+                    backgroundSize: '300% auto',
+                    backgroundPosition: cardPhotoPosition[acc.id],
+                  }}
                 />
+                <span className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
 
-                <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
+                <span className="absolute top-4 left-4 flex gap-2 flex-wrap">
                   <span className="inline-flex items-center gap-1.5 bg-[#14241A]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
                     <Users className="w-3.5 h-3.5 text-[#C29B48]" />
                     {acc.capacity}
@@ -53,8 +69,12 @@ export const AccommodationsSection: React.FC<AccommodationsSectionProps> = ({
                       Pet friendly
                     </span>
                   )}
-                </div>
-              </div>
+                </span>
+
+                <span className="absolute bottom-4 right-4 rounded-full bg-black/55 text-white text-[11px] font-semibold px-3 py-1.5 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                  Ver fotos
+                </span>
+              </button>
 
               <div className="p-6 sm:p-7 flex flex-col flex-1">
                 <div className="flex-1">
