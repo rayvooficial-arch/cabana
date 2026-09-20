@@ -1,18 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Accommodation } from '../types';
 import { BookingButton } from './BookingButton';
-import {
-  X,
-  Users,
-  Sparkles,
-  Bath,
-  Tv,
-  Utensils,
-  Heart,
-  ChevronLeft,
-  ChevronRight,
-  ShieldCheck,
-} from 'lucide-react';
+import { Check, Heart, ImageOff, Users, X } from 'lucide-react';
 
 interface AccommodationDetailModalProps {
   accommodation: Accommodation | null;
@@ -20,225 +9,132 @@ interface AccommodationDetailModalProps {
   onOpenBooking?: (accommodationId?: string) => void;
 }
 
+const isLocalImage = (src: string) => !/^https?:\/\//i.test(src);
+
 export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> = ({
   accommodation,
   onClose,
-  onOpenBooking,
 }) => {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
-
   if (!accommodation) return null;
 
-  const nextImage = () => {
-    setActiveImageIndex((prev) =>
-      prev === accommodation.galleryImages.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const prevImage = () => {
-    setActiveImageIndex((prev) =>
-      prev === 0 ? accommodation.galleryImages.length - 1 : prev - 1
-    );
-  };
+  const localImages = Array.from(
+    new Set([accommodation.coverImage, ...accommodation.galleryImages].filter(isLocalImage))
+  );
 
   return (
     <div
-      id="accommodation-modal-backdrop"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
       }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Detalhes de ${accommodation.name}`}
     >
-      <div
-        id="accommodation-modal-content"
-        className="bg-[#FAF7F2] text-[#2C332D] rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl border border-[#C29B48]/30 max-h-[92vh] flex flex-col my-auto relative animate-in zoom-in-95 duration-200"
-      >
-        {/* Modal Header with Close Button */}
-        <div className="flex items-center justify-between p-6 sm:p-8 bg-[#14241A] text-white border-b border-[#2d4f3b]">
-          <div>
-            <div className="flex items-center gap-3 mb-1">
-              <span className="text-xs uppercase tracking-widest text-[#C29B48] font-semibold">
-                Detalhes da Acomodação
-              </span>
-              {accommodation.isPetFriendly && (
-                <span className="bg-[#526048] text-[#FAF7F2] text-[10px] font-bold uppercase px-2 py-0.5 rounded-full flex items-center gap-1">
-                  <Heart className="w-3 h-3 text-[#C29B48]" />
-                  Pet Friendly
-                </span>
-              )}
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#FAF7F2]">
-              {accommodation.name}
-            </h2>
-          </div>
-
+      <div className="max-w-5xl mx-auto bg-[#FAF7F2] rounded-3xl overflow-hidden shadow-2xl my-4 sm:my-8">
+        <div className="relative bg-[#14241A] text-white px-6 sm:px-8 py-6">
           <button
+            type="button"
             onClick={onClose}
-            id="close-accommodation-modal-btn"
-            aria-label="Fechar detalhes"
-            className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            aria-label="Fechar detalhes da acomodação"
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
-        </div>
 
-        {/* Modal Scrollable Body */}
-        <div className="overflow-y-auto p-6 sm:p-8 space-y-8 flex-1">
-          {/* Photo Gallery Carousel */}
-          <div className="relative rounded-2xl overflow-hidden bg-black h-72 sm:h-96 shadow-lg group">
-            <img
-              src={accommodation.galleryImages[activeImageIndex]}
-              alt={`${accommodation.name} foto ${activeImageIndex + 1}`}
-              className="w-full h-full object-cover transition-opacity duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-            {/* Navigation Arrows */}
-            {accommodation.galleryImages.length > 1 && (
-              <>
-                <button
-                  onClick={prevImage}
-                  aria-label="Foto anterior"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={nextImage}
-                  aria-label="Próxima foto"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </>
-            )}
-
-            {/* Image Counter */}
-            <div className="absolute bottom-3 right-4 px-3 py-1 rounded-full bg-black/70 text-white text-xs font-medium backdrop-blur-sm">
-              {activeImageIndex + 1} / {accommodation.galleryImages.length}
-            </div>
-
-            {/* Badges Overlay */}
-            <div className="absolute bottom-3 left-4 flex flex-wrap gap-2">
-              <span className="px-3 py-1 rounded-full bg-[#C29B48] text-[#14241A] text-xs font-bold uppercase tracking-wider">
+          <div className="pr-12">
+            <span className="text-xs uppercase tracking-[0.18em] text-[#E8D4A2] font-semibold">
+              Acomodação
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-1">
+              {accommodation.name}
+            </h2>
+            <div className="flex flex-wrap gap-2 mt-3">
+              <span className="inline-flex items-center gap-1.5 text-xs bg-white/10 border border-white/15 rounded-full px-3 py-1.5">
+                <Users className="w-3.5 h-3.5 text-[#C29B48]" />
                 {accommodation.capacity}
               </span>
+              {accommodation.isPetFriendly && (
+                <span className="inline-flex items-center gap-1.5 text-xs bg-white/10 border border-white/15 rounded-full px-3 py-1.5">
+                  <Heart className="w-3.5 h-3.5 text-[#C29B48]" />
+                  Pet friendly
+                </span>
+              )}
             </div>
           </div>
+        </div>
 
-          {/* Description */}
-          <div className="border-l-4 border-[#C29B48] pl-4 py-1">
-            <p className="font-serif italic text-lg sm:text-xl text-[#14241A]">
-              “{accommodation.description}”
-            </p>
-          </div>
-
-          {/* Structure & Bedrooms */}
-          <div>
-            <h3 className="font-serif text-xl font-bold text-[#14241A] mb-4 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#C29B48]" />
-              Estrutura & Quartos
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {accommodation.structure.map((item, idx) => (
+        <div className="p-5 sm:p-8 space-y-8">
+          {localImages.length > 0 ? (
+            <div className={`grid gap-3 ${localImages.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {localImages.slice(0, 4).map((image, index) => (
                 <div
-                  key={idx}
-                  className="p-4 rounded-xl bg-white border border-[#E8DED1] shadow-sm"
+                  key={`${image}-${index}`}
+                  className={`rounded-2xl overflow-hidden bg-stone-200 ${index === 0 ? 'col-span-2 h-72 sm:h-96' : 'h-44 sm:h-56'}`}
                 >
-                  <h4 className="font-serif font-bold text-[#14241A] mb-2 text-base">
-                    {item.title}
-                  </h4>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-[#526048]">
-                    {item.details.map((detail, dIdx) => (
-                      <li key={dIdx} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C29B48]" />
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <img
+                    src={image}
+                    alt={`${accommodation.name} - foto ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               ))}
             </div>
-          </div>
+          ) : (
+            <div className="rounded-2xl bg-[#EEE8DF] min-h-56 flex flex-col items-center justify-center text-center px-6 text-[#526048]">
+              <ImageOff className="w-8 h-8 text-[#8B6A2F] mb-3" />
+              <strong className="text-[#14241A]">Fotos em atualização</strong>
+              <span className="text-sm mt-1">Consulte disponibilidade e detalhes atuais no motor de reservas.</span>
+            </div>
+          )}
 
-          {/* Spa & Comfort Details */}
-          {accommodation.spaDetails && (
-            <div className="p-5 rounded-2xl bg-[#F3ECE2] border border-[#C29B48]/30">
-              <h3 className="font-serif text-lg font-bold text-[#14241A] mb-3 flex items-center gap-2">
-                <Bath className="w-5 h-5 text-[#1c3224]" />
-                Ritual de Hidromassagem & Bem-Estar
-              </h3>
-              <p className="text-xs text-[#526048] mb-3">
-                Disponibilizamos para a sua experiência de banho:
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="font-serif text-2xl font-bold text-[#14241A] mb-3">Sobre a acomodação</h3>
+              <p className="text-sm text-[#526048] leading-relaxed mb-5">
+                {accommodation.description}
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-medium text-[#1c3224]">
-                {accommodation.spaDetails.map((spa, sIdx) => (
-                  <div
-                    key={sIdx}
-                    className="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-lg border border-[#E3D9CC]"
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-[#C29B48]" />
-                    <span>{spa}</span>
+
+              <div className="space-y-4">
+                {accommodation.structure.map((item) => (
+                  <div key={item.title}>
+                    <h4 className="text-sm font-bold text-[#14241A] mb-1">{item.title}</h4>
+                    <p className="text-sm text-[#526048] leading-relaxed">
+                      {item.details.join(' • ')}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
-          )}
 
-          {/* Entertainment & Tech */}
-          <div>
-            <h3 className="font-serif text-xl font-bold text-[#14241A] mb-4 flex items-center gap-2">
-              <Tv className="w-5 h-5 text-[#C29B48]" />
-              Entretenimento & Lazer
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {accommodation.entertainment.map((item, eIdx) => (
-                <div
-                  key={eIdx}
-                  className="flex items-center gap-2 p-3 rounded-xl bg-white border border-[#E8DED1] text-xs sm:text-sm text-[#2C332D]"
-                >
-                  <ShieldCheck className="w-4 h-4 text-[#526048] shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
+            <div>
+              <h3 className="font-serif text-2xl font-bold text-[#14241A] mb-3">Principais comodidades</h3>
+              <div className="space-y-2.5">
+                {accommodation.highlightBadges.map((item) => (
+                  <div key={item} className="flex items-start gap-2 text-sm text-[#445247]">
+                    <Check className="w-4 h-4 text-[#8B6A2F] mt-0.5 shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Pricing Highlight inside Modal */}
-          <div className="p-6 rounded-2xl bg-[#14241A] text-white flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <span className="text-xs uppercase tracking-wider text-[#C29B48] block">
-                Valores por Diária
-              </span>
-              <div className="flex items-baseline gap-3 mt-1">
-                <span className="text-sm text-white/80">Segunda a Quarta:</span>
-                <span className="font-serif text-xl font-bold text-[#E8D4A2]">
-                  R$ {accommodation.weekdayPrice.toLocaleString('pt-BR')}
-                </span>
-                <span className="bg-[#C29B48] text-[#14241A] text-[10px] font-bold px-1.5 py-0.5 rounded">
-                  20% OFF
-                </span>
-              </div>
-              <div className="flex items-baseline gap-3">
-                <span className="text-sm text-white/80">Quinta a Domingo:</span>
-                <span className="font-serif text-lg font-semibold text-white">
-                  R$ {accommodation.weekendPrice.toLocaleString('pt-BR')}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-              <BookingButton
-                id={`modal-reserve-btn-${accommodation.id}`}
-                accommodationId={accommodation.id}
-                accommodationName={accommodation.name}
-                label="VER DISPONIBILIDADE"
-                variant="gold"
-                size="md"
-                className="w-full sm:w-auto px-8 py-3.5"
-                onClick={onClose}
-              />
-            </div>
+          <div className="pt-6 border-t border-[#E3D9CC] flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+            <p className="text-xs text-[#6B746D] max-w-lg">
+              Disponibilidade, tarifa aplicável e condições finais são confirmadas no motor oficial de reservas.
+            </p>
+            <BookingButton
+              id={`modal-reserve-${accommodation.id}`}
+              accommodationId={accommodation.id}
+              accommodationName={accommodation.name}
+              label="VER DISPONIBILIDADE"
+              variant="gold"
+              size="md"
+              className="sm:min-w-56"
+              onClick={onClose}
+            />
           </div>
         </div>
       </div>
