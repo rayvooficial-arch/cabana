@@ -1,31 +1,22 @@
 /**
- * CONFIGURAÇÃO CENTRAL DO MOTOR DE RESERVAS EXTERNO
- * 
+ * CONFIGURAÇÃO CENTRAL DO MOTOR DE RESERVAS
+ *
  * Cabana das Mansões
- * 
- * Esta é a única fonte da verdade para o motor de reservas online.
- * Quando o link oficial for fornecido, basta preencher a propriedade `url` abaixo.
- * Todos os botões e links de reserva em todo o site utilizarão automaticamente esta configuração.
+ *
+ * Todos os botões de disponibilidade e reserva do site utilizam esta
+ * configuração. A URL deve apontar sempre para o endereço oficial fornecido
+ * pela propriedade.
  */
 
 export interface BookingEngineConfig {
-  /**
-   * URL oficial do motor de reservas externo.
-   * Exemplo futuro: "https://reservas.cabanadasmansoes.com.br"
-   * Enquanto estiver vazio (""), o sistema opera em modo seguro sem redirecionamento externo.
-   */
+  /** URL oficial do motor de reservas externo. */
   url: string;
 
-  /**
-   * Status de ativação da integração.
-   * Alterne para `true` assim que a URL for inserida e testada.
-   */
+  /** Permite desativar temporariamente os redirecionamentos sem remover a URL. */
   enabled: boolean;
 }
 
 export const BOOKING_CONFIG: BookingEngineConfig = {
-  // ATENÇÃO: Insira aqui a URL oficial do motor de reservas quando fornecida.
-  // Nenhum outro arquivo precisa ser alterado para ativar o novo motor.
-  url: '',
-  enabled: false,
+  url: 'https://reservas.bitzsoftwares.com.br/166f56b8-0b7c-4343-affe-3517c530537c/',
+  enabled: true,
 };

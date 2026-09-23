@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
-import { includedExperiences } from '../data/experiences';
+import React, { useEffect, useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import { BookingButton } from './BookingButton';
 
-interface NavbarProps {
-  onOpenBooking?: (accommodationId?: string) => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { label: 'Início', href: '#inicio' },
     { label: 'Acomodações', href: '#acomodacoes' },
     { label: 'Modalidades', href: '#modalidades' },
-    ...(includedExperiences.length > 0 ? [{ label: 'Estrutura', href: '#estrutura' }] : []),
-    { label: 'Cestas & Experiências', href: '#personalize-experiencia' },
-    { label: 'Tarifário', href: '#tarifario' },
-    { label: 'Como Chegar', href: '#como-chegar' },
+    { label: 'Lazer', href: '#estrutura' },
+    { label: 'Adicionais', href: '#personalize-experiencia' },
+    { label: 'Tarifas', href: '#tarifario' },
+    { label: 'Localização', href: '#como-chegar' },
   ];
 
   return (
@@ -34,92 +26,74 @@ export const Navbar: React.FC<NavbarProps> = () => {
       id="main-navigation"
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#14241A]/95 backdrop-blur-md py-3.5 shadow-xl border-b border-[#2d4f3b]/30'
-          : 'bg-gradient-to-b from-black/70 via-black/30 to-transparent py-5'
+          ? 'bg-[#14241A]/96 backdrop-blur-md py-3 shadow-lg border-b border-white/10'
+          : 'bg-gradient-to-b from-black/70 to-transparent py-4 sm:py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Brand Logo */}
-          <a
-            href="#inicio"
-            id="nav-logo-link"
-            className="group flex flex-col items-start focus:outline-none"
-          >
-            <span className="font-serif text-lg sm:text-2xl font-bold tracking-wider text-[#FAF7F2] uppercase group-hover:text-[#E8D4A2] transition-colors">
-              Cabana das Mansões
-            </span>
-            <span className="text-[10px] sm:text-xs font-sans tracking-[0.25em] uppercase text-[#C29B48] flex items-center gap-1 font-medium">
-              <Sparkles className="w-2.5 h-2.5 inline text-[#C29B48]" />
-              Spa em Meio à Natureza
-            </span>
-          </a>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6">
+        <a href="#inicio" className="shrink-0">
+          <span className="font-serif text-lg sm:text-xl font-bold tracking-wide text-white block leading-tight">
+            Cabana das Mansões
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.18em] text-[#D8B466]">
+            Chácara das Mansões • Campo Grande/MS
+          </span>
+        </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-xs uppercase tracking-widest font-medium text-[#FAF7F2]/80 hover:text-[#C29B48] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-[#C29B48] hover:after:w-full after:transition-all after:duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+        <nav className="hidden xl:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-[11px] uppercase tracking-wider font-semibold text-white/80 hover:text-[#D8B466] transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
-          {/* Action CTA */}
-          <div className="hidden sm:flex items-center gap-4">
-            <BookingButton
-              id="nav-reservation-button"
-              label="RESERVAR"
-              variant="nav"
-              size="sm"
-              className="px-6 py-2.5 rounded-full"
-            />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            id="mobile-menu-toggle"
-            aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-            className="lg:hidden p-2 rounded-lg text-[#FAF7F2] hover:bg-white/10 transition-colors focus:outline-none"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+        <div className="hidden sm:block shrink-0">
+          <BookingButton
+            id="nav-reservation-button"
+            label="VER DISPONIBILIDADE"
+            variant="nav"
+            size="sm"
+            className="rounded-full"
+          />
         </div>
+
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          className="xl:hidden text-white p-2 cursor-pointer"
+        >
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
 
-      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div
-          id="mobile-dropdown-menu"
-          className="lg:hidden bg-[#14241A] border-b border-[#2d4f3b]/50 px-6 py-6 space-y-4 animate-in fade-in slide-in-from-top-4 duration-200"
-        >
-          <div className="flex flex-col space-y-3">
+        <div className="xl:hidden bg-[#14241A] border-t border-white/10 px-5 py-5">
+          <nav className="flex flex-col">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-medium uppercase tracking-widest text-[#FAF7F2] hover:text-[#C29B48] transition-colors py-2 border-b border-white/5"
+                className="py-3 border-b border-white/10 text-sm font-medium text-white/90"
               >
                 {link.label}
               </a>
             ))}
-          </div>
-
-          <div className="pt-2">
-            <BookingButton
-              id="mobile-menu-reserve-btn"
-              label="RESERVAR AGORA"
-              variant="nav"
-              size="md"
-              className="w-full py-3.5 rounded-xl text-center"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-          </div>
+          </nav>
+          <BookingButton
+            id="mobile-menu-reserve-btn"
+            label="VER DISPONIBILIDADE"
+            variant="gold"
+            size="md"
+            className="w-full mt-5"
+            onClick={() => setMobileMenuOpen(false)}
+          />
         </div>
       )}
     </header>

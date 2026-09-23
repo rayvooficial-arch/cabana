@@ -12,20 +12,10 @@ export interface BookingEngineParams {
   source?: string;
 }
 
-export type PendingBookingListener = (params: BookingEngineParams) => void;
-
-// Gerenciador de ouvintes para quando o botão for acionado sem URL cadastrada
-const pendingBookingListeners = new Set<PendingBookingListener>();
-
-export function registerPendingBookingListener(listener: PendingBookingListener): () => void {
-  pendingBookingListeners.add(listener);
-  return () => {
-    pendingBookingListeners.delete(listener);
-  };
-}
-
 /**
- * Funções reutilizáveis de rastreamento e analytics (preparadas para Google Analytics / Meta Pixel / GTM)
+ * Evento central de intenção de reserva.
+ * Mantemos os dados de contexto para mensuração, sem assumir que o motor
+ * externo aceita parâmetros que ainda não foram documentados oficialmente.
  */
 export function trackBookingClick(params?: BookingEngineParams): void {
   try {
@@ -37,13 +27,14 @@ export function trackBookingClick(params?: BookingEngineParams): void {
           accommodation_id: params?.accommodationId,
           accommodation_name: params?.accommodationName,
           rate_code: params?.rateCode,
+          experience_id: params?.experienceId,
           source: params?.source || 'direct_cta',
           timestamp: new Date().toISOString(),
         });
       }
     }
   } catch {
-    // Fail silently in development/sandbox
+    // Analytics não deve bloquear a navegação do hóspede.
   }
 }
 
@@ -62,7 +53,7 @@ export function trackAvailabilityClick(params?: BookingEngineParams): void {
       }
     }
   } catch {
-    // Fail silently in development/sandbox
+    // Analytics não deve bloquear a navegação do hóspede.
   }
 }
 
@@ -79,53 +70,23 @@ export function trackExperienceClick(experienceName: string): void {
 }
 
 /**
- * Função central de acionamento do motor de reservas externo.
- * - Se `BOOKING_CONFIG.url` estiver preenchida: abre o motor de reservas no navegador de forma limpa e segura.
- * - Se `BOOKING_CONFIG.url` estiver vazia: não executa redirecionamento externo e notifica com elegância.
+ * Abre o motor oficial de reservas em uma nova aba.
+ *
+ * Enquanto não houver documentação oficial de deep links da Bitz no projeto,
+ * o site envia sempre para a URL fornecida pela propriedade, sem acrescentar
+ * parâmetros de acomodação, datas, hóspedes ou tarifas por conta própria.
  */
 export function openBookingEngine(params?: BookingEngineParams): void {
-  // Dispara analytics
   trackBookingClick(params);
 
-  const rawUrl = BOOKING_CONFIG.url ? BOOKING_CONFIG.url.trim() : '';
-
-  if (rawUrl !== '') {
-    try {
-      const targetUrl = new URL(rawUrl);
-
-      // Parâmetros estruturados para integração futura conforme documentação do motor
-      if (params?.accommodationId) {
-        targetUrl.searchParams.set('accommodation', params.accommodationId);
-      }
-      if (params?.checkIn) {
-        targetUrl.searchParams.set('checkin', params.checkIn);
-      }
-      if (params?.checkOut) {
-        targetUrl.searchParams.set('checkout', params.checkOut);
-      }
-      if (params?.guests) {
-        targetUrl.searchParams.set('guests', String(params.guests));
-      }
-      if (params?.promoCode) {
-        targetUrl.searchParams.set('promo', params.promoCode);
-      }
-      if (params?.rateCode) {
-        targetUrl.searchParams.set('rate', params.rateCode);
-      }
-
-      window.open(targetUrl.toString(), '_blank', 'noopener,noreferrer');
-    } catch {
-      // Caso a URL inserida seja relativa ou sem protocolo
-      window.open(rawUrl, '_blank', 'noopener,noreferrer');
-    }
-  } else {
-    // Comportamento seguro: não redireciona para página inexistente e não exibe erros técnicos
-    pendingBookingListeners.forEach((listener) => {
-      try {
-        listener(params || {});
-      } catch {
-        // Safe execution
-      }
-    });
+  if (typeof window === 'undefined' || !BOOKING_CONFIG.enabled) {
+    return;
   }
+
+  const bookingUrl = BOOKING_CONFIG.url.trim();
+  if (!bookingUrl) {
+    return;
+  }
+
+  window.open(bookingUrl, '_blank', 'noopener,noreferrer');
 }
