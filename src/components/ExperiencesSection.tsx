@@ -12,8 +12,6 @@ import {
   Utensils,
   Waves,
 } from 'lucide-react';
-import { HYDRO_SPRITE } from '../data/hydroMedia';
-import { HYDRO_COVER } from '../data/hydroCoverHQ';
 
 interface GalleryPhoto {
   title: string;
@@ -38,29 +36,22 @@ const galleries: GalleryGroup[] = [
     title: 'Hidromassagens',
     shortDescription: 'Privativas nas acomodações',
     icon: Bath,
-    coverSrc: HYDRO_COVER,
-    coverPosition: 'center 55%',
+    coverSrc: '/hidro-manancial-externa.webp',
     photos: [
       {
-        title: 'Hidromassagem interna',
-        caption: 'Cabana Manancial',
-        src: HYDRO_SPRITE,
-        position: 'left center',
-        size: '300% auto',
-      },
-      {
-        title: 'Hidromassagem ao ar livre',
-        caption: 'Deck da Cabana Manancial',
-        src: HYDRO_SPRITE,
-        position: 'center center',
-        size: '300% auto',
+        title: 'Hidromassagem externa',
+        caption: 'Cabana Manancial durante o dia',
+        src: '/hidro-manancial-externa.webp',
       },
       {
         title: 'Hidromassagem no deck',
         caption: 'Cabana Éden à noite',
-        src: HYDRO_SPRITE,
-        position: 'right center',
-        size: '300% auto',
+        src: '/hidro-eden-externa.webp',
+      },
+      {
+        title: 'Hidromassagem interna',
+        caption: 'Banheira da Cabana Manancial',
+        src: '/hidro-manancial-interna.webp',
       },
     ],
   },
