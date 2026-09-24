@@ -29,7 +29,7 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
   return (
     <div className="bg-[#14241A] text-white">
       <div
-        className="relative h-72 sm:h-80 lg:h-72 xl:h-80 bg-[#0c1710] overflow-hidden touch-pan-y"
+        className="relative w-full aspect-[9/10] bg-[#0c1710] overflow-hidden touch-pan-y"
         onTouchStart={(event) => { touchStart.current = event.touches[0].clientX; }}
         onTouchEnd={(event) => {
           if (touchStart.current === null) return;
