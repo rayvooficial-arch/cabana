@@ -13,7 +13,6 @@ import {
   Waves,
 } from 'lucide-react';
 import { HYDRO_SPRITE } from '../data/hydroMedia';
-import { CINEMA_SPRITE } from '../data/cinemaMedia';
 import { FISHING_SPRITE } from '../data/fishingMedia';
 import { HYDRO_COVER } from '../data/hydroCoverHQ';
 
@@ -70,30 +69,17 @@ const galleries: GalleryGroup[] = [
     title: 'Cinema ao ar livre',
     shortDescription: 'Telão em meio à natureza',
     icon: Film,
-    coverSrc: CINEMA_SPRITE,
-    coverPosition: 'left center',
-    coverSize: '300% auto',
+    coverSrc: '/lazer-cinema-01.webp',
     photos: [
       {
         title: 'Cinema ao ar livre',
-        caption: 'Estrutura do cinema durante o dia',
-        src: CINEMA_SPRITE,
-        position: 'left center',
-        size: '300% auto',
+        caption: 'Espaço do cinema preparado ao entardecer',
+        src: '/lazer-cinema-01.webp',
       },
       {
         title: 'Sessão de cinema',
-        caption: 'Tela preparada para a sessão',
-        src: CINEMA_SPRITE,
-        position: 'center center',
-        size: '300% auto',
-      },
-      {
-        title: 'Cinema à noite',
-        caption: 'Estrutura iluminada em meio à natureza',
-        src: CINEMA_SPRITE,
-        position: 'right center',
-        size: '300% auto',
+        caption: 'Tela acesa para aproveitar a noite',
+        src: '/lazer-cinema-03.webp',
       },
     ],
   },
