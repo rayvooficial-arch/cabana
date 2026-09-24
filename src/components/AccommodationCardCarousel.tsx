@@ -5,7 +5,7 @@ import { Accommodation } from '../types';
 export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation }> = ({ accommodation }) => {
   const photos = accommodation.detailedPhotos ?? [];
   const [currentIndex, setCurrentIndex] = useState(0);
-  const touchStart = useRef<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const thumbnails = useRef<HTMLDivElement>(null);
   const photo = photos[currentIndex];
 
@@ -23,20 +23,26 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
   if (!photo) return null;
 
   const show = (direction: number) => {
-    setCurrentIndex((index) => (index + direction + photos.length) % photos.length);
+    setCurrentIndex((index) => Math.max(0, Math.min(photos.length - 1, index + direction)));
   };
 
   return (
     <div className="bg-[#14241A] text-white">
       <div
         className="relative w-full aspect-[9/10] bg-[#0c1710] overflow-hidden touch-pan-y"
-        onTouchStart={(event) => { touchStart.current = event.touches[0].clientX; }}
+        onTouchStart={(event) => {
+          touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+        }}
         onTouchEnd={(event) => {
           if (touchStart.current === null) return;
-          const distance = touchStart.current - event.changedTouches[0].clientX;
-          if (Math.abs(distance) > 50) show(distance > 0 ? 1 : -1);
+          const distance = touchStart.current.x - event.changedTouches[0].clientX;
+          const verticalDistance = Math.abs(touchStart.current.y - event.changedTouches[0].clientY);
+          if (Math.abs(distance) > 60 && Math.abs(distance) > verticalDistance * 1.5) {
+            show(distance > 0 ? 1 : -1);
+          }
           touchStart.current = null;
         }}
+        onTouchCancel={() => { touchStart.current = null; }}
       >
         <img
           src={photo.url}
@@ -62,10 +68,10 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
         </div>
         {photos.length > 1 && (
           <>
-            <button type="button" onClick={() => show(-1)} aria-label={`Foto anterior de ${accommodation.name}`} className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-black/90 border border-white/20 flex items-center justify-center cursor-pointer">
+            <button type="button" onClick={() => show(-1)} disabled={currentIndex === 0} aria-label={`Foto anterior de ${accommodation.name}`} className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-black/90 disabled:opacity-40 disabled:cursor-not-allowed border border-white/20 flex items-center justify-center cursor-pointer">
               <ChevronLeft className="w-6 h-6" />
             </button>
-            <button type="button" onClick={() => show(1)} aria-label={`Próxima foto de ${accommodation.name}`} className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-black/90 border border-white/20 flex items-center justify-center cursor-pointer">
+            <button type="button" onClick={() => show(1)} disabled={currentIndex === photos.length - 1} aria-label={`Próxima foto de ${accommodation.name}`} className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-black/90 disabled:opacity-40 disabled:cursor-not-allowed border border-white/20 flex items-center justify-center cursor-pointer">
               <ChevronRight className="w-6 h-6" />
             </button>
           </>

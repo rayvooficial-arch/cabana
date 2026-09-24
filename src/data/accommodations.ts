@@ -17,7 +17,6 @@ import manancialCoverImage from '../assets/images/imagem1.jpg';
 
 export const MANANCIAL_PHOTOS: AccommodationPhotoItem[] = [
   { url: manancialCoverImage, title: 'Cabana Manancial — Vista Externa', category: 'externa', description: 'A fachada da cabana em meio à natureza.' },
-  { url: '/accommodations/manancial/foto-3.webp', title: 'Fachada Iluminada', category: 'externa', description: 'A entrada da cabana iluminada ao anoitecer.' },
   { url: '/accommodations/manancial/foto-15.webp', title: 'Deck e Hidromassagem Externa', category: 'externa', description: 'O deck privativo e a hidromassagem ao ar livre.' },
   { url: '/accommodations/manancial/foto-21.webp', title: 'Vista Geral do Interior', category: 'interna', description: 'Ambientes integrados e mezanino em madeira.' },
   { url: '/accommodations/manancial/foto-19.webp', title: 'Sala de Estar', category: 'interna', description: 'Sofá e detalhes aconchegantes da sala.' },
