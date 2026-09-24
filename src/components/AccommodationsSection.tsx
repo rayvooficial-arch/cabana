@@ -15,7 +15,7 @@ const cardPhotoPosition: Record<Accommodation['id'], string> = {
 const formatPrice = (value: number) => value.toLocaleString('pt-BR');
 
 export const AccommodationsSection: React.FC = () => {
-  const [isEdenGalleryOpen, setIsEdenGalleryOpen] = useState(false);
+  const [openGallery, setOpenGallery] = useState<'eden' | 'manancial' | null>(null);
 
   return (
     <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
@@ -40,7 +40,7 @@ export const AccommodationsSection: React.FC = () => {
               : PRICING_CONFIG.conforto.cabanas;
             const hasComfortPrice =
               comfortPricing.weekdayPrice !== null && comfortPricing.weekendPrice !== null;
-            const isEden = acc.id === 'eden';
+            const hasGallery = acc.id === 'eden' || acc.id === 'manancial';
 
             return (
               <article
@@ -51,18 +51,18 @@ export const AccommodationsSection: React.FC = () => {
                 {/* Accommodation Card Image Container - Click to open gallery */}
                 <div
                   className={`relative aspect-[20/13] bg-[#EEE8DF] overflow-hidden ${
-                    isEden ? 'cursor-pointer' : ''
+                    hasGallery ? 'cursor-pointer' : ''
                   }`}
                   onClick={() => {
-                    if (isEden) setIsEdenGalleryOpen(true);
+                    if (hasGallery) setOpenGallery(acc.id as 'eden' | 'manancial');
                   }}
-                  title={isEden ? 'Clique para ver todas as 9 fotos da Cabana Éden' : undefined}
+                  title={hasGallery ? `Ver galeria da ${acc.name}` : undefined}
                 >
                   <img
                     src={acc.coverImage}
                     alt={`Foto de ${acc.name}`}
                     className={`absolute inset-0 h-full w-full object-cover select-none transition-transform duration-500 ${
-                      isEden ? 'group-hover:scale-105' : ''
+                      hasGallery ? 'group-hover:scale-105' : ''
                     }`}
                     style={{ objectPosition: cardPhotoPosition[acc.id] }}
                     loading="lazy"
@@ -86,10 +86,10 @@ export const AccommodationsSection: React.FC = () => {
                   </div>
 
                   {/* Click to open gallery badge for Cabana Éden */}
-                  {isEden && (
+                  {hasGallery && (
                     <div className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-black/75 hover:bg-black/90 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/20 transition-all shadow-md group-hover:scale-105">
                       <Camera className="w-3.5 h-3.5 text-[#E8D4A2]" />
-                      <span>9 fotos • Ver galeria</span>
+                      <span>{acc.detailedPhotos?.length} fotos • Ver galeria</span>
                     </div>
                   )}
                 </div>
@@ -209,8 +209,9 @@ export const AccommodationsSection: React.FC = () => {
       </div>
 
       <EdenGalleryModal
-        isOpen={isEdenGalleryOpen}
-        onClose={() => setIsEdenGalleryOpen(false)}
+        isOpen={openGallery !== null}
+        accommodationId={openGallery || 'eden'}
+        onClose={() => setOpenGallery(null)}
       />
     </section>
   );

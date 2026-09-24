@@ -8,7 +8,7 @@ import edenImgCozinha from '../assets/images/Design sem nome (8).jpg';
 import edenImgCantinhoPipoca from '../assets/images/eden_cantinho_pipoca_1790249611956.jpg';
 import edenImgTvVideogame from '../assets/images/eden_tv_videogame_1790249633787.jpg';
 import edenImgQuartoSuperior from '../assets/images/Design sem nome (11).jpg';
-import manancialCoverImage from '../assets/images/imagem1.jpg';
+import { MANANCIAL_PHOTOS } from './accommodations';
 
 export const galleryPhotos: GalleryPhoto[] = [
   // --- EXPERIÊNCIA ---
@@ -152,22 +152,14 @@ export const galleryPhotos: GalleryPhoto[] = [
   },
 
   // --- CABANA MANANCIAL ---
-  {
-    id: 'manancial-1',
-    title: 'Cabana Manancial — Vista Externa Iluminada',
-    category: 'manancial',
+  ...MANANCIAL_PHOTOS.map((photo, index) => ({
+    id: `manancial-${index + 1}`,
+    title: photo.title,
+    category: 'manancial' as const,
     categoryLabel: 'Cabana Manancial',
-    url: manancialCoverImage,
-    description: 'Design rústico elegante e acolhimento com luz suave e varanda privativa.',
-  },
-  {
-    id: 'manancial-2',
-    title: 'Cabana Manancial — Varanda e Natureza',
-    category: 'manancial',
-    categoryLabel: 'Cabana Manancial',
-    url: '/accommodations/manancial.webp',
-    description: 'Aconchego e momentos inesquecíveis com hidromassagem e mezanino integrados à natureza.',
-  },
+    url: photo.url,
+    description: photo.description,
+  })),
 
   // --- CASA PEDACINHO DO CÉU ---
   {

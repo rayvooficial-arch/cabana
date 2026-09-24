@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { EDEN_PHOTOS } from '../data/accommodations';
+import { EDEN_PHOTOS, accommodations } from '../data/accommodations';
 import { AccommodationPhotoItem } from '../types';
 import { BookingButton } from './BookingButton';
 import {
@@ -16,18 +16,21 @@ interface EdenGalleryModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialIndex?: number;
+  accommodationId?: 'eden' | 'manancial';
 }
 
 export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({
   isOpen,
   onClose,
   initialIndex = 0,
+  accommodationId = 'eden',
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
 
-  const photos: AccommodationPhotoItem[] = EDEN_PHOTOS;
+  const accommodation = accommodations.find((item) => item.id === accommodationId)!;
+  const photos: AccommodationPhotoItem[] = accommodation.detailedPhotos || EDEN_PHOTOS;
   const currentPhoto = photos[currentIndex] || photos[0];
 
   useEffect(() => {
@@ -103,7 +106,7 @@ export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({
       }}
       role="dialog"
       aria-modal="true"
-      aria-label="Galeria Oficial da Cabana Éden"
+      aria-label={`Galeria da ${accommodation.name}`}
     >
       <div className="relative w-full max-w-6xl max-h-[96vh] flex flex-col bg-[#14241A] text-white rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
         {/* Top Header */}
@@ -111,7 +114,7 @@ export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C29B48]/20 border border-[#C29B48]/30 text-[#E8D4A2] text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-[#C29B48]" />
-              Cabana Éden
+              {accommodation.name}
             </span>
             <span className="text-xs sm:text-sm text-white/70">
               {currentIndex + 1} de {photos.length} fotos
@@ -181,7 +184,7 @@ export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({
           <div className="flex-1 pr-0 md:pr-4">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#E8D4A2]">
-                Tour Cabana Éden • {currentPhoto.category === 'externa' ? 'Área Externa' : 'Ambiente Interno'}
+                Tour {accommodation.name} • {currentPhoto.category === 'externa' ? 'Área Externa' : 'Ambiente Interno'}
               </span>
             </div>
             <h3 className="font-serif text-lg sm:text-xl font-bold text-white leading-snug">
@@ -195,8 +198,8 @@ export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({
           <div className="shrink-0 flex items-center gap-3 pt-2 md:pt-0 border-t md:border-t-0 border-white/10">
             <BookingButton
               id="eden-gallery-reserve-cta"
-              accommodationId="eden"
-              accommodationName="Cabana Éden"
+              accommodationId={accommodationId}
+              accommodationName={accommodation.name}
               label="RESERVAR ESTA CABANA"
               variant="gold"
               size="sm"

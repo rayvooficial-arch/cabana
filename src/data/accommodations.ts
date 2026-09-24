@@ -15,6 +15,20 @@ import edenImgQuartoSuperior from '../assets/images/Design sem nome (11).jpg';
 // Foto Cabana Manancial
 import manancialCoverImage from '../assets/images/imagem1.jpg';
 
+export const MANANCIAL_PHOTOS: AccommodationPhotoItem[] = [
+  { url: manancialCoverImage, title: 'Cabana Manancial — Vista Externa', category: 'externa', description: 'A fachada da cabana em meio à natureza.' },
+  { url: '/accommodations/manancial/foto-3.webp', title: 'Fachada Iluminada', category: 'externa', description: 'A entrada da cabana iluminada ao anoitecer.' },
+  { url: '/accommodations/manancial/foto-15.webp', title: 'Deck e Hidromassagem Externa', category: 'externa', description: 'O deck privativo e a hidromassagem ao ar livre.' },
+  { url: '/accommodations/manancial/foto-21.webp', title: 'Vista Geral do Interior', category: 'interna', description: 'Ambientes integrados e mezanino em madeira.' },
+  { url: '/accommodations/manancial/foto-19.webp', title: 'Sala de Estar', category: 'interna', description: 'Sofá e detalhes aconchegantes da sala.' },
+  { url: '/accommodations/manancial/foto-22.webp', title: 'Smart TV e Videogame', category: 'interna', description: 'Espaço de entretenimento com televisão e controles.' },
+  { url: '/accommodations/manancial/foto-16.webp', title: 'Mesa de Jantar', category: 'interna', description: 'Mesa posta para refeições na cabana.' },
+  { url: '/accommodations/manancial/foto-20.webp', title: 'Cozinha Integrada', category: 'interna', description: 'Cozinha integrada à área de refeições.' },
+  { url: '/accommodations/manancial/foto-17.webp', title: 'Cozinha Equipada', category: 'interna', description: 'Bancada, cooktop e utensílios à disposição.' },
+  { url: '/accommodations/manancial/foto-14.webp', title: 'Hidromassagem Interna', category: 'interna', description: 'Banheira de hidromassagem no interior da cabana.' },
+  { url: '/accommodations/manancial/foto-18.webp', title: 'Quarto no Mezanino', category: 'interna', description: 'Cama no mezanino sob o telhado da cabana.' },
+];
+
 export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
   {
     url: edenImgFachada,
@@ -155,9 +169,9 @@ export const accommodations: Accommodation[] = [
     ],
     coverImage: manancialCoverImage,
     galleryImages: [
-      manancialCoverImage,
-      '/accommodations/manancial.webp',
+      ...MANANCIAL_PHOTOS.map((photo) => photo.url),
     ],
+    detailedPhotos: MANANCIAL_PHOTOS,
     description:
       'Uma cabana charmosa e acolhedora para viver momentos de descanso, conexão e tranquilidade.',
     structure: [
