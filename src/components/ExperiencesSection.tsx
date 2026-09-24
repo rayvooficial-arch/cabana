@@ -13,7 +13,6 @@ import {
   Waves,
 } from 'lucide-react';
 import { HYDRO_SPRITE } from '../data/hydroMedia';
-import { FISHING_SPRITE } from '../data/fishingMedia';
 import { HYDRO_COVER } from '../data/hydroCoverHQ';
 
 interface GalleryPhoto {
@@ -87,30 +86,27 @@ const galleries: GalleryGroup[] = [
     title: 'Pesque e solte',
     shortDescription: 'Pesca recreativa no lago',
     icon: Waves,
-    coverSrc: FISHING_SPRITE,
-    coverPosition: 'right center',
-    coverSize: '300% auto',
+    coverSrc: '/lazer-pesqueiro-cover-novo.webp',
     photos: [
       {
         title: 'Pesque e solte',
-        caption: 'Experiência de pesca e solte junto ao lago',
-        src: FISHING_SPRITE,
-        position: 'right center',
-        size: '300% auto',
+        caption: 'Momento de pesca no deck junto ao lago',
+        src: '/lazer-pesqueiro-cover-novo.webp',
+      },
+      {
+        title: 'Deck da pescaria',
+        caption: 'Área coberta para aproveitar o lago',
+        src: '/lazer-deck-pescaria.webp',
       },
       {
         title: 'Pesca no lago',
-        caption: 'Momentos de pesca na propriedade',
-        src: FISHING_SPRITE,
-        position: 'center center',
-        size: '300% auto',
+        caption: 'Pescaria em meio à natureza',
+        src: '/lazer-pesqueiro-novo.webp',
       },
       {
         title: 'Espécies do lago',
-        caption: 'Peixes disponíveis para pesca e solte',
-        src: FISHING_SPRITE,
-        position: 'left center',
-        size: '300% auto',
+        caption: 'Placa com informações sobre os peixes do pesqueiro',
+        src: '/lazer-pesqueiro-02-novo.webp',
       },
     ],
   },
