@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { accommodations } from '../data/accommodations';
-import { Accommodation } from '../types';
 import { PRICING_CONFIG } from '../config/constants';
 import { BookingButton } from './BookingButton';
-import { EdenGalleryModal } from './EdenGalleryModal';
-import { CalendarDays, Camera, Check, Heart, Sparkles, Users } from 'lucide-react';
-
-const cardPhotoPosition: Record<Accommodation['id'], string> = {
-  eden: 'center center',
-  manancial: 'center 58%',
-  'pedacinho-do-ceu': 'center 50%',
-};
+import { AccommodationCardCarousel } from './AccommodationCardCarousel';
+import { CalendarDays, Check, Sparkles } from 'lucide-react';
 
 const formatPrice = (value: number) => value.toLocaleString('pt-BR');
 
 export const AccommodationsSection: React.FC = () => {
-  const [openGallery, setOpenGallery] = useState<Accommodation['id'] | null>(null);
 
   return (
     <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
@@ -40,7 +32,6 @@ export const AccommodationsSection: React.FC = () => {
               : PRICING_CONFIG.conforto.cabanas;
             const hasComfortPrice =
               comfortPricing.weekdayPrice !== null && comfortPricing.weekendPrice !== null;
-            const hasGallery = Boolean(acc.detailedPhotos?.length);
 
             return (
               <article
@@ -48,51 +39,7 @@ export const AccommodationsSection: React.FC = () => {
                 id={`accommodation-card-${acc.id}`}
                 className="bg-white rounded-3xl border border-[#E3D9CC] overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col group"
               >
-                {/* Accommodation Card Image Container - Click to open gallery */}
-                <div
-                  className={`relative aspect-[20/13] bg-[#EEE8DF] overflow-hidden ${
-                    hasGallery ? 'cursor-pointer' : ''
-                  }`}
-                  onClick={() => {
-                    if (hasGallery) setOpenGallery(acc.id);
-                  }}
-                  title={hasGallery ? `Ver galeria da ${acc.name}` : undefined}
-                >
-                  <img
-                    src={acc.coverImage}
-                    alt={`Foto de ${acc.name}`}
-                    className={`absolute inset-0 h-full w-full object-cover select-none transition-transform duration-500 ${
-                      hasGallery ? 'group-hover:scale-105' : ''
-                    }`}
-                    style={{ objectPosition: cardPhotoPosition[acc.id] }}
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
-
-                  {/* Top Badges */}
-                  <div className="absolute top-4 left-4 flex gap-2 flex-wrap pointer-events-none">
-                    <span className="inline-flex items-center gap-1.5 bg-[#14241A]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
-                      <Users className="w-3.5 h-3.5 text-[#C29B48]" />
-                      {acc.capacity}
-                    </span>
-                    {acc.isPetFriendly && (
-                      <span className="inline-flex items-center gap-1.5 bg-white/90 text-[#14241A] text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
-                        <Heart className="w-3.5 h-3.5 text-[#8B6A2F]" />
-                        Pet friendly
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Click to open gallery badge for Cabana Éden */}
-                  {hasGallery && (
-                    <div className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-black/75 hover:bg-black/90 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/20 transition-all shadow-md group-hover:scale-105">
-                      <Camera className="w-3.5 h-3.5 text-[#E8D4A2]" />
-                      <span>{acc.detailedPhotos?.length} fotos • Ver galeria</span>
-                    </div>
-                  )}
-                </div>
+                <AccommodationCardCarousel accommodation={acc} />
 
                 <div className="p-6 sm:p-7 flex flex-col flex-1">
                   <div className="flex-1">
@@ -208,11 +155,6 @@ export const AccommodationsSection: React.FC = () => {
         </p>
       </div>
 
-      <EdenGalleryModal
-        isOpen={openGallery !== null}
-        accommodationId={openGallery || 'eden'}
-        onClose={() => setOpenGallery(null)}
-      />
     </section>
   );
 };

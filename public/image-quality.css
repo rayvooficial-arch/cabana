@@ -3,33 +3,6 @@
  * Keeps the existing layout/crops while replacing low-resolution card assets.
  */
 
-/* Accommodation cards: 3 equal cells (Éden, Manancial, Pedacinho do Céu). */
-#accommodation-card-eden > div:first-child,
-#accommodation-card-manancial > div:first-child,
-#accommodation-card-pedacinho-do-ceu > div:first-child {
-  background-image: url('/accommodation-cards-hq.webp');
-  background-repeat: no-repeat;
-  background-size: 300% 100%;
-}
-
-#accommodation-card-eden > div:first-child {
-  background-position: 0% 50%;
-}
-
-#accommodation-card-manancial > div:first-child {
-  background-position: 50% 50%;
-}
-
-#accommodation-card-pedacinho-do-ceu > div:first-child {
-  background-position: 100% 50%;
-}
-
-#accommodation-card-eden > div:first-child > img,
-#accommodation-card-manancial > div:first-child > img,
-#accommodation-card-pedacinho-do-ceu > div:first-child > img {
-  opacity: 0;
-}
-
 /* Experience cards: 5 equal cells in the same visual order as the section. */
 #estrutura button[aria-label='Ver fotos de Hidromassagens'] > div[role='img'],
 #estrutura button[aria-label='Ver fotos de Cinema ao ar livre'] > div[role='img'],
