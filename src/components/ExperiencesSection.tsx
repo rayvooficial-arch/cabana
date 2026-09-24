@@ -217,6 +217,7 @@ const ExperienceCard: React.FC<{ group: GalleryGroup }> = ({ group }) => {
         }}
         onTouchCancel={() => { start.current = null; }}
       >
+        <div aria-hidden="true" style={photoStyle(photo)} className="absolute -inset-5 blur-xl opacity-50 scale-110" />
         <div role="img" aria-label={`${group.title}: ${item.title}`} style={photoStyle(photo, 'contain')} className="absolute inset-0" />
         <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
         <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-black/65 border border-white/20 px-2.5 py-1.5 text-xs font-semibold">

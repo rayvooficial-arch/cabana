@@ -44,10 +44,11 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
         }}
         onTouchCancel={() => { touchStart.current = null; }}
       >
+        <img src={photo.url} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110" />
         <img
           src={photo.url}
           alt={`${accommodation.name}: ${photo.title}`}
-          className="w-full h-full object-contain"
+          className="relative w-full h-full object-contain"
           loading={currentIndex === 0 ? 'eager' : 'lazy'}
           decoding="async"
         />
