@@ -143,26 +143,32 @@ const galleries: GalleryGroup[] = [
     title: 'Fazendinha',
     shortDescription: 'Mini animais e contato com a natureza',
     icon: Heart,
-    coverSrc: '/fazendinha-coelhos.webp',
-    coverPosition: 'center 60%',
+    coverSrc: '/fazendinha-cabritinhos-novo.webp',
     photos: [
-      {
-        title: 'Coelhinhos da fazendinha',
-        caption: 'Contato com os mini animais da propriedade',
-        src: '/fazendinha-coelhos.webp',
-        position: 'center 60%',
-      },
-      {
-        title: 'Patinhos no lago',
-        caption: 'Animais da fazendinha em meio à natureza',
-        src: '/fazendinha-patinhos.webp',
-        position: 'center 58%',
-      },
       {
         title: 'Cabritinhos',
         caption: 'Mini animais da fazendinha',
-        src: '/fazendinha-cabras.webp',
-        position: 'center 48%',
+        src: '/fazendinha-cabritinhos-novo.webp',
+      },
+      {
+        title: 'Coelhinhos',
+        caption: 'Coelhos da fazendinha em meio ao verde',
+        src: '/fazendinha-coelhos-novo.webp',
+      },
+      {
+        title: 'Patinhos no lago',
+        caption: 'Patinhos acompanhando a mãe na água',
+        src: '/fazendinha-patinhos-novo.webp',
+      },
+      {
+        title: 'Mini porquinhos',
+        caption: 'Animais da fazendinha descansando juntos',
+        src: '/fazendinha-mini-porquinhos-novo.webp',
+      },
+      {
+        title: 'Galinhas da fazendinha',
+        caption: 'Galinhas no espaço dos animais',
+        src: '/fazendinha-galinhas-novo.webp',
       },
     ],
   },
