@@ -103,7 +103,7 @@ const galleries: GalleryGroup[] = [
   },
   {
     title: 'Fogueira e descanso',
-    shortDescription: 'Fogo, redários e área verde',
+    shortDescription: 'Fogo, balanços e área verde',
     icon: Flame,
     coverSrc: '/lazer-piquenique.webp',
     photos: [
@@ -113,9 +113,9 @@ const galleries: GalleryGroup[] = [
         src: '/lazer-piquenique.webp',
       },
       {
-        title: 'Momento de descanso',
-        caption: 'Um canto para ler e aproveitar a noite',
-        src: '/lazer-redario.webp',
+        title: 'Área de descanso',
+        caption: 'Balanços e redes à sombra das árvores',
+        src: '/lazer-area-descanso.webp',
         position: 'center',
       },
       {
