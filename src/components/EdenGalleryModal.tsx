@@ -16,7 +16,7 @@ interface EdenGalleryModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialIndex?: number;
-  accommodationId?: 'eden' | 'manancial';
+  accommodationId?: 'eden' | 'manancial' | 'pedacinho-do-ceu';
 }
 
 export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({

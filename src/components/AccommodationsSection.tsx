@@ -15,7 +15,7 @@ const cardPhotoPosition: Record<Accommodation['id'], string> = {
 const formatPrice = (value: number) => value.toLocaleString('pt-BR');
 
 export const AccommodationsSection: React.FC = () => {
-  const [openGallery, setOpenGallery] = useState<'eden' | 'manancial' | null>(null);
+  const [openGallery, setOpenGallery] = useState<Accommodation['id'] | null>(null);
 
   return (
     <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
@@ -40,7 +40,7 @@ export const AccommodationsSection: React.FC = () => {
               : PRICING_CONFIG.conforto.cabanas;
             const hasComfortPrice =
               comfortPricing.weekdayPrice !== null && comfortPricing.weekendPrice !== null;
-            const hasGallery = acc.id === 'eden' || acc.id === 'manancial';
+            const hasGallery = Boolean(acc.detailedPhotos?.length);
 
             return (
               <article
@@ -54,7 +54,7 @@ export const AccommodationsSection: React.FC = () => {
                     hasGallery ? 'cursor-pointer' : ''
                   }`}
                   onClick={() => {
-                    if (hasGallery) setOpenGallery(acc.id as 'eden' | 'manancial');
+                    if (hasGallery) setOpenGallery(acc.id);
                   }}
                   title={hasGallery ? `Ver galeria da ${acc.name}` : undefined}
                 >

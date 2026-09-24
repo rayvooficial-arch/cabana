@@ -1,5 +1,5 @@
 import { GalleryPhoto } from '../types';
-import { EDEN_PHOTOS, MANANCIAL_PHOTOS } from './accommodations';
+import { EDEN_PHOTOS, MANANCIAL_PHOTOS, PEDACINHO_PHOTOS } from './accommodations';
 
 export const galleryPhotos: GalleryPhoto[] = [
   // --- EXPERIÊNCIA ---
@@ -89,52 +89,12 @@ export const galleryPhotos: GalleryPhoto[] = [
   })),
 
   // --- CASA PEDACINHO DO CÉU ---
-  {
-    id: 'pedacinho-1',
-    title: 'Casa Pedacinho do Céu — Vista Principal',
-    category: 'pedacinho-do-ceu',
+  ...PEDACINHO_PHOTOS.map((photo, index) => ({
+    id: `pedacinho-${index + 1}`,
+    title: photo.title,
+    category: 'pedacinho-do-ceu' as const,
     categoryLabel: 'Casa Pedacinho do Céu',
-    url: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80',
-    description: 'Ampla residência de campo para até 8 pessoas, rodeada por gramado generoso.',
-  },
-  {
-    id: 'pedacinho-2',
-    title: 'Totalmente Pet Friendly',
-    category: 'pedacinho-do-ceu',
-    categoryLabel: 'Casa Pedacinho do Céu',
-    url: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80',
-    description: 'Seu pet é muito bem-vindo para brincar livremente no gramado e junto à família.',
-  },
-  {
-    id: 'pedacinho-3',
-    title: 'Quarto Casal 01',
-    category: 'pedacinho-do-ceu',
-    categoryLabel: 'Casa Pedacinho do Céu',
-    url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80',
-    description: 'Cama de casal com lençóis 600 fios, kit de cobre-leito e coberta King.',
-  },
-  {
-    id: 'pedacinho-4',
-    title: 'Quarto Casal 02',
-    category: 'pedacinho-do-ceu',
-    categoryLabel: 'Casa Pedacinho do Céu',
-    url: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80',
-    description: 'Segundo quarto de casal com total conforto térmico e acústico do campo.',
-  },
-  {
-    id: 'pedacinho-5',
-    title: 'Fogões a Lenha & Churrasqueira',
-    category: 'pedacinho-do-ceu',
-    categoryLabel: 'Casa Pedacinho do Céu',
-    url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
-    description: '2 fogões a lenha autênticos e churrasqueira para celebrar a gastronomia tradicional.',
-  },
-  {
-    id: 'pedacinho-6',
-    title: 'Sala de Estar Integrada e Climatizada',
-    category: 'pedacinho-do-ceu',
-    categoryLabel: 'Casa Pedacinho do Céu',
-    url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    description: 'Smart TV 43", videogame, Alexa, jogos de tabuleiro, umidificador e aromatizador.',
-  },
+    url: photo.url,
+    description: photo.description,
+  })),
 ];

@@ -29,6 +29,18 @@ export const MANANCIAL_PHOTOS: AccommodationPhotoItem[] = [
   { url: '/accommodations/manancial/foto-18.webp', title: 'Quarto no Mezanino', category: 'interna', description: 'Cama no mezanino sob o telhado da cabana.' },
 ];
 
+export const PEDACINHO_PHOTOS: AccommodationPhotoItem[] = [
+  { url: '/accommodations/pedacinho-do-ceu/fachada.webp', title: 'Fachada da Casa', category: 'externa', description: 'A entrada da Casa Pedacinho do Céu cercada pelo jardim.' },
+  { url: '/accommodations/pedacinho-do-ceu/varanda.webp', title: 'Varanda e Jardim', category: 'externa', description: 'Varanda coberta com vista para o jardim à noite.' },
+  { url: '/accommodations/pedacinho-do-ceu/estar-externo.webp', title: 'Espaço de Descanso', category: 'externa', description: 'Poltronas e sofá na área coberta da casa.' },
+  { url: '/accommodations/pedacinho-do-ceu/refeicoes.webp', title: 'Área de Refeições', category: 'externa', description: 'Mesa para reunir família e amigos na área coberta.' },
+  { url: '/accommodations/pedacinho-do-ceu/sala.webp', title: 'Sala de Estar', category: 'interna', description: 'Sala com sofás para momentos de descanso em grupo.' },
+  { url: '/accommodations/pedacinho-do-ceu/cozinha.webp', title: 'Cozinha', category: 'interna', description: 'Cozinha com bancada e área de preparo de refeições.' },
+  { url: '/accommodations/pedacinho-do-ceu/quarto-1.webp', title: 'Quarto de Casal', category: 'interna', description: 'Quarto com cama de casal e iluminação acolhedora.' },
+  { url: '/accommodations/pedacinho-do-ceu/quarto-2.webp', title: 'Segundo Quarto de Casal', category: 'interna', description: 'Outro quarto de casal da casa.' },
+  { url: '/accommodations/pedacinho-do-ceu/banheiro.webp', title: 'Banheiro', category: 'interna', description: 'Banheiro com box de vidro e bancada.' },
+];
+
 export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
   {
     url: edenImgFachada,
@@ -233,16 +245,9 @@ export const accommodations: Accommodation[] = [
       'Churrasqueira',
       'Cozinha completa',
     ],
-    coverImage:
-      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1600&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
-    ],
+    coverImage: PEDACINHO_PHOTOS[0].url,
+    galleryImages: PEDACINHO_PHOTOS.map((photo) => photo.url),
+    detailedPhotos: PEDACINHO_PHOTOS,
     description:
       'Uma casa espaçosa para famílias e grupos que desejam aproveitar juntos uma experiência confortável e especial em meio à natureza.',
     structure: [
