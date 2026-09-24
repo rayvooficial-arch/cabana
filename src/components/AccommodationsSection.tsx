@@ -1,18 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { accommodations } from '../data/accommodations';
 import { Accommodation } from '../types';
 import { PRICING_CONFIG } from '../config/constants';
 import { BookingButton } from './BookingButton';
-import { CalendarDays, Check, Heart, Sparkles, Users } from 'lucide-react';
-
-const cardPhotos: Record<Accommodation['id'], string> = {
-  eden: '/accommodations/eden.webp',
-  manancial: '/accommodations/manancial.webp',
-  'pedacinho-do-ceu': '/accommodations/pedacinho-do-ceu.webp',
-};
+import { EdenGalleryModal } from './EdenGalleryModal';
+import { CalendarDays, Camera, Check, Heart, Sparkles, Users } from 'lucide-react';
 
 const cardPhotoPosition: Record<Accommodation['id'], string> = {
-  eden: 'center 58%',
+  eden: 'center center',
   manancial: 'center 58%',
   'pedacinho-do-ceu': 'center 50%',
 };
@@ -20,6 +15,8 @@ const cardPhotoPosition: Record<Accommodation['id'], string> = {
 const formatPrice = (value: number) => value.toLocaleString('pt-BR');
 
 export const AccommodationsSection: React.FC = () => {
+  const [isEdenGalleryOpen, setIsEdenGalleryOpen] = useState(false);
+
   return (
     <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,37 +40,58 @@ export const AccommodationsSection: React.FC = () => {
               : PRICING_CONFIG.conforto.cabanas;
             const hasComfortPrice =
               comfortPricing.weekdayPrice !== null && comfortPricing.weekendPrice !== null;
+            const isEden = acc.id === 'eden';
 
             return (
               <article
                 key={acc.id}
                 id={`accommodation-card-${acc.id}`}
-                className="bg-white rounded-3xl border border-[#E3D9CC] overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col"
+                className="bg-white rounded-3xl border border-[#E3D9CC] overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col group"
               >
-                <div className="relative aspect-[20/13] bg-[#EEE8DF] overflow-hidden">
+                {/* Accommodation Card Image Container - Click to open gallery */}
+                <div
+                  className={`relative aspect-[20/13] bg-[#EEE8DF] overflow-hidden ${
+                    isEden ? 'cursor-pointer' : ''
+                  }`}
+                  onClick={() => {
+                    if (isEden) setIsEdenGalleryOpen(true);
+                  }}
+                  title={isEden ? 'Clique para ver todas as 9 fotos da Cabana Éden' : undefined}
+                >
                   <img
-                    src={cardPhotos[acc.id]}
+                    src={acc.coverImage}
                     alt={`Foto de ${acc.name}`}
-                    className="absolute inset-0 h-full w-full object-cover select-none pointer-events-none"
+                    className={`absolute inset-0 h-full w-full object-cover select-none transition-transform duration-500 ${
+                      isEden ? 'group-hover:scale-105' : ''
+                    }`}
                     style={{ objectPosition: cardPhotoPosition[acc.id] }}
                     loading="lazy"
                     decoding="async"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
 
+                  {/* Top Badges */}
                   <div className="absolute top-4 left-4 flex gap-2 flex-wrap pointer-events-none">
-                    <span className="inline-flex items-center gap-1.5 bg-[#14241A]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
+                    <span className="inline-flex items-center gap-1.5 bg-[#14241A]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
                       <Users className="w-3.5 h-3.5 text-[#C29B48]" />
                       {acc.capacity}
                     </span>
                     {acc.isPetFriendly && (
-                      <span className="inline-flex items-center gap-1.5 bg-white/90 text-[#14241A] text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
+                      <span className="inline-flex items-center gap-1.5 bg-white/90 text-[#14241A] text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
                         <Heart className="w-3.5 h-3.5 text-[#8B6A2F]" />
                         Pet friendly
                       </span>
                     )}
                   </div>
+
+                  {/* Click to open gallery badge for Cabana Éden */}
+                  {isEden && (
+                    <div className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-black/75 hover:bg-black/90 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/20 transition-all shadow-md group-hover:scale-105">
+                      <Camera className="w-3.5 h-3.5 text-[#E8D4A2]" />
+                      <span>9 fotos • Ver galeria</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6 sm:p-7 flex flex-col flex-1">
@@ -189,6 +207,11 @@ export const AccommodationsSection: React.FC = () => {
           Valores são referências das modalidades exibidas. Disponibilidade, pacotes e condições finais são confirmados no motor oficial de reservas.
         </p>
       </div>
+
+      <EdenGalleryModal
+        isOpen={isEdenGalleryOpen}
+        onClose={() => setIsEdenGalleryOpen(false)}
+      />
     </section>
   );
 };

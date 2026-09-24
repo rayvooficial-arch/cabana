@@ -1,11 +1,14 @@
 import { GalleryPhoto } from '../types';
-import edenCoverImage from '../assets/images/regenerated_image_1789430982222.jpg';
+import edenImgFachada from '../assets/images/Design sem nome (6).jpg';
+import edenImgDeckJacuzzi from '../assets/images/Design sem nome (12).jpg';
+import edenImgSalaEstar from '../assets/images/Design sem nome (5).jpg';
+import edenImgPoltronaMassagem from '../assets/images/eden_poltrona_massagem_1790250008465.jpg';
+import edenImgMesaJantar from '../assets/images/eden_mesa_jantar_1790249623022.jpg';
+import edenImgCozinha from '../assets/images/Design sem nome (8).jpg';
+import edenImgCantinhoPipoca from '../assets/images/eden_cantinho_pipoca_1790249611956.jpg';
+import edenImgTvVideogame from '../assets/images/eden_tv_videogame_1790249633787.jpg';
+import edenImgQuartoSuperior from '../assets/images/Design sem nome (11).jpg';
 import manancialCoverImage from '../assets/images/imagem1.jpg';
-import manancialImg11 from '../assets/images/Design sem nome (11).jpg';
-import manancialImg12 from '../assets/images/Design sem nome (12).jpg';
-import manancialImg5 from '../assets/images/Design sem nome (5).jpg';
-import manancialImg6 from '../assets/images/Design sem nome (6).jpg';
-import manancialImg8 from '../assets/images/Design sem nome (8).jpg';
 
 export const galleryPhotos: GalleryPhoto[] = [
   // --- EXPERIÊNCIA ---
@@ -74,46 +77,78 @@ export const galleryPhotos: GalleryPhoto[] = [
     description: 'Galinhas poedeiras criadas soltas, fornecendo ovos frescos diretamente para você.',
   },
 
-  // --- CABANA ÉDEN ---
+  // --- CABANA ÉDEN (9 Fotos na sequência natural de visita) ---
   {
     id: 'eden-1',
-    title: 'Cabana Éden — Fachada em Meio à Floresta',
+    title: 'Fachada Iluminada à Noite',
     category: 'eden',
     categoryLabel: 'Cabana Éden',
-    url: edenCoverImage,
-    description: 'Arquitetura acolhedora integrada à vegetação nativa com total privacidade.',
+    url: edenImgFachada,
+    description: 'A charmosa cabana estilo A-frame iluminada ao anoitecer, com varanda privativa em madeira, cadeiras de descanso e placa oficial Cabana Éden.',
   },
   {
     id: 'eden-2',
-    title: 'Quarto no Andar Superior',
+    title: 'Deck & Hidromassagem Externa Aquecida',
     category: 'eden',
     categoryLabel: 'Cabana Éden',
-    url: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
-    description: 'Cama Queen Size com enxoval 600 fios, cobre-leito e coberta King.',
+    url: edenImgDeckJacuzzi,
+    description: 'Banho de imersão relaxante ao ar livre sob o luar das Mansões, integrado ao deck de madeira privativo.',
   },
   {
     id: 'eden-3',
-    title: 'Hidromassagem Privativa da Cabana Éden',
+    title: 'Sala de Estar & Sofá Aconchegante',
     category: 'eden',
     categoryLabel: 'Cabana Éden',
-    url: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
-    description: 'Água quentinha e hidroterapia para renovar as energias.',
+    url: edenImgSalaEstar,
+    description: 'Recepção aconchegante com sofá em linho verde, almofadas botânicas e quadros decorativos na parede em madeira nobre.',
   },
   {
     id: 'eden-4',
-    title: 'Cadeira de Massagem Vibratória',
+    title: 'Cadeira de Massagem & Espaço Relax',
     category: 'eden',
     categoryLabel: 'Cabana Éden',
-    url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80',
-    description: 'Conforto supremo para relaxar enquanto contempla a vista da natureza.',
+    url: edenImgPoltronaMassagem,
+    description: 'Poltrona reclinável de massagem ergonômica com manta macia e apoio para pés, ideal para descanso profundo.',
   },
   {
     id: 'eden-5',
-    title: 'Sala de Estar com TV 43" & Videogame',
+    title: 'Sala de Jantar & Mesa Posta',
     category: 'eden',
     categoryLabel: 'Cabana Éden',
-    url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
-    description: 'Entretenimento completo com jogos variados, jogos de tabuleiro, Alexa e streaming.',
+    url: edenImgMesaJantar,
+    description: 'Mesa de refeições sob a escadaria em madeira com toalha rendada, orquídea e cadeiras rústicas confortáveis.',
+  },
+  {
+    id: 'eden-6',
+    title: 'Cozinha Completa Equipada',
+    category: 'eden',
+    categoryLabel: 'Cabana Éden',
+    url: edenImgCozinha,
+    description: 'Bancada rústica em madeira maciça com borda orgânica, cooktop por indução, pia em inox, purificador e frigobar.',
+  },
+  {
+    id: 'eden-7',
+    title: 'Cantinho Gourmet, Pipoca & Taças',
+    category: 'eden',
+    categoryLabel: 'Cabana Éden',
+    url: edenImgCantinhoPipoca,
+    description: 'Pipoqueira retrô clássica Luxor, taças de cristal para vinho e espumante, e cafeteira para noites especiais de cinema.',
+  },
+  {
+    id: 'eden-8',
+    title: 'Smart TV 43" & Videogame',
+    category: 'eden',
+    categoryLabel: 'Cabana Éden',
+    url: edenImgTvVideogame,
+    description: 'Painel com Smart TV de alta definição, console com videogames variados, Alexa integrada e serviços de streaming.',
+  },
+  {
+    id: 'eden-9',
+    title: 'Quarto no Andar Superior',
+    category: 'eden',
+    categoryLabel: 'Cabana Éden',
+    url: edenImgQuartoSuperior,
+    description: 'Suíte exclusiva no mezanino triangular com Cama Queen Size, lençóis 600 fios, cobertas king e luminárias acolhedoras de cabeceira.',
   },
 
   // --- CABANA MANANCIAL ---
@@ -127,43 +162,11 @@ export const galleryPhotos: GalleryPhoto[] = [
   },
   {
     id: 'manancial-2',
-    title: 'Suíte no Mezanino',
+    title: 'Cabana Manancial — Varanda e Natureza',
     category: 'manancial',
     categoryLabel: 'Cabana Manancial',
-    url: manancialImg11,
-    description: 'Mezanino com Cama Queen Size, lençóis 600 fios e 4 travesseiros macios.',
-  },
-  {
-    id: 'manancial-3',
-    title: 'Hidromassagem Externa com Deck',
-    category: 'manancial',
-    categoryLabel: 'Cabana Manancial',
-    url: manancialImg12,
-    description: 'Banho de imersão ao ar livre sob a luz do dia ou o luar das Mansões.',
-  },
-  {
-    id: 'manancial-4',
-    title: 'Hidromassagem Interna com Ritual de Spa',
-    category: 'manancial',
-    categoryLabel: 'Cabana Manancial',
-    url: manancialImg5,
-    description: 'Disponibilizamos sais de banho, espuma aromática, velas e roupão.',
-  },
-  {
-    id: 'manancial-5',
-    title: 'Área Social e Entretenimento',
-    category: 'manancial',
-    categoryLabel: 'Cabana Manancial',
-    url: manancialImg6,
-    description: 'Smart TV 43", videogame, Alexa, jogos de tabuleiro e cozinha totalmente equipada.',
-  },
-  {
-    id: 'manancial-6',
-    title: 'Conforto & Meio Ambiente',
-    category: 'manancial',
-    categoryLabel: 'Cabana Manancial',
-    url: manancialImg8,
-    description: 'Aconchego e momentos inesquecíveis integrados à natureza.',
+    url: '/accommodations/manancial.webp',
+    description: 'Aconchego e momentos inesquecíveis com hidromassagem e mezanino integrados à natureza.',
   },
 
   // --- CASA PEDACINHO DO CÉU ---

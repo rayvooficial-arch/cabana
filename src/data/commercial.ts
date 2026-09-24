@@ -94,10 +94,8 @@ export const STAY_MODES: Record<'express' | 'conforto', StayMode> = {
       'Se quiser tornar a estadia ainda mais especial, existem kits, cestas e experiências opcionais disponíveis.',
     pricing: {
       cabanas: {
-        // Conforme item 5: NÃO inventar novo preço para Cabanas Conforto
-        weekday: null,
-        weekend: null,
-        statusText: 'Sob consulta / A definir oficialmente',
+        weekday: 1010,
+        weekend: 1210,
         appliesTo: 'Cabana Éden & Cabana Manancial',
       },
       casa: {

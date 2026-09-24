@@ -62,9 +62,12 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
               <div className="flex items-end justify-between gap-4 pb-4 border-b border-white/10">
                 <div>
                   <strong className="block text-sm">Éden e Manancial</strong>
-                  <span className="text-xs text-white/55">Valores confirmados no motor</span>
+                  <span className="text-xs text-white/55">Seg–Qua / Qui–Dom</span>
                 </div>
-                <strong className="text-[#E8D4A2] text-sm">Sob consulta</strong>
+                <div className="text-right text-sm">
+                  <strong className="block text-[#E8D4A2]">{formatBRL(conforto.cabanas.weekday)}</strong>
+                  <span className="text-white/60">{formatBRL(conforto.cabanas.weekend)}</span>
+                </div>
               </div>
               <div className="flex items-end justify-between gap-4">
                 <div>

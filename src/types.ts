@@ -1,3 +1,10 @@
+export interface AccommodationPhotoItem {
+  url: string;
+  title: string;
+  category: 'externa' | 'interna';
+  description: string;
+}
+
 export interface Accommodation {
   id: 'eden' | 'manancial' | 'pedacinho-do-ceu';
   name: string;
@@ -8,6 +15,7 @@ export interface Accommodation {
   isPetFriendly?: boolean;
   coverImage: string;
   galleryImages: string[];
+  detailedPhotos?: AccommodationPhotoItem[];
   description: string;
   structure: {
     title: string;

@@ -10,6 +10,7 @@ import { LocationSection } from './components/LocationSection';
 import { FinalCta } from './components/FinalCta';
 import { Footer } from './components/Footer';
 import { MobileReservationBar } from './components/MobileReservationBar';
+import { PendingBookingModal } from './components/PendingBookingModal';
 
 export default function App() {
   return (
@@ -17,7 +18,7 @@ export default function App() {
       <Navbar />
 
       <main className="flex-1">
-        <Hero videoUrl="/SaveClip.mp4" />
+        <Hero videoUrl="/b0br9k.mp4" />
         <AccommodationsSection />
         <StayModesSection />
         <ExperiencesSection />
@@ -30,6 +31,7 @@ export default function App() {
 
       <Footer />
       <MobileReservationBar />
+      <PendingBookingModal />
     </div>
   );
 }

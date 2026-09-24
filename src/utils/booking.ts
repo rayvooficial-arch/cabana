@@ -69,6 +69,26 @@ export function trackExperienceClick(experienceName: string): void {
   trackBookingClick({ experienceId: experienceName, source: 'experience_highlight' });
 }
 
+type BookingListener = (params: BookingEngineParams | null) => void;
+const listeners = new Set<BookingListener>();
+
+export function registerPendingBookingListener(listener: BookingListener): () => void {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+export function triggerPendingBooking(params?: BookingEngineParams): void {
+  listeners.forEach((listener) => {
+    try {
+      listener(params ?? null);
+    } catch {
+      // Ignore listener error
+    }
+  });
+}
+
 /**
  * Abre o motor oficial de reservas em uma nova aba.
  *
@@ -79,12 +99,13 @@ export function trackExperienceClick(experienceName: string): void {
 export function openBookingEngine(params?: BookingEngineParams): void {
   trackBookingClick(params);
 
-  if (typeof window === 'undefined' || !BOOKING_CONFIG.enabled) {
+  if (typeof window === 'undefined') {
     return;
   }
 
-  const bookingUrl = BOOKING_CONFIG.url.trim();
-  if (!bookingUrl) {
+  const bookingUrl = BOOKING_CONFIG.url?.trim();
+  if (!BOOKING_CONFIG.enabled || !bookingUrl) {
+    triggerPendingBooking(params);
     return;
   }
 

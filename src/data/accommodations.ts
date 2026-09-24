@@ -1,12 +1,76 @@
-import { Accommodation } from '../types';
+import { Accommodation, AccommodationPhotoItem } from '../types';
 import { PRICING_CONFIG } from '../config/constants';
-import edenCoverImage from '../assets/images/regenerated_image_1789430982222.jpg';
+
+// Fotos Oficiais da Cabana Éden (Ordem: Fachada externa -> Demais externas -> Sequência natural interna)
+import edenImgFachada from '../assets/images/Design sem nome (6).jpg';
+import edenImgDeckJacuzzi from '../assets/images/Design sem nome (12).jpg';
+import edenImgSalaEstar from '../assets/images/Design sem nome (5).jpg';
+import edenImgPoltronaMassagem from '../assets/images/eden_poltrona_massagem_1790250008465.jpg';
+import edenImgMesaJantar from '../assets/images/eden_mesa_jantar_1790249623022.jpg';
+import edenImgCozinha from '../assets/images/Design sem nome (8).jpg';
+import edenImgCantinhoPipoca from '../assets/images/eden_cantinho_pipoca_1790249611956.jpg';
+import edenImgTvVideogame from '../assets/images/eden_tv_videogame_1790249633787.jpg';
+import edenImgQuartoSuperior from '../assets/images/Design sem nome (11).jpg';
+
+// Foto Cabana Manancial
 import manancialCoverImage from '../assets/images/imagem1.jpg';
-import manancialImg11 from '../assets/images/Design sem nome (11).jpg';
-import manancialImg12 from '../assets/images/Design sem nome (12).jpg';
-import manancialImg5 from '../assets/images/Design sem nome (5).jpg';
-import manancialImg6 from '../assets/images/Design sem nome (6).jpg';
-import manancialImg8 from '../assets/images/Design sem nome (8).jpg';
+
+export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
+  {
+    url: edenImgFachada,
+    title: 'Fachada Iluminada à Noite',
+    category: 'externa',
+    description: 'A charmosa cabana estilo A-frame iluminada ao anoitecer, com varanda privativa em madeira, cadeiras de descanso e placa oficial Cabana Éden.',
+  },
+  {
+    url: edenImgDeckJacuzzi,
+    title: 'Deck & Hidromassagem Externa Aquecida',
+    category: 'externa',
+    description: 'Banho de imersão relaxante ao ar livre sob o luar das Mansões, integrado ao deck de madeira privativo.',
+  },
+  {
+    url: edenImgSalaEstar,
+    title: 'Sala de Estar & Sofá Aconchegante',
+    category: 'interna',
+    description: 'Recepção aconchegante com sofá em linho verde, almofadas botânicas e quadros decorativos na parede em madeira nobre.',
+  },
+  {
+    url: edenImgPoltronaMassagem,
+    title: 'Cadeira de Massagem & Espaço Relax',
+    category: 'interna',
+    description: 'Poltrona reclinável de massagem ergonômica com manta macia e apoio para pés, ideal para descanso profundo.',
+  },
+  {
+    url: edenImgMesaJantar,
+    title: 'Sala de Jantar & Mesa Posta',
+    category: 'interna',
+    description: 'Mesa de refeições sob a escadaria em madeira com toalha rendada, orquídea e cadeiras rústicas confortáveis.',
+  },
+  {
+    url: edenImgCozinha,
+    title: 'Cozinha Completa Equipada',
+    category: 'interna',
+    description: 'Bancada rústica em madeira maciça com borda orgânica, cooktop por indução, pia em inox, purificador e frigobar.',
+  },
+  {
+    url: edenImgCantinhoPipoca,
+    title: 'Cantinho Gourmet, Pipoca & Taças',
+    category: 'interna',
+    description: 'Pipoqueira retrô clássica Luxor, taças de cristal para vinho e espumante, e cafeteira para noites especiais de cinema.',
+  },
+  {
+    url: edenImgTvVideogame,
+    title: 'Smart TV 43" & Videogame',
+    category: 'interna',
+    description: 'Painel com Smart TV de alta definição, console com videogames variados, Alexa integrada e serviços de streaming.',
+  },
+  {
+    url: edenImgQuartoSuperior,
+    title: 'Quarto no Andar Superior',
+    category: 'interna',
+    description: 'Suíte exclusiva no mezanino triangular com Cama Queen Size, lençóis 600 fios, cobertas king e luminárias acolhedoras de cabeceira.',
+  },
+];
 
 export const accommodations: Accommodation[] = [
   {
@@ -23,14 +87,19 @@ export const accommodations: Accommodation[] = [
       'Cozinha completa',
       'Andar superior',
     ],
-    coverImage: edenCoverImage,
+    coverImage: edenImgFachada,
     galleryImages: [
-      edenCoverImage,
-      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+      edenImgFachada,
+      edenImgDeckJacuzzi,
+      edenImgSalaEstar,
+      edenImgPoltronaMassagem,
+      edenImgMesaJantar,
+      edenImgCozinha,
+      edenImgCantinhoPipoca,
+      edenImgTvVideogame,
+      edenImgQuartoSuperior,
     ],
+    detailedPhotos: EDEN_PHOTOS,
     description:
       'Um refúgio aconchegante para quem busca privacidade, conforto e uma experiência especial em meio à natureza.',
     structure: [
@@ -87,11 +156,7 @@ export const accommodations: Accommodation[] = [
     coverImage: manancialCoverImage,
     galleryImages: [
       manancialCoverImage,
-      manancialImg11,
-      manancialImg12,
-      manancialImg5,
-      manancialImg6,
-      manancialImg8,
+      '/accommodations/manancial.webp',
     ],
     description:
       'Uma cabana charmosa e acolhedora para viver momentos de descanso, conexão e tranquilidade.',
