@@ -1,16 +1,16 @@
 import { Accommodation, AccommodationPhotoItem } from '../types';
 import { PRICING_CONFIG } from '../config/constants';
 
-// Fotos Oficiais da Cabana Éden (Ordem: Fachada externa -> Demais externas -> Sequência natural interna)
-import edenImgFachada from '../assets/images/Design sem nome (6).jpg';
-import edenImgDeckJacuzzi from '../assets/images/Design sem nome (12).jpg';
-import edenImgSalaEstar from '../assets/images/Design sem nome (5).jpg';
-import edenImgPoltronaMassagem from '../assets/images/eden_poltrona_massagem_1790250008465.jpg';
-import edenImgMesaJantar from '../assets/images/eden_mesa_jantar_1790249623022.jpg';
-import edenImgCozinha from '../assets/images/Design sem nome (8).jpg';
-import edenImgCantinhoPipoca from '../assets/images/eden_cantinho_pipoca_1790249611956.jpg';
-import edenImgTvVideogame from '../assets/images/eden_tv_videogame_1790249633787.jpg';
-import edenImgQuartoSuperior from '../assets/images/Design sem nome (11).jpg';
+// Fotos oficiais da Éden, na sequência: fachada, deck, sala, cozinha e quarto.
+const edenImgFachada = '/accommodations/eden/foto-6.webp';
+const edenImgDeckJacuzzi = '/accommodations/eden/foto-11.webp';
+const edenImgSalaEstar = '/accommodations/eden/foto-5.webp';
+const edenImgPoltronaMassagem = '/accommodations/eden/foto-4.webp';
+const edenImgMesaJantar = '/accommodations/eden/foto-9.webp';
+const edenImgCozinha = '/accommodations/eden/foto-8.webp';
+const edenImgCantinhoPipoca = '/accommodations/eden/foto-7.webp';
+const edenImgTvVideogame = '/accommodations/eden/foto-10.webp';
+const edenImgQuartoSuperior = '/accommodations/eden/foto-12.webp';
 
 // Foto Cabana Manancial
 import manancialCoverImage from '../assets/images/imagem1.jpg';
@@ -56,27 +56,27 @@ export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
   },
   {
     url: edenImgMesaJantar,
-    title: 'Sala de Jantar & Mesa Posta',
+    title: 'Mesa de Jantar',
     category: 'interna',
-    description: 'Mesa de refeições sob a escadaria em madeira com toalha rendada, orquídea e cadeiras rústicas confortáveis.',
+    description: 'Mesa de refeições com cadeiras de madeira e detalhes decorativos.',
   },
   {
     url: edenImgCozinha,
     title: 'Cozinha Completa Equipada',
     category: 'interna',
-    description: 'Bancada rústica em madeira maciça com borda orgânica, cooktop por indução, pia em inox, purificador e frigobar.',
+    description: 'Cozinha com bancada, cooktop por indução e pia.',
   },
   {
     url: edenImgCantinhoPipoca,
     title: 'Cantinho Gourmet, Pipoca & Taças',
     category: 'interna',
-    description: 'Pipoqueira retrô clássica Luxor, taças de cristal para vinho e espumante, e cafeteira para noites especiais de cinema.',
+    description: 'Cantinho de pipoca, taças e cafeteira.',
   },
   {
     url: edenImgTvVideogame,
     title: 'Smart TV 43" & Videogame',
     category: 'interna',
-    description: 'Painel com Smart TV de alta definição, console com videogames variados, Alexa integrada e serviços de streaming.',
+    description: 'Smart TV e videogame no espaço de entretenimento.',
   },
   {
     url: edenImgQuartoSuperior,
