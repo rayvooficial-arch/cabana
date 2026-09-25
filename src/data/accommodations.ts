@@ -9,7 +9,6 @@ const edenImgPoltronaMassagem = '/accommodations/eden/foto-4.webp';
 const edenImgMesaJantar = '/accommodations/eden/foto-9.webp';
 const edenImgCozinha = '/accommodations/eden/foto-8.webp';
 const edenImgCantinhoPipoca = '/accommodations/eden/foto-7.webp';
-const edenImgTvVideogame = '/accommodations/eden/foto-10.webp';
 const edenImgQuartoSuperior = '/accommodations/eden/foto-12.webp';
 
 // Foto Cabana Manancial
@@ -84,12 +83,6 @@ export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
     description: 'Cantinho de pipoca, taças e cafeteira.',
   },
   {
-    url: edenImgTvVideogame,
-    title: 'Smart TV 43" & Videogame',
-    category: 'interna',
-    description: 'Smart TV e videogame no espaço de entretenimento.',
-  },
-  {
     url: edenImgQuartoSuperior,
     title: 'Quarto no Andar Superior',
     category: 'interna',
@@ -121,7 +114,6 @@ export const accommodations: Accommodation[] = [
       edenImgMesaJantar,
       edenImgCozinha,
       edenImgCantinhoPipoca,
-      edenImgTvVideogame,
       edenImgQuartoSuperior,
     ],
     detailedPhotos: EDEN_PHOTOS,
