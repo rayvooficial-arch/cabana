@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, CreditCard, MessageCircle } from 'lucide-react';
+import { WHATSAPP_NUMBER, WHATSAPP_NUMBER_FORMATTED } from '../config/constants';
+
+const cardPaymentLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Olá! Gostaria de fazer uma reserva na Cabana das Mansões com pagamento por cartão de crédito. Podem me ajudar?')}`;
 
 const faqs = [
   {
@@ -77,6 +80,20 @@ export const FaqSection: React.FC = () => {
               </div>
             );
           })}
+        </div>
+        <div className="mt-8 sm:mt-10 rounded-2xl border border-[#DDD0B7] bg-white p-5 sm:p-7 shadow-sm flex flex-col sm:flex-row sm:items-center gap-5">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 text-[#8B6A2F] mb-2">
+              <CreditCard className="w-5 h-5" aria-hidden="true" />
+              <h3 className="font-serif text-xl font-bold text-[#14241A]">Pagamento com cartão de crédito</h3>
+            </div>
+            <p className="text-sm text-[#526048] leading-relaxed">
+              Para fazer uma reserva com pagamento por cartão de crédito, entre em contato pelo WhatsApp: {WHATSAPP_NUMBER_FORMATTED}.
+            </p>
+          </div>
+          <a href={cardPaymentLink} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#1C5335] px-5 py-3 text-sm font-semibold text-white hover:bg-[#153D28] transition-colors">
+            <MessageCircle className="w-5 h-5" aria-hidden="true" /> Falar no WhatsApp
+          </a>
         </div>
       </div>
     </section>

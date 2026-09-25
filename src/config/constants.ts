@@ -7,8 +7,8 @@
 
 // Número de WhatsApp oficial para onde todos os leads qualificados são direcionados
 // Formato internacional sem caracteres especiais (ex: 5567999999999)
-export const WHATSAPP_NUMBER = '67992788230';
-export const WHATSAPP_NUMBER_FORMATTED = '(67) 99278-8230';
+export const WHATSAPP_NUMBER = '5567999356608';
+export const WHATSAPP_NUMBER_FORMATTED = '(67) 99935-6608';
 
 // Nome e slogan da marca
 export const BRAND_NAME = 'Cabana das Mansões';
