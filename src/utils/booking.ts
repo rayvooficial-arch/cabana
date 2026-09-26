@@ -1,4 +1,5 @@
 import { BOOKING_CONFIG } from '../config/booking';
+import { trackBookingStart } from './metaPixel';
 
 export interface BookingEngineParams {
   accommodationId?: string;
@@ -98,6 +99,7 @@ export function triggerPendingBooking(params?: BookingEngineParams): void {
  */
 export function openBookingEngine(params?: BookingEngineParams): void {
   trackBookingClick(params);
+  trackBookingStart(params);
 
   if (typeof window === 'undefined') {
     return;

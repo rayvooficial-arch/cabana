@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { accommodations } from '../data/accommodations';
 import { PRICING_CONFIG } from '../config/constants';
 import { BookingButton } from './BookingButton';
 import { AccommodationCardCarousel } from './AccommodationCardCarousel';
 import { CalendarDays, Check, Sparkles } from 'lucide-react';
+import { trackAccommodationCatalogView } from '../utils/metaPixel';
 
 const formatPrice = (value: number) => value.toLocaleString('pt-BR');
 
 export const AccommodationsSection: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const viewTrackedRef = useRef(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || viewTrackedRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          viewTrackedRef.current = true;
+          trackAccommodationCatalogView();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
+    <section ref={sectionRef} id="acomodacoes" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-10 sm:mb-12">
           <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8B6A2F]">
