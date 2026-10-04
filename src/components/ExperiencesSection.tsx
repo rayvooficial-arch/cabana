@@ -26,6 +26,7 @@ interface GalleryGroup {
   shortDescription: string;
   icon: React.ComponentType<{ className?: string }>;
   photos: GalleryPhoto[];
+  mediaAspect?: string;
   coverSrc?: string;
   coverPosition?: string;
   coverSize?: string;
@@ -130,32 +131,53 @@ const galleries: GalleryGroup[] = [
     title: 'Fazendinha',
     shortDescription: 'Mini animais e contato com a natureza',
     icon: Heart,
-    coverSrc: '/fazendinha-cabritinhos-novo.webp',
+    mediaAspect: 'aspect-square',
+    coverSrc: '/fazendinha-vacas.webp',
     photos: [
       {
-        title: 'Cabritinhos',
-        caption: 'Mini animais da fazendinha',
-        src: '/fazendinha-cabritinhos-novo.webp',
-      },
-      {
-        title: 'Coelhinhos',
-        caption: 'Coelhos da fazendinha em meio ao verde',
-        src: '/fazendinha-coelhos-novo.webp',
-      },
-      {
-        title: 'Patinhos no lago',
-        caption: 'Patinhos acompanhando a mãe na água',
-        src: '/fazendinha-patinhos-novo.webp',
+        title: 'As vaquinhas da fazendinha',
+        caption: 'Duas companheiras dóceis em meio ao verde',
+        src: '/fazendinha-vacas.webp',
       },
       {
         title: 'Mini porquinhos',
-        caption: 'Animais da fazendinha descansando juntos',
-        src: '/fazendinha-mini-porquinhos-novo.webp',
+        caption: 'A dupla curiosa aproveitando o espaço da fazendinha',
+        src: '/fazendinha-mini-porcos.webp',
       },
       {
-        title: 'Galinhas da fazendinha',
-        caption: 'Galinhas no espaço dos animais',
-        src: '/fazendinha-galinhas-novo.webp',
+        title: 'Porquinho-da-índia',
+        caption: 'Pequeno, curioso e cheio de personalidade',
+        src: '/fazendinha-porquinho-india-preto-branco.webp',
+      },
+      {
+        title: 'Mini cabras',
+        caption: 'Companheiras brincalhonas no abrigo de madeira',
+        src: '/fazendinha-mini-cabras.webp',
+      },
+      {
+        title: 'Mini cavalo',
+        caption: 'O charme da vida no campo bem de perto',
+        src: '/fazendinha-mini-cavalo.webp',
+      },
+      {
+        title: 'Patos da fazendinha',
+        caption: 'O grupo descansando junto em seu espaço',
+        src: '/fazendinha-patos.webp',
+      },
+      {
+        title: 'Coelhinhos',
+        caption: 'Uma dupla tranquila em meio ao verde',
+        src: '/fazendinha-coelhos.webp',
+      },
+      {
+        title: 'Galinhas-d’angola',
+        caption: 'Beleza e tradição do campo no galinheiro',
+        src: '/fazendinha-galinhas-angola.webp',
+      },
+      {
+        title: 'Porquinho-da-índia de pelo longo',
+        caption: 'Um morador muito charmoso da fazendinha',
+        src: '/fazendinha-porquinho-india-pelo-longo.webp',
       },
     ],
   },
@@ -206,7 +228,7 @@ const ExperienceCard: React.FC<{ group: GalleryGroup }> = ({ group }) => {
   return (
     <article className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#14241A] text-white border border-[#294132] shadow-sm flex flex-col">
       <div
-        className="relative aspect-[9/10] bg-[#0c1710] overflow-hidden touch-pan-y"
+        className={`relative ${group.mediaAspect ?? 'aspect-[9/10]'} bg-[#0c1710] overflow-hidden touch-pan-y`}
         onTouchStart={(event) => { start.current = { x: event.touches[0].clientX, y: event.touches[0].clientY }; }}
         onTouchEnd={(event) => {
           if (!start.current) return;
@@ -246,7 +268,7 @@ const ExperienceCard: React.FC<{ group: GalleryGroup }> = ({ group }) => {
             : image;
           return (
             <button key={`${image.title}-${thumbIndex}`} type="button" onClick={() => select(thumbIndex)} aria-label={`Ver foto ${thumbIndex + 1}: ${image.title}`} aria-current={thumbIndex === index ? 'true' : undefined} className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${thumbIndex === index ? 'border-[#C29B48] ring-1 ring-[#C29B48]' : 'border-white/20 opacity-65 hover:opacity-100'}`}>
-              <span role="img" aria-label={image.title} style={photoStyle(thumbPhoto)} className="block w-full h-full" />
+              <span role="img" aria-label={image.title} style={photoStyle(thumbPhoto, group.mediaAspect === 'aspect-square' ? 'contain' : 'cover')} className="block w-full h-full bg-[#0c1710]" />
             </button>
           );
         })}
