@@ -13,20 +13,20 @@ const edenImgCantinhoPipoca = '/accommodations/eden/quadradas/08-cantinho-gourme
 const edenImgQuartoSuperior = '/accommodations/eden/quadradas/09-quarto-superior.webp';
 const edenImgQuartoTv = '/accommodations/eden/quadradas/10-quarto-tv.webp';
 
-// Foto Cabana Manancial
-import manancialCoverImage from '../assets/images/imagem1.jpg';
+// Fotos oficiais da Cabana Manancial em formato quadrado.
+const manancialCoverImage = '/accommodations/manancial/quadradas/01-fachada.webp';
 
 export const MANANCIAL_PHOTOS: AccommodationPhotoItem[] = [
   { url: manancialCoverImage, title: 'Cabana Manancial — Vista Externa', category: 'externa', description: 'A fachada da cabana em meio à natureza.' },
-  { url: '/accommodations/manancial/foto-15.webp', title: 'Deck e Hidromassagem Externa', category: 'externa', description: 'O deck privativo e a hidromassagem ao ar livre.' },
-  { url: '/accommodations/manancial/foto-21.webp', title: 'Vista Geral do Interior', category: 'interna', description: 'Ambientes integrados e mezanino em madeira.' },
-  { url: '/accommodations/manancial/foto-19.webp', title: 'Sala de Estar', category: 'interna', description: 'Sofá e detalhes aconchegantes da sala.' },
-  { url: '/accommodations/manancial/foto-22.webp', title: 'Smart TV e Videogame', category: 'interna', description: 'Espaço de entretenimento com televisão e controles.' },
-  { url: '/accommodations/manancial/foto-16.webp', title: 'Mesa de Jantar', category: 'interna', description: 'Mesa posta para refeições na cabana.' },
-  { url: '/accommodations/manancial/foto-20.webp', title: 'Cozinha Integrada', category: 'interna', description: 'Cozinha integrada à área de refeições.' },
-  { url: '/accommodations/manancial/foto-17.webp', title: 'Cozinha Equipada', category: 'interna', description: 'Bancada, cooktop e utensílios à disposição.' },
-  { url: '/accommodations/manancial/foto-14.webp', title: 'Hidromassagem Interna', category: 'interna', description: 'Banheira de hidromassagem no interior da cabana.' },
-  { url: '/accommodations/manancial/foto-18.webp', title: 'Quarto no Mezanino', category: 'interna', description: 'Cama no mezanino sob o telhado da cabana.' },
+  { url: '/accommodations/manancial/quadradas/02-deck-hidromassagem.webp', title: 'Deck e Hidromassagem Externa', category: 'externa', description: 'O deck privativo e a hidromassagem ao ar livre.' },
+  { url: '/accommodations/manancial/quadradas/03-vista-interior.webp', title: 'Vista Geral do Interior', category: 'interna', description: 'Ambientes integrados e mezanino em madeira.' },
+  { url: '/accommodations/manancial/quadradas/04-sala-estar.webp', title: 'Sala de Estar', category: 'interna', description: 'Sofá e detalhes aconchegantes da sala.' },
+  { url: '/accommodations/manancial/quadradas/05-tv-videogame.webp', title: 'Smart TV e Videogame', category: 'interna', description: 'Espaço de entretenimento com televisão e controles.' },
+  { url: '/accommodations/manancial/quadradas/06-mesa-jantar.webp', title: 'Mesa de Jantar', category: 'interna', description: 'Mesa posta para refeições na cabana.' },
+  { url: '/accommodations/manancial/quadradas/07-cozinha-integrada.webp', title: 'Cozinha Integrada', category: 'interna', description: 'Cozinha integrada à área de refeições.' },
+  { url: '/accommodations/manancial/quadradas/08-cozinha-equipada.webp', title: 'Cozinha Equipada', category: 'interna', description: 'Bancada, cooktop e utensílios à disposição.' },
+  { url: '/accommodations/manancial/quadradas/09-hidromassagem-interna.webp', title: 'Hidromassagem Interna', category: 'interna', description: 'Banheira de hidromassagem no interior da cabana.' },
+  { url: '/accommodations/manancial/quadradas/10-quarto-mezanino.webp', title: 'Quarto no Mezanino', category: 'interna', description: 'Cama no mezanino sob o telhado da cabana.' },
 ];
 
 export const PEDACINHO_PHOTOS: AccommodationPhotoItem[] = [
