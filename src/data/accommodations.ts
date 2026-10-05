@@ -2,14 +2,16 @@ import { Accommodation, AccommodationPhotoItem } from '../types';
 import { PRICING_CONFIG } from '../config/constants';
 
 // Fotos oficiais da Éden, na sequência: fachada, deck, sala, cozinha e quarto.
-const edenImgFachada = '/accommodations/eden/foto-6.webp';
-const edenImgDeckJacuzzi = '/accommodations/eden/foto-11.webp';
-const edenImgSalaEstar = '/accommodations/eden/foto-5.webp';
-const edenImgPoltronaMassagem = '/accommodations/eden/foto-4.webp';
-const edenImgMesaJantar = '/accommodations/eden/foto-9.webp';
-const edenImgCozinha = '/accommodations/eden/foto-8.webp';
-const edenImgCantinhoPipoca = '/accommodations/eden/foto-7.webp';
-const edenImgQuartoSuperior = '/accommodations/eden/foto-12.webp';
+const edenImgFachada = '/accommodations/eden/quadradas/01-fachada-noite.webp';
+const edenImgDeckJacuzzi = '/accommodations/eden/quadradas/02-deck-hidromassagem.webp';
+const edenImgSalaEstar = '/accommodations/eden/quadradas/03-sala-estar.webp';
+const edenImgVistaInterna = '/accommodations/eden/quadradas/04-vista-interna.webp';
+const edenImgPoltronaMassagem = '/accommodations/eden/quadradas/05-poltrona-massagem.webp';
+const edenImgMesaJantar = '/accommodations/eden/quadradas/06-mesa-jantar.webp';
+const edenImgCozinha = '/accommodations/eden/quadradas/07-cozinha.webp';
+const edenImgCantinhoPipoca = '/accommodations/eden/quadradas/08-cantinho-gourmet.webp';
+const edenImgQuartoSuperior = '/accommodations/eden/quadradas/09-quarto-superior.webp';
+const edenImgQuartoTv = '/accommodations/eden/quadradas/10-quarto-tv.webp';
 
 // Foto Cabana Manancial
 import manancialCoverImage from '../assets/images/imagem1.jpg';
@@ -65,6 +67,12 @@ export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
     description: 'Recepção aconchegante com sofá em linho verde, almofadas botânicas e quadros decorativos na parede em madeira nobre.',
   },
   {
+    url: edenImgVistaInterna,
+    title: 'Vista Integrada da Cabana',
+    category: 'interna',
+    description: 'Sala, espaço de refeições e cozinha reunidos em um ambiente acolhedor.',
+  },
+  {
     url: edenImgPoltronaMassagem,
     title: 'Cadeira de Massagem & Espaço Relax',
     category: 'interna',
@@ -94,6 +102,12 @@ export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
     category: 'interna',
     description: 'Suíte exclusiva no mezanino triangular com Cama Queen Size, lençóis 600 fios, cobertas king e luminárias acolhedoras de cabeceira.',
   },
+  {
+    url: edenImgQuartoTv,
+    title: 'Quarto Superior com TV',
+    category: 'interna',
+    description: 'Quarto no mezanino com cama de casal, televisão e estrutura em madeira.',
+  },
 ];
 
 export const accommodations: Accommodation[] = [
@@ -116,11 +130,13 @@ export const accommodations: Accommodation[] = [
       edenImgFachada,
       edenImgDeckJacuzzi,
       edenImgSalaEstar,
+      edenImgVistaInterna,
       edenImgPoltronaMassagem,
       edenImgMesaJantar,
       edenImgCozinha,
       edenImgCantinhoPipoca,
       edenImgQuartoSuperior,
+      edenImgQuartoTv,
     ],
     detailedPhotos: EDEN_PHOTOS,
     description:
