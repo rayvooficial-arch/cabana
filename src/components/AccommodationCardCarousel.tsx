@@ -8,7 +8,7 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const thumbnails = useRef<HTMLDivElement>(null);
   const photo = photos[currentIndex];
-  const usesSquarePhotos = accommodation.id === 'pedacinho-do-ceu';
+  const usesSquarePhotos = accommodation.id === 'pedacinho-do-ceu' || accommodation.id === 'eden';
 
   useEffect(() => {
     const strip = thumbnails.current;
