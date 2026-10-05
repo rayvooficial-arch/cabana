@@ -28,15 +28,21 @@ export const MANANCIAL_PHOTOS: AccommodationPhotoItem[] = [
 ];
 
 export const PEDACINHO_PHOTOS: AccommodationPhotoItem[] = [
-  { url: '/accommodations/pedacinho-do-ceu/fachada.webp', title: 'Fachada da Casa', category: 'externa', description: 'A entrada da Casa Pedacinho do Céu cercada pelo jardim.' },
-  { url: '/accommodations/pedacinho-do-ceu/varanda.webp', title: 'Varanda e Jardim', category: 'externa', description: 'Varanda coberta com vista para o jardim à noite.' },
-  { url: '/accommodations/pedacinho-do-ceu/estar-externo.webp', title: 'Espaço de Descanso', category: 'externa', description: 'Poltronas e sofá na área coberta da casa.' },
-  { url: '/accommodations/pedacinho-do-ceu/refeicoes.webp', title: 'Área de Refeições', category: 'externa', description: 'Mesa para reunir família e amigos na área coberta.' },
-  { url: '/accommodations/pedacinho-do-ceu/sala.webp', title: 'Sala de Estar', category: 'interna', description: 'Sala com sofás para momentos de descanso em grupo.' },
-  { url: '/accommodations/pedacinho-do-ceu/cozinha.webp', title: 'Cozinha', category: 'interna', description: 'Cozinha com bancada e área de preparo de refeições.' },
-  { url: '/accommodations/pedacinho-do-ceu/quarto-1.webp', title: 'Quarto de Casal', category: 'interna', description: 'Quarto com cama de casal e iluminação acolhedora.' },
-  { url: '/accommodations/pedacinho-do-ceu/quarto-2.webp', title: 'Segundo Quarto de Casal', category: 'interna', description: 'Outro quarto de casal da casa.' },
-  { url: '/accommodations/pedacinho-do-ceu/banheiro.webp', title: 'Banheiro', category: 'interna', description: 'Banheiro com box de vidro e bancada.' },
+  { url: '/accommodations/pedacinho-do-ceu/01-fachada.webp', title: 'Fachada da Casa', category: 'externa', description: 'A Casa Pedacinho do Céu iluminada e cercada pelo jardim.' },
+  { url: '/accommodations/pedacinho-do-ceu/02-hidromassagem-externa.webp', title: 'Hidromassagem no Deck', category: 'externa', description: 'Banheira externa borbulhante integrada ao deck de madeira.' },
+  { url: '/accommodations/pedacinho-do-ceu/03-varanda-jardim.webp', title: 'Varanda e Jardim', category: 'externa', description: 'Varanda coberta com vista para a área verde da propriedade.' },
+  { url: '/accommodations/pedacinho-do-ceu/04-varanda-refeicoes.webp', title: 'Varanda para Refeições', category: 'externa', description: 'Mesa ampla para reunir família e amigos na varanda.' },
+  { url: '/accommodations/pedacinho-do-ceu/05-area-gourmet.webp', title: 'Área Gourmet', category: 'externa', description: 'Balcão e espaço gourmet integrados à varanda.' },
+  { url: '/accommodations/pedacinho-do-ceu/06-varanda-estar.webp', title: 'Espaço de Descanso', category: 'externa', description: 'Poltronas confortáveis na área coberta da casa.' },
+  { url: '/accommodations/pedacinho-do-ceu/07-sala-estar.webp', title: 'Sala de Estar', category: 'interna', description: 'Sala com sofá, televisão e ambiente acolhedor.' },
+  { url: '/accommodations/pedacinho-do-ceu/08-sala-entrada.webp', title: 'Sala e Entrada', category: 'interna', description: 'Ambiente de estar junto à entrada principal da casa.' },
+  { url: '/accommodations/pedacinho-do-ceu/09-area-refeicoes.webp', title: 'Área de Refeições', category: 'interna', description: 'Mesa preparada ao lado da cozinha e da área gourmet.' },
+  { url: '/accommodations/pedacinho-do-ceu/10-cozinha-principal.webp', title: 'Cozinha Principal', category: 'interna', description: 'Cozinha completa com armários, fogão e geladeira.' },
+  { url: '/accommodations/pedacinho-do-ceu/11-cozinha-completa.webp', title: 'Cozinha Completa', category: 'interna', description: 'Ampla bancada e estrutura para preparar as refeições.' },
+  { url: '/accommodations/pedacinho-do-ceu/12-cozinha-equipada.webp', title: 'Cozinha Equipada', category: 'interna', description: 'Utensílios e eletrodomésticos disponíveis para a estadia.' },
+  { url: '/accommodations/pedacinho-do-ceu/13-quarto-casal-1.webp', title: 'Primeiro Quarto de Casal', category: 'interna', description: 'Quarto de casal claro, confortável e climatizado.' },
+  { url: '/accommodations/pedacinho-do-ceu/14-quarto-casal-2.webp', title: 'Segundo Quarto de Casal', category: 'interna', description: 'Quarto de casal aconchegante com armários planejados.' },
+  { url: '/accommodations/pedacinho-do-ceu/15-quarto-3.webp', title: 'Terceiro Quarto', category: 'interna', description: 'Terceiro quarto confortável e climatizado.' },
 ];
 
 export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
