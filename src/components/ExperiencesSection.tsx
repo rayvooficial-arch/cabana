@@ -37,6 +37,7 @@ const galleries: GalleryGroup[] = [
     title: 'Hidromassagens',
     shortDescription: 'Privativas nas acomodações',
     icon: Bath,
+    mediaAspect: 'aspect-square',
     coverSrc: '/hidromassagens/01-hidro-externa-dia.webp',
     photos: [
       {
