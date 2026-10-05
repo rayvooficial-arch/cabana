@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, Star } from 'lucide-react';
-import { SPECIAL_PACKAGES, STAY_MODES, SEASONAL_RATES } from '../data/commercial';
+import { SPECIAL_PACKAGES, SEASONAL_RATES } from '../data/commercial';
 import { BookingButton } from './BookingButton';
 
 interface PricingSectionProps {
@@ -11,9 +11,6 @@ const formatBRL = (value: number | null) =>
   value === null ? 'Sob consulta' : value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
 export const PricingSection: React.FC<PricingSectionProps> = () => {
-  const express = STAY_MODES.express.pricing;
-  const conforto = STAY_MODES.conforto.pricing;
-
   return (
     <section id="tarifario" className="py-20 sm:py-24 bg-[#14241A] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,60 +24,6 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
           <p className="text-sm sm:text-base text-white/70 leading-relaxed">
             Use os valores abaixo como referência e confirme disponibilidade e preço final no motor de reservas.
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-          <article className="rounded-3xl bg-white/5 border border-white/10 p-6 sm:p-8">
-            <h3 className="font-serif text-2xl font-bold mb-5">Temporada Express</h3>
-            <div className="space-y-4">
-              <div className="flex items-end justify-between gap-4 pb-4 border-b border-white/10">
-                <div>
-                  <strong className="block text-sm">Éden e Manancial</strong>
-                  <span className="text-xs text-white/55">Seg–Qua / Qui–Dom</span>
-                </div>
-                <div className="text-right text-sm">
-                  <strong className="block text-[#E8D4A2]">{formatBRL(express.cabanas.weekday)}</strong>
-                  <span className="text-white/60">{formatBRL(express.cabanas.weekend)}</span>
-                </div>
-              </div>
-              <div className="flex items-end justify-between gap-4">
-                <div>
-                  <strong className="block text-sm">Casa Pedacinho do Céu</strong>
-                  <span className="text-xs text-white/55">Seg–Qua / Qui–Dom</span>
-                </div>
-                <div className="text-right text-sm">
-                  <strong className="block text-[#E8D4A2]">{formatBRL(express.casa.weekday)}</strong>
-                  <span className="text-white/60">{formatBRL(express.casa.weekend)}</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article className="rounded-3xl bg-white/5 border border-[#C29B48]/30 p-6 sm:p-8">
-            <h3 className="font-serif text-2xl font-bold mb-5">Temporada Conforto</h3>
-            <div className="space-y-4">
-              <div className="flex items-end justify-between gap-4 pb-4 border-b border-white/10">
-                <div>
-                  <strong className="block text-sm">Éden e Manancial</strong>
-                  <span className="text-xs text-white/55">Seg–Qua / Qui–Dom</span>
-                </div>
-                <div className="text-right text-sm">
-                  <strong className="block text-[#E8D4A2]">{formatBRL(conforto.cabanas.weekday)}</strong>
-                  <span className="text-white/60">{formatBRL(conforto.cabanas.weekend)}</span>
-                </div>
-              </div>
-              <div className="flex items-end justify-between gap-4">
-                <div>
-                  <strong className="block text-sm">Casa Pedacinho do Céu</strong>
-                  <span className="text-xs text-white/55">Seg–Qua / Qui–Dom</span>
-                </div>
-                <div className="text-right text-sm">
-                  <strong className="block text-[#E8D4A2]">{formatBRL(conforto.casa.weekday)}</strong>
-                  <span className="text-white/60">{formatBRL(conforto.casa.weekend)}</span>
-                </div>
-              </div>
-            </div>
-          </article>
         </div>
 
         <div className="mb-10">
