@@ -2,7 +2,7 @@ import { Accommodation, AccommodationPhotoItem } from '../types';
 import { PRICING_CONFIG } from '../config/constants';
 
 // Fotos oficiais da Éden, na sequência: fachada, deck, sala, cozinha e quarto.
-const edenImgFachada = '/accommodations/eden/quadradas/01-fachada-noite.webp';
+const edenImgFachada = '/accommodations/eden/quadradas/01-fachada-nova.jpg';
 const edenImgDeckJacuzzi = '/accommodations/eden/quadradas/02-deck-hidromassagem.webp';
 const edenImgSalaEstar = '/accommodations/eden/quadradas/03-sala-estar.webp';
 const edenImgVistaInterna = '/accommodations/eden/quadradas/04-vista-interna.webp';
@@ -14,10 +14,10 @@ const edenImgQuartoSuperior = '/accommodations/eden/quadradas/09-quarto-superior
 const edenImgQuartoTv = '/accommodations/eden/quadradas/10-quarto-tv.webp';
 
 // Fotos oficiais da Cabana Manancial em formato quadrado.
-const manancialCoverImage = '/accommodations/manancial/quadradas/01-fachada.webp';
+const manancialCoverImage = '/accommodations/manancial/quadradas/01-fachada-nova.jpg';
 
 export const MANANCIAL_PHOTOS: AccommodationPhotoItem[] = [
-  { url: manancialCoverImage, title: 'Cabana Manancial — Vista Externa', category: 'externa', description: 'A fachada da cabana em meio à natureza.' },
+  { url: manancialCoverImage, title: 'Fachada da Cabana Manancial', category: 'externa', description: 'A fachada da Cabana Manancial integrada à natureza.' },
   { url: '/accommodations/manancial/quadradas/02-deck-hidromassagem.webp', title: 'Deck e Hidromassagem Externa', category: 'externa', description: 'O deck privativo e a hidromassagem ao ar livre.' },
   { url: '/accommodations/manancial/quadradas/03-vista-interior.webp', title: 'Vista Geral do Interior', category: 'interna', description: 'Ambientes integrados e mezanino em madeira.' },
   { url: '/accommodations/manancial/quadradas/04-sala-estar.webp', title: 'Sala de Estar', category: 'interna', description: 'Sofá e detalhes aconchegantes da sala.' },
@@ -50,9 +50,9 @@ export const PEDACINHO_PHOTOS: AccommodationPhotoItem[] = [
 export const EDEN_PHOTOS: AccommodationPhotoItem[] = [
   {
     url: edenImgFachada,
-    title: 'Fachada Iluminada à Noite',
+    title: 'Fachada da Cabana Éden',
     category: 'externa',
-    description: 'A charmosa cabana estilo A-frame iluminada ao anoitecer, com varanda privativa em madeira, cadeiras de descanso e placa oficial Cabana Éden.',
+    description: 'A fachada da Cabana Éden em meio à natureza, com sua arquitetura acolhedora em madeira.',
   },
   {
     url: edenImgDeckJacuzzi,
