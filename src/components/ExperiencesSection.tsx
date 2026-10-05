@@ -66,17 +66,28 @@ const galleries: GalleryGroup[] = [
     title: 'Cinema ao ar livre',
     shortDescription: 'Telão em meio à natureza',
     icon: Film,
-    coverSrc: '/lazer-cinema-01.webp',
+    mediaAspect: 'aspect-square',
+    coverSrc: '/experiences/cinema/01-cinema-externo.jpg',
     photos: [
       {
-        title: 'Cinema ao ar livre',
-        caption: 'Espaço do cinema preparado ao entardecer',
-        src: '/lazer-cinema-01.webp',
+        title: 'Cinema ao ar livre em meio à natureza',
+        caption: 'Estrutura preparada para sessões especiais ao ar livre',
+        src: '/experiences/cinema/01-cinema-externo.jpg',
       },
       {
-        title: 'Sessão de cinema',
-        caption: 'Tela acesa para aproveitar a noite',
-        src: '/lazer-cinema-03.webp',
+        title: 'Ambiente do cinema',
+        caption: 'Espaço aconchegante para curtir filmes em boa companhia',
+        src: '/experiences/cinema/02-cinema-ambiente.jpg',
+      },
+      {
+        title: 'Cinema iluminado à noite',
+        caption: 'Iluminação acolhedora para aproveitar a sessão noturna',
+        src: '/experiences/cinema/03-cinema-noturno.jpg',
+      },
+      {
+        title: 'Vista completa do cinema',
+        caption: 'Telão e deck integrados à área verde da propriedade',
+        src: '/experiences/cinema/04-cinema-deck.png',
       },
     ],
   },
@@ -84,27 +95,33 @@ const galleries: GalleryGroup[] = [
     title: 'Pesque e solte',
     shortDescription: 'Pesca recreativa no lago',
     icon: Waves,
-    coverSrc: '/lazer-pesqueiro-cover-novo.webp',
+    mediaAspect: 'aspect-square',
+    coverSrc: '/experiences/pesca/01-deck-lago.png',
     photos: [
       {
-        title: 'Pesque e solte',
-        caption: 'Momento de pesca no deck junto ao lago',
-        src: '/lazer-pesqueiro-cover-novo.webp',
+        title: 'Deck de pesca junto ao lago',
+        caption: 'Espaço coberto para relaxar e aproveitar o lago',
+        src: '/experiences/pesca/01-deck-lago.png',
       },
       {
-        title: 'Deck da pescaria',
-        caption: 'Área coberta para aproveitar o lago',
-        src: '/lazer-deck-pescaria.webp',
+        title: 'Deck sobre o tanque',
+        caption: 'Vista ampla da estrutura de pesca e da área verde',
+        src: '/experiences/pesca/02-deck-tanque.jpg',
       },
       {
         title: 'Pesca no lago',
         caption: 'Pescaria em meio à natureza',
-        src: '/lazer-pesqueiro-novo.webp',
+        src: '/experiences/pesca/03-pesca.jpg',
       },
       {
         title: 'Espécies do lago',
         caption: 'Placa com informações sobre os peixes do pesqueiro',
-        src: '/lazer-pesqueiro-02-novo.webp',
+        src: '/experiences/pesca/04-placa-peixes.png',
+      },
+      {
+        title: 'Área de churrasqueira junto ao lago',
+        caption: 'Estrutura de apoio para aproveitar o dia na área externa',
+        src: '/experiences/pesca/05-area-churrasqueira.jpg',
       },
     ],
   },
@@ -112,24 +129,62 @@ const galleries: GalleryGroup[] = [
     title: 'Fogueira e descanso',
     shortDescription: 'Fogo, balanços e área verde',
     icon: Flame,
-    coverSrc: '/lazer-piquenique.webp',
+    mediaAspect: 'aspect-square',
+    coverSrc: '/experiences/fogueira/01-fogareiro-cinematic.jpg',
     photos: [
       {
-        title: 'Mesas de piquenique',
-        caption: 'Área verde e espaço para descansar',
-        src: '/lazer-piquenique.webp',
+        title: 'Fogareiro ao ar livre',
+        caption: 'Um espaço acolhedor para aproveitar as noites na propriedade',
+        src: '/experiences/fogueira/01-fogareiro-cinematic.jpg',
       },
       {
-        title: 'Área de descanso',
-        caption: 'Balanços e redes à sombra das árvores',
-        src: '/lazer-area-descanso.webp',
-        position: 'center',
+        title: 'Fogueira vista de cima',
+        caption: 'Área de fogo cercada por assentos de madeira',
+        src: '/experiences/fogueira/02-fogueira-vista-superior.png',
       },
       {
-        title: 'Noite junto à fogueira',
-        caption: 'Área de fogo ao ar livre em frente às cabanas',
-        src: '/lazer-fogueira-02.webp',
-        position: 'center',
+        title: 'Vinho junto à fogueira',
+        caption: 'Clima especial para relaxar diante das cabanas iluminadas',
+        src: '/experiences/fogueira/03-fogueira-vinho.png',
+      },
+    ],
+  },
+  {
+    title: 'Playground, campinho e redário',
+    shortDescription: 'Diversão e descanso ao ar livre',
+    icon: Baby,
+    mediaAspect: 'aspect-square',
+    coverSrc: '/experiences/playground/01-playground-vista-geral.jpg',
+    photos: [
+      {
+        title: 'Playground ao ar livre',
+        caption: 'Espaço preparado para as crianças brincarem em meio à natureza',
+        src: '/experiences/playground/01-playground-vista-geral.jpg',
+      },
+      {
+        title: 'Brinquedos do playground',
+        caption: 'Diversão com estrutura de madeira e área verde',
+        src: '/experiences/playground/02-playground.jpg',
+      },
+      {
+        title: 'Campinho',
+        caption: 'Área aberta para jogos e brincadeiras',
+        src: '/experiences/playground/03-campinho.jpg',
+      },
+      {
+        title: 'Balanços',
+        caption: 'Balanços cercados pela natureza da propriedade',
+        src: '/experiences/playground/04-balancos.jpg',
+      },
+      {
+        title: 'Redário',
+        caption: 'Redes à sombra para descansar e desacelerar',
+        src: '/experiences/playground/05-redario.png',
+      },
+      {
+        title: 'Mesa de piquenique e descanso',
+        caption: 'Área sombreada para reunir a família e relaxar',
+        src: '/experiences/playground/06-mesa-piquenique.png',
       },
     ],
   },
@@ -293,17 +348,6 @@ export const ExperiencesSection: React.FC = () => (
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
         {galleries.map((group) => <ExperienceCard key={group.title} group={group} />)}
-        <article className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#14241A] text-white border border-[#294132] shadow-sm flex flex-col">
-          <div className="aspect-[9/10] bg-[#0c1710] flex flex-col items-center justify-center p-6 text-center">
-            <Baby className="w-12 h-12 text-[#E8D4A2]" aria-hidden="true" />
-            <span className="text-sm text-white/70 mt-4">Espaço para brincar ao ar livre</span>
-          </div>
-          <div className="p-4 sm:p-5 border-t border-white/10 flex-1">
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-[#E8D4A2]">Para as crianças</span>
-            <h3 className="font-serif text-lg sm:text-xl font-bold mt-2">Playground e campinho</h3>
-            <p className="text-sm text-white/75 mt-1">Brincadeiras e jogos em meio à natureza.</p>
-          </div>
-        </article>
       </div>
       <div className="mt-6 sm:mt-8 flex flex-wrap gap-2">
         {otherExperiences.map(({ title, icon: Icon }) => (
