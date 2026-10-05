@@ -323,8 +323,17 @@ export interface SpecialPackage {
   id: string;
   name: string;
   period: string;
-  nights: number;
-  price: number;
+  minimumNights: number;
+  rates: {
+    cabanas: {
+      express: number;
+      conforto: number;
+    };
+    casa: {
+      express: number;
+      conforto: number;
+    };
+  };
   highlightBadge?: string;
   note: string;
 }
@@ -340,51 +349,41 @@ export interface SeasonalRate {
 export const SPECIAL_PACKAGES: SpecialPackage[] = [
   {
     id: 'pacote-natal',
-    name: 'Pacote Natal',
+    name: 'Natal',
     period: '24 a 26 de dezembro',
-    nights: 2,
-    price: 3490,
+    minimumNights: 2,
+    rates: {
+      cabanas: { express: 1490, conforto: 1610 },
+      casa: { express: 2290, conforto: 2470 },
+    },
     highlightBadge: 'Celebração de Fim de Ano',
-    note: '2 noites — R$ 3.490 para celebrar a paz do Natal em meio à natureza.',
+    note: 'Mínimo de 2 diárias. Valores por diária.',
   },
   {
     id: 'pacote-reveillon',
-    name: 'Pacote Réveillon',
+    name: 'Réveillon',
     period: '30 de dezembro a 02 de janeiro',
-    nights: 3,
-    price: 4990,
+    minimumNights: 3,
+    rates: {
+      cabanas: { express: 1790, conforto: 1910 },
+      casa: { express: 2690, conforto: 2870 },
+    },
     highlightBadge: 'Virada de Ano Exclusiva',
-    note: '3 noites — R$ 4.990 com spa privativo e céu estrelado do campo.',
+    note: 'Mínimo de 3 diárias. Valores por diária.',
   },
 ];
 
 export const SEASONAL_RATES = {
-  dezembroAlta: [
-    {
-      id: 'dez-18-23',
-      period: '18 a 23 de dezembro',
-      rate: 1400,
-      description: 'Diária sazonal de alta temporada em dezembro.',
+  period: 'Dezembro de 2026 e janeiro de 2027',
+  schedule: 'Tarifa única — segunda a domingo',
+  rates: {
+    express: {
+      cabanas: 1290,
+      casa: 1990,
     },
-    {
-      id: 'dez-27-29',
-      period: '27 a 29 de dezembro',
-      rate: 1400,
-      description: 'Diária sazonal no intervalo de fim de ano.',
-    },
-  ],
-  janeiro2027: {
-    period: '03 a 31 de janeiro de 2027',
-    hoursOfUse: '21 horas de uso por diária',
-    cabanas: {
-      weekday: 1200, // Segunda a quarta
-      weekend: 1400, // Quinta a domingo
-    },
-    casa: {
-      segundaASexta: 1640,
-      quintaADomingo: 2000,
-      overlapNotice:
-        'Nota de sobreposição oficial: Fornecido "Segunda a sexta R$ 1.640" e "Quinta a domingo R$ 2.000". A regra específica para quinta e sexta será confirmada no motor de reservas.',
+    conforto: {
+      cabanas: 1410,
+      casa: 2170,
     },
   },
 };
