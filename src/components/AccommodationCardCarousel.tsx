@@ -8,6 +8,7 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const thumbnails = useRef<HTMLDivElement>(null);
   const photo = photos[currentIndex];
+  const usesSquarePhotos = accommodation.id === 'pedacinho-do-ceu';
 
   useEffect(() => {
     const strip = thumbnails.current;
@@ -29,7 +30,7 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
   return (
     <div className="bg-[#14241A] text-white">
       <div
-        className="relative w-full aspect-[9/10] bg-[#0c1710] overflow-hidden touch-pan-y"
+        className={`relative w-full ${usesSquarePhotos ? 'aspect-square' : 'aspect-[9/10]'} bg-[#0c1710] overflow-hidden touch-pan-y`}
         onTouchStart={(event) => {
           touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
         }}
@@ -96,7 +97,7 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
               aria-current={index === currentIndex ? 'true' : undefined}
               className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${index === currentIndex ? 'border-[#C29B48] ring-1 ring-[#C29B48] opacity-100' : 'border-white/20 opacity-65 hover:opacity-100'}`}
             >
-              <img src={item.url} alt="" className="w-full h-full object-cover" loading="lazy" />
+              <img src={item.url} alt="" className={`w-full h-full ${usesSquarePhotos ? 'object-contain bg-[#0c1710]' : 'object-cover'}`} loading="lazy" />
             </button>
           ))}
         </div>
