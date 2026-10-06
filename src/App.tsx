@@ -18,7 +18,7 @@ export default function App() {
       <Navbar />
 
       <main className="flex-1">
-        <Hero videoUrl="/b0br9k.mp4" />
+        <Hero videoUrl="/herosite.mp4" hasAudio={false} />
         <AccommodationsSection />
         <StayModesSection />
         <ExperiencesSection />
