@@ -5,9 +5,10 @@ import { BookingButton } from './BookingButton';
 interface HeroProps {
   onOpenBooking?: () => void;
   videoUrl?: string;
+  hasAudio?: boolean;
 }
 
-export const Hero: React.FC<HeroProps> = ({ videoUrl = '/b0br9k.mp4' }) => {
+export const Hero: React.FC<HeroProps> = ({ videoUrl = '/herosite.mp4', hasAudio = false }) => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -41,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ videoUrl = '/b0br9k.mp4' }) => {
           <div className="absolute inset-x-0 bottom-0 h-36 sm:h-48 bg-gradient-to-t from-[#122118] via-[#122118]/40 to-transparent pointer-events-none" />
         </div>
 
-        {videoUrl && (
+        {videoUrl && hasAudio && (
           <button
             onClick={toggleMute}
             id="hero-toggle-audio-btn"
