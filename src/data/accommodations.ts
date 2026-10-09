@@ -117,7 +117,9 @@ export const accommodations: Accommodation[] = [
     tagline: 'Refúgio exclusivo com andar superior e relaxamento total',
     capacity: 'Até 4 pessoas',
     maxGuests: PRICING_CONFIG.cabanas.maxGuests,
+    isPetFriendly: true,
     highlightBadges: [
+      'PET FRIENDLY',
       'Hidromassagem',
       'Cadeira de massagem',
       'Videogame',
@@ -184,7 +186,9 @@ export const accommodations: Accommodation[] = [
     tagline: 'Charme rústico, mezanino e experiência dupla de hidromassagem',
     capacity: 'Até 4 pessoas',
     maxGuests: PRICING_CONFIG.cabanas.maxGuests,
+    isPetFriendly: true,
     highlightBadges: [
+      'PET FRIENDLY',
       'Hidromassagem interna',
       'Hidromassagem externa',
       'Videogame',
