@@ -20,7 +20,7 @@ const faqs = [
     id: 'pet',
     question: 'Posso me hospedar com pet?',
     answer:
-      'A Casa Pedacinho do Céu é a opção indicada para hóspedes que viajam com pet. Consulte as condições vigentes no momento da reserva.',
+      'Sim. A Cabana Éden, a Cabana Manancial e a Casa Pedacinho do Céu aceitam pets, seguindo as regras e condições informadas no momento da reserva.',
   },
   {
     id: 'reserva',
