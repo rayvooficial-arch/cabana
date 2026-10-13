@@ -160,7 +160,7 @@ export const AccommodationsSection: React.FC = () => {
                       id={`reserve-${acc.id}`}
                       accommodationId={acc.id}
                       accommodationName={acc.name}
-                      label="RESERVAR PELO WHATSAPP"
+                      label="ESCOLHER DATAS"
                       variant="primary"
                       size="md"
                       className="w-full"

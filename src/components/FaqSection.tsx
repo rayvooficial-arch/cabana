@@ -26,7 +26,7 @@ const faqs = [
     id: 'reserva',
     question: 'Como consulto valores e disponibilidade?',
     answer:
-      'Use qualquer botão “Reservar pelo WhatsApp” do site. Uma conversa será aberta com uma mensagem pronta para você consultar as datas, os valores e concluir a reserva com nossa equipe.',
+      'Use qualquer botão “Escolher datas” do site, preencha os dados da estadia e continue pelo WhatsApp com uma mensagem pronta para consultar a disponibilidade e concluir a reserva com nossa equipe.',
   },
   {
     id: 'adicionais',

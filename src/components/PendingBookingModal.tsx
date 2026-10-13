@@ -1,129 +1,318 @@
-import React, { useState, useEffect } from 'react';
-import { Sparkles, Calendar, Check, X, ShieldCheck, ArrowRight } from 'lucide-react';
-import { registerPendingBookingListener, BookingEngineParams } from '../utils/booking';
+import React, { FormEvent, useEffect, useMemo, useState } from 'react';
+import { CalendarDays, MessageCircle, Users, X } from 'lucide-react';
+import {
+  BookingEngineParams,
+  createBookingWhatsAppLink,
+  registerPendingBookingListener,
+} from '../utils/booking';
 import { accommodations } from '../data/accommodations';
+import { PRICING_CONFIG } from '../config/constants';
+import { SEASONAL_RATES, SPECIAL_PACKAGES } from '../data/commercial';
+
+type StayMode = 'express' | 'conforto';
+
+const DAY_IN_MS = 24 * 60 * 60 * 1000;
+
+function parseDate(value: string): Date {
+  return new Date(`${value}T12:00:00`);
+}
+
+function formatInputDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function nightsBetween(checkIn: string, checkOut: string): number {
+  if (!checkIn || !checkOut) return 0;
+  return Math.max(0, Math.round((parseDate(checkOut).getTime() - parseDate(checkIn).getTime()) / DAY_IN_MS));
+}
+
+function isChristmasNight(date: Date): boolean {
+  return date.getFullYear() === 2026 && date.getMonth() === 11 && [24, 25].includes(date.getDate());
+}
+
+function isNewYearNight(date: Date): boolean {
+  return (
+    (date.getFullYear() === 2026 && date.getMonth() === 11 && [30, 31].includes(date.getDate())) ||
+    (date.getFullYear() === 2027 && date.getMonth() === 0 && date.getDate() === 1)
+  );
+}
+
+function isHighSeason(date: Date): boolean {
+  return (
+    (date.getFullYear() === 2026 && date.getMonth() === 11) ||
+    (date.getFullYear() === 2027 && date.getMonth() === 0)
+  );
+}
 
 export const PendingBookingModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentParams, setCurrentParams] = useState<BookingEngineParams | null>(null);
+  const [accommodationId, setAccommodationId] = useState('');
+  const [stayMode, setStayMode] = useState<StayMode>('express');
+  const [guestName, setGuestName] = useState('');
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [guests, setGuests] = useState(2);
+  const [error, setError] = useState('');
+
+  const today = useMemo(() => formatInputDate(new Date()), []);
+  const selectedAccommodation = accommodations.find((item) => item.id === accommodationId);
+  const nights = nightsBetween(checkIn, checkOut);
 
   useEffect(() => {
-    // Registra ouvinte para cliques em botões de reserva enquanto a URL oficial não estiver configurada
-    const unsubscribe = registerPendingBookingListener((params) => {
+    return registerPendingBookingListener((params) => {
+      const selected = accommodations.find(
+        (item) =>
+          item.id === params?.accommodationId ||
+          item.name.toLowerCase() === params?.accommodationName?.toLowerCase(),
+      );
+      const source = params?.source || '';
       setCurrentParams(params);
+      setAccommodationId(selected?.id || '');
+      setStayMode(source.includes('conforto') ? 'conforto' : 'express');
+      setGuestName('');
+      setCheckIn('');
+      setCheckOut('');
+      setGuests(2);
+      setError('');
       setIsOpen(true);
     });
-    return unsubscribe;
   }, []);
+
+  const estimate = useMemo(() => {
+    if (!selectedAccommodation || nights <= 0) return 0;
+    const propertyType = selectedAccommodation.id === 'pedacinho-do-ceu' ? 'casa' : 'cabanas';
+    let total = 0;
+    const cursor = parseDate(checkIn);
+
+    for (let index = 0; index < nights; index += 1) {
+      let nightlyRate: number;
+
+      if (isChristmasNight(cursor)) {
+        nightlyRate = SPECIAL_PACKAGES[0].rates[propertyType][stayMode];
+      } else if (isNewYearNight(cursor)) {
+        nightlyRate = SPECIAL_PACKAGES[1].rates[propertyType][stayMode];
+      } else if (isHighSeason(cursor)) {
+        nightlyRate = SEASONAL_RATES.rates[stayMode][propertyType];
+      } else {
+        const rate = PRICING_CONFIG[stayMode][propertyType];
+        const dayOfWeek = cursor.getDay();
+        nightlyRate = dayOfWeek >= 1 && dayOfWeek <= 3
+          ? (rate.weekdayPrice as number)
+          : (rate.weekendPrice as number);
+      }
+
+      total += nightlyRate;
+      cursor.setDate(cursor.getDate() + 1);
+    }
+
+    return total;
+  }, [checkIn, nights, selectedAccommodation, stayMode]);
+
+  const minimumStayWarning = useMemo(() => {
+    if (!checkIn || nights <= 0) return '';
+    const cursor = parseDate(checkIn);
+    let includesChristmas = false;
+    let includesNewYear = false;
+
+    for (let index = 0; index < nights; index += 1) {
+      includesChristmas ||= isChristmasNight(cursor);
+      includesNewYear ||= isNewYearNight(cursor);
+      cursor.setDate(cursor.getDate() + 1);
+    }
+
+    if (includesNewYear && nights < 3) return 'O pacote de Réveillon exige o mínimo de 3 diárias.';
+    if (includesChristmas && nights < 2) return 'O pacote de Natal exige o mínimo de 2 diárias.';
+    return '';
+  }, [checkIn, nights]);
 
   if (!isOpen) return null;
 
-  const currentAcc = accommodations.find(
-    (a) =>
-      a.id === currentParams?.accommodationId ||
-      a.name.toLowerCase() === currentParams?.accommodationName?.toLowerCase()
-  );
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError('');
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  const handleExploreAccommodations = () => {
-    setIsOpen(false);
-    const elem = document.getElementById('acomodacoes');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
+    if (!selectedAccommodation || !guestName.trim() || !checkIn || !checkOut || nights <= 0) {
+      setError('Preencha todos os campos e escolha um período válido.');
+      return;
     }
+    if (guests < 1 || guests > selectedAccommodation.maxGuests) {
+      setError(`Esta acomodação recebe até ${selectedAccommodation.maxGuests} hóspedes.`);
+      return;
+    }
+    if (minimumStayWarning) {
+      setError(minimumStayWarning);
+      return;
+    }
+
+    const url = createBookingWhatsAppLink(
+      {
+        accommodationName: selectedAccommodation.name,
+        guestName: guestName.trim(),
+        checkIn,
+        checkOut,
+        nights,
+        guests,
+        estimatedValue: estimate,
+        stayMode,
+        stayModeName: stayMode === 'express' ? 'Temporada Express' : 'Temporada Conforto',
+      },
+      currentParams || undefined,
+    );
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
     <div
-      id="pending-booking-modal-backdrop"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) handleClose();
-      }}
+      id="booking-inquiry-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="booking-inquiry-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md overflow-y-auto"
+      onClick={(event) => event.target === event.currentTarget && setIsOpen(false)}
     >
-      <div
-        id="pending-booking-card"
-        className="bg-[#FAF7F2] text-[#2C332D] rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-[#C29B48]/40 flex flex-col relative animate-in zoom-in-95 duration-200"
-      >
-        {/* Header com Visual Sofisticado */}
-        <div className="bg-[#14241A] text-white p-6 sm:p-7 relative border-b border-[#C29B48]/30">
+      <div className="relative w-full max-w-2xl rounded-3xl overflow-hidden bg-[#FAF7F2] shadow-2xl border border-[#C29B48]/40">
+        <header className="relative bg-[#14241A] px-5 py-5 sm:px-7 sm:py-6 text-white">
           <button
-            onClick={handleClose}
-            id="close-pending-modal-btn"
-            aria-label="Fechar janela"
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            type="button"
+            onClick={() => setIsOpen(false)}
+            aria-label="Fechar formulário de reserva"
+            className="absolute right-4 top-4 rounded-full p-2 bg-white/10 hover:bg-white/20 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
-
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C29B48]/20 border border-[#C29B48]/40 text-[#E8D4A2] text-[11px] font-semibold uppercase tracking-wider mb-2">
-            <Sparkles className="w-3 h-3 text-[#C29B48]" />
-            <span>Reserva Online Inteligente</span>
-          </div>
-
-          <h3 className="font-serif text-2xl font-bold text-white tracking-tight">
-            Motor de Reservas
-          </h3>
-
-          <p className="text-xs sm:text-sm text-white/80 font-light mt-1">
-            {currentAcc
-              ? `Interesse selecionado: ${currentAcc.name}`
-              : 'Cabana das Mansões — Spa em Meio à Natureza'}
+          <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#E8D4A2]">
+            Consulta rápida
+          </span>
+          <h2 id="booking-inquiry-title" className="font-serif text-2xl sm:text-3xl font-bold mt-1 pr-10">
+            Escolha as datas da sua estadia
+          </h2>
+          <p className="text-sm text-white/75 mt-2">
+            Preencha os dados para enviar uma mensagem completa à nossa equipe pelo WhatsApp.
           </p>
-        </div>
+        </header>
 
-        {/* Conteúdo Explicativo Elegante (Sem jargões técnicos) */}
-        <div className="p-6 sm:p-8 space-y-5">
-          <div className="p-5 rounded-2xl bg-[#F3ECE2] border border-[#E8DED1] flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-[#1c3224] text-[#C29B48] flex items-center justify-center shrink-0 mt-0.5">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <div className="text-xs sm:text-sm leading-relaxed text-[#2C332D]">
-              <strong className="font-serif block text-base font-bold text-[#14241A] mb-1">
-                Reservas Online em Atualização
-              </strong>
-              Nosso sistema de reservas online está sendo atualizado. Por favor, tente novamente em alguns instantes.
-            </div>
+        <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <label className="text-sm font-semibold text-[#14241A]">
+              Acomodação
+              <select
+                required
+                value={accommodationId}
+                onChange={(event) => {
+                  setAccommodationId(event.target.value);
+                  const accommodation = accommodations.find((item) => item.id === event.target.value);
+                  if (accommodation && guests > accommodation.maxGuests) setGuests(accommodation.maxGuests);
+                }}
+                className="mt-1.5 w-full rounded-xl border border-[#D8CCBC] bg-white px-3.5 py-3 font-normal outline-none focus:border-[#8B6A2F]"
+              >
+                <option value="">Selecione</option>
+                {accommodations.map((item) => (
+                  <option key={item.id} value={item.id}>{item.name}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="text-sm font-semibold text-[#14241A]">
+              Modalidade
+              <select
+                value={stayMode}
+                onChange={(event) => setStayMode(event.target.value as StayMode)}
+                className="mt-1.5 w-full rounded-xl border border-[#D8CCBC] bg-white px-3.5 py-3 font-normal outline-none focus:border-[#8B6A2F]"
+              >
+                <option value="express">Temporada Express</option>
+                <option value="conforto">Temporada Conforto</option>
+              </select>
+            </label>
           </div>
 
-          <div className="space-y-2 text-xs text-[#526048]">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-[#1c3224] shrink-0" />
-              <span>Garantia de menor tarifa diretamente com a propriedade</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-[#1c3224] shrink-0" />
-              <span>Sem taxas intermediárias de comissão</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#1c3224] shrink-0" />
-              <span>Privacidade total em meio à natureza com spa privativo</span>
-            </div>
+          <label className="block text-sm font-semibold text-[#14241A]">
+            Seu nome
+            <input
+              required
+              type="text"
+              value={guestName}
+              onChange={(event) => setGuestName(event.target.value)}
+              placeholder="Nome completo"
+              autoComplete="name"
+              className="mt-1.5 w-full rounded-xl border border-[#D8CCBC] bg-white px-3.5 py-3 font-normal outline-none focus:border-[#8B6A2F]"
+            />
+          </label>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <label className="text-sm font-semibold text-[#14241A]">
+              Check-in — 15h
+              <input
+                required
+                type="date"
+                min={today}
+                value={checkIn}
+                onChange={(event) => {
+                  setCheckIn(event.target.value);
+                  if (checkOut && event.target.value >= checkOut) setCheckOut('');
+                }}
+                className="mt-1.5 w-full rounded-xl border border-[#D8CCBC] bg-white px-3.5 py-3 font-normal outline-none focus:border-[#8B6A2F]"
+              />
+            </label>
+            <label className="text-sm font-semibold text-[#14241A]">
+              Check-out — 12h
+              <input
+                required
+                type="date"
+                min={checkIn || today}
+                value={checkOut}
+                onChange={(event) => setCheckOut(event.target.value)}
+                className="mt-1.5 w-full rounded-xl border border-[#D8CCBC] bg-white px-3.5 py-3 font-normal outline-none focus:border-[#8B6A2F]"
+              />
+            </label>
           </div>
 
-          {/* Botões de Ação */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
-            <button
-              onClick={handleExploreAccommodations}
-              id="pending-modal-explore-btn"
-              className="w-full py-3.5 rounded-full bg-[#1c3224] hover:bg-[#2d4f3b] text-[#FAF7F2] font-semibold text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md"
-            >
-              <span>Conhecer as Acomodações</span>
-              <ArrowRight className="w-4 h-4 text-[#C29B48]" />
-            </button>
+          <label className="block text-sm font-semibold text-[#14241A]">
+            Hóspedes
+            <div className="relative mt-1.5">
+              <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B6A2F]" />
+              <input
+                required
+                type="number"
+                min={1}
+                max={selectedAccommodation?.maxGuests || 8}
+                value={guests}
+                onChange={(event) => setGuests(Number(event.target.value))}
+                className="w-full rounded-xl border border-[#D8CCBC] bg-white pl-10 pr-3.5 py-3 font-normal outline-none focus:border-[#8B6A2F]"
+              />
+            </div>
+          </label>
 
-            <button
-              onClick={handleClose}
-              id="pending-modal-close-btn"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-white hover:bg-stone-100 text-[#14241A] border border-[#E8DED1] font-semibold text-xs uppercase tracking-wider transition-colors cursor-pointer text-center"
-            >
-              Entendido
-            </button>
-          </div>
-        </div>
+          {nights > 0 && selectedAccommodation && (
+            <div className="rounded-2xl border border-[#D6C49C] bg-[#F3ECE2] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <CalendarDays className="w-5 h-5 text-[#8B6A2F]" />
+                <div>
+                  <strong className="block text-sm text-[#14241A]">{nights} noite(s)</strong>
+                  <span className="text-xs text-[#6B746D]">Valor sujeito à confirmação da disponibilidade</span>
+                </div>
+              </div>
+              <strong className="font-serif text-xl text-[#14241A]">R$ {estimate.toLocaleString('pt-BR')}</strong>
+            </div>
+          )}
+
+          {minimumStayWarning && <p className="text-sm font-semibold text-amber-800">{minimumStayWarning}</p>}
+          {error && <p role="alert" className="text-sm font-semibold text-red-700">{error}</p>}
+
+          <button
+            type="submit"
+            className="w-full rounded-full bg-[#1C5335] hover:bg-[#153D28] text-white px-6 py-4 font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+          >
+            <MessageCircle className="w-5 h-5" />
+            Consultar disponibilidade no WhatsApp
+          </button>
+          <p className="text-center text-[11px] text-[#6B746D]">
+            O valor é uma estimativa baseada nas tarifas do site e será confirmado por nossa equipe.
+          </p>
+        </form>
       </div>
     </div>
   );

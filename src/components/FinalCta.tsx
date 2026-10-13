@@ -16,7 +16,7 @@ export const FinalCta: React.FC = () => {
         </p>
         <BookingButton
           id="final-cta-reserve-btn"
-          label="RESERVAR PELO WHATSAPP"
+          label="ESCOLHER DATAS"
           variant="gold"
           size="lg"
           className="w-full sm:w-auto"

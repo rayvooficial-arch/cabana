@@ -64,7 +64,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
 
             <BookingButton
               id="stay-mode-express-cta"
-              label="CONSULTAR PELO WHATSAPP"
+              label="ESCOLHER DATAS"
               variant="outline"
               size="md"
               className="w-full py-3.5"
@@ -109,7 +109,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
 
             <BookingButton
               id="stay-mode-conforto-cta"
-              label="CONSULTAR PELO WHATSAPP"
+              label="ESCOLHER DATAS"
               variant="gold"
               size="md"
               className="w-full py-3.5"

@@ -73,7 +73,7 @@ export const PersonalizeExperienceSection: React.FC = () => {
 
                 <BookingButton
                   id={`addon-${item.id}-cta`}
-                  label="CONSULTAR PELO WHATSAPP"
+                  label="ESCOLHER DATAS"
                   variant={item.id === 'fogareiro-premium' ? 'gold' : 'outline'}
                   size="sm"
                   className="w-full py-3"

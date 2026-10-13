@@ -13,6 +13,18 @@ export interface BookingEngineParams {
   source?: string;
 }
 
+export interface BookingInquiryDetails {
+  accommodationName: string;
+  guestName: string;
+  checkIn: string;
+  checkOut: string;
+  nights: number;
+  guests: number;
+  estimatedValue: number;
+  stayMode: 'express' | 'conforto';
+  stayModeName: string;
+}
+
 /**
  * Evento central de intenção de reserva pelo WhatsApp.
  */
@@ -91,35 +103,40 @@ export function triggerPendingBooking(params?: BookingEngineParams): void {
 /**
  * Monta uma mensagem de reserva com o contexto do botão escolhido.
  */
-export function createBookingWhatsAppLink(params?: BookingEngineParams): string {
-  const details: string[] = [];
+function formatDate(date: string): string {
+  const [year, month, day] = date.split('-');
+  return `${day}/${month}/${year}`;
+}
 
-  if (params?.accommodationName) {
-    details.push(`Tenho interesse em *${params.accommodationName}*.`);
-  }
-  if (params?.rateCode) {
-    details.push(`Modalidade ou pacote: *${params.rateCode}*.`);
-  }
-  if (params?.experienceId) {
-    details.push(`Também gostaria de consultar: *${params.experienceId}*.`);
-  }
-  if (params?.checkIn || params?.checkOut) {
-    details.push(`Período desejado: ${params.checkIn || 'a definir'} até ${params.checkOut || 'a definir'}.`);
-  }
-  if (params?.guests) {
-    details.push(`Quantidade de hóspedes: ${params.guests}.`);
-  }
+export function createBookingWhatsAppLink(
+  inquiry: BookingInquiryDetails,
+  params?: BookingEngineParams,
+): string {
+  const optionalDetails = [
+    params?.rateCode ? `🎉 Pacote de interesse: ${params.rateCode}` : null,
+    params?.experienceId ? `🎁 Adicional de interesse: ${params.experienceId}` : null,
+  ].filter(Boolean);
 
   const message = [
-    `Olá! Gostaria de realizar uma reserva na *${BRAND_NAME}*.` ,
-    ...details,
-    'Podem me informar as datas disponíveis, os valores e as condições da hospedagem?',
+    `Olá! Vim pelo site da ${BRAND_NAME} e gostaria de consultar disponibilidade:`,
+    '',
+    `🏡 Acomodação: ${inquiry.accommodationName}`,
+    `✨ Modalidade: ${inquiry.stayModeName}`,
+    `👤 Nome: ${inquiry.guestName}`,
+    `📅 Check-in (15h): ${formatDate(inquiry.checkIn)}`,
+    `📅 Check-out (12h): ${formatDate(inquiry.checkOut)}`,
+    `🌙 Diárias: ${inquiry.nights} noite(s)`,
+    `👥 Hóspedes: ${inquiry.guests} pessoa(s)`,
+    `💰 Valor Estimado: R$ ${inquiry.estimatedValue.toLocaleString('pt-BR')}`,
+    ...optionalDetails,
+    '',
+    'Vocês têm disponibilidade para essas datas?',
   ].join('\n');
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-/** Abre o atendimento de reservas pelo WhatsApp em uma nova aba. */
+/** Abre o formulário de consulta antes de encaminhar o cliente ao WhatsApp. */
 export function openBookingEngine(params?: BookingEngineParams): void {
   trackBookingClick(params);
   trackBookingStart(params);
@@ -128,5 +145,5 @@ export function openBookingEngine(params?: BookingEngineParams): void {
     return;
   }
 
-  window.open(createBookingWhatsAppLink(params), '_blank', 'noopener,noreferrer');
+  triggerPendingBooking(params);
 }

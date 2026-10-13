@@ -15,16 +15,16 @@ export const MobileReservationBar: React.FC<MobileReservationBarProps> = () => {
       <div className="pr-3 min-w-0">
         <span className="text-[10px] uppercase tracking-wider text-[#E8D4A2] font-semibold flex items-center gap-1">
           <MessageCircle className="w-3 h-3 text-[#C29B48]" />
-          Reserva pelo WhatsApp
+          Escolha sua data
         </span>
         <span className="text-xs text-white/80 block leading-tight truncate">
-          Atendimento direto
+          Continue pelo WhatsApp
         </span>
       </div>
 
       <BookingButton
         id="mobile-bar-reserve-button"
-        label="RESERVAR"
+        label="ESCOLHER DATAS"
         variant="compact"
         size="sm"
         className="px-5 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs shrink-0"

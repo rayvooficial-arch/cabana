@@ -10,6 +10,7 @@ import { LocationSection } from './components/LocationSection';
 import { FinalCta } from './components/FinalCta';
 import { Footer } from './components/Footer';
 import { MobileReservationBar } from './components/MobileReservationBar';
+import { PendingBookingModal } from './components/PendingBookingModal';
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
 
       <Footer />
       <MobileReservationBar />
+      <PendingBookingModal />
     </div>
   );
 }

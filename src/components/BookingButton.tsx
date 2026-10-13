@@ -5,7 +5,7 @@ import { openBookingEngine, BookingEngineParams } from '../utils/booking';
 export interface BookingButtonProps {
   /**
    * Texto a ser exibido no botão.
-   * Padrão: "RESERVAR PELO WHATSAPP"
+   * Padrão: "ESCOLHER DATAS"
    */
   label?: string;
 
@@ -61,7 +61,7 @@ export interface BookingButtonProps {
 }
 
 export const BookingButton: React.FC<BookingButtonProps> = ({
-  label = 'RESERVAR PELO WHATSAPP',
+  label = 'ESCOLHER DATAS',
   accommodationId,
   accommodationName,
   params,

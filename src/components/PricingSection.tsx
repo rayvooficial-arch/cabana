@@ -106,7 +106,7 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
 
                   <BookingButton
                     id={`package-${pkg.id}-cta`}
-                    label="RESERVAR PELO WHATSAPP"
+                    label="ESCOLHER DATAS"
                     variant="gold"
                     size="md"
                     className="w-full py-3.5"
@@ -121,7 +121,7 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
         <div className="text-center">
           <BookingButton
             id="pricing-main-cta"
-            label="CONSULTAR PELO WHATSAPP"
+            label="ESCOLHER DATAS"
             variant="gold"
             size="lg"
             params={{ source: 'pricing_section' }}
