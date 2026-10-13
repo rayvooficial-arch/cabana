@@ -72,7 +72,7 @@ export function trackBookingStart(parameters?: {
     parameters?.accommodationId ||
     parameters?.rateCode ||
     parameters?.experienceId ||
-    'motor-reservas';
+    'whatsapp-reservas';
 
   return trackMetaEvent('InitiateCheckout', {
     content_ids: [contentId],
@@ -80,7 +80,7 @@ export function trackBookingStart(parameters?: {
       parameters?.accommodationName ||
       parameters?.rateCode ||
       parameters?.experienceId ||
-      'Motor de reservas Bitz',
+      'Atendimento de reservas pelo WhatsApp',
     content_category: 'Hospedagem',
     content_type: 'product',
     currency: 'BRL',

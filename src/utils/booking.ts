@@ -1,4 +1,4 @@
-import { BOOKING_CONFIG } from '../config/booking';
+import { BRAND_NAME, WHATSAPP_NUMBER } from '../config/constants';
 import { trackBookingStart } from './metaPixel';
 
 export interface BookingEngineParams {
@@ -14,9 +14,7 @@ export interface BookingEngineParams {
 }
 
 /**
- * Evento central de intenção de reserva.
- * Mantemos os dados de contexto para mensuração, sem assumir que o motor
- * externo aceita parâmetros que ainda não foram documentados oficialmente.
+ * Evento central de intenção de reserva pelo WhatsApp.
  */
 export function trackBookingClick(params?: BookingEngineParams): void {
   try {
@@ -91,12 +89,37 @@ export function triggerPendingBooking(params?: BookingEngineParams): void {
 }
 
 /**
- * Abre o motor oficial de reservas em uma nova aba.
- *
- * Enquanto não houver documentação oficial de deep links da Bitz no projeto,
- * o site envia sempre para a URL fornecida pela propriedade, sem acrescentar
- * parâmetros de acomodação, datas, hóspedes ou tarifas por conta própria.
+ * Monta uma mensagem de reserva com o contexto do botão escolhido.
  */
+export function createBookingWhatsAppLink(params?: BookingEngineParams): string {
+  const details: string[] = [];
+
+  if (params?.accommodationName) {
+    details.push(`Tenho interesse em *${params.accommodationName}*.`);
+  }
+  if (params?.rateCode) {
+    details.push(`Modalidade ou pacote: *${params.rateCode}*.`);
+  }
+  if (params?.experienceId) {
+    details.push(`Também gostaria de consultar: *${params.experienceId}*.`);
+  }
+  if (params?.checkIn || params?.checkOut) {
+    details.push(`Período desejado: ${params.checkIn || 'a definir'} até ${params.checkOut || 'a definir'}.`);
+  }
+  if (params?.guests) {
+    details.push(`Quantidade de hóspedes: ${params.guests}.`);
+  }
+
+  const message = [
+    `Olá! Gostaria de realizar uma reserva na *${BRAND_NAME}*.` ,
+    ...details,
+    'Podem me informar as datas disponíveis, os valores e as condições da hospedagem?',
+  ].join('\n');
+
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+/** Abre o atendimento de reservas pelo WhatsApp em uma nova aba. */
 export function openBookingEngine(params?: BookingEngineParams): void {
   trackBookingClick(params);
   trackBookingStart(params);
@@ -105,11 +128,5 @@ export function openBookingEngine(params?: BookingEngineParams): void {
     return;
   }
 
-  const bookingUrl = BOOKING_CONFIG.url?.trim();
-  if (!BOOKING_CONFIG.enabled || !bookingUrl) {
-    triggerPendingBooking(params);
-    return;
-  }
-
-  window.open(bookingUrl, '_blank', 'noopener,noreferrer');
+  window.open(createBookingWhatsAppLink(params), '_blank', 'noopener,noreferrer');
 }

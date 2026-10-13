@@ -160,7 +160,7 @@ export const AccommodationsSection: React.FC = () => {
                       id={`reserve-${acc.id}`}
                       accommodationId={acc.id}
                       accommodationName={acc.name}
-                      label="VER DISPONIBILIDADE"
+                      label="RESERVAR PELO WHATSAPP"
                       variant="primary"
                       size="md"
                       className="w-full"
@@ -173,7 +173,7 @@ export const AccommodationsSection: React.FC = () => {
         </div>
 
         <p className="mt-6 text-xs text-[#6B746D] text-center">
-          Valores são referências das modalidades exibidas. Disponibilidade, pacotes e condições finais são confirmados no motor oficial de reservas.
+          Valores são referências das modalidades exibidas. Disponibilidade, pacotes e condições finais são confirmados pelo WhatsApp.
         </p>
       </div>
 

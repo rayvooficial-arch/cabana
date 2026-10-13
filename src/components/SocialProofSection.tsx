@@ -146,7 +146,7 @@ export const SocialProofSection: React.FC = () => {
               Reserva Confiável
             </span>
             <p className="text-xs text-white/60">
-              Reserva online direta sem comissões e suporte dedicado à sua estadia
+              Reserva direta pelo WhatsApp, sem comissões e com suporte dedicado à sua estadia
             </p>
           </div>
         </div>

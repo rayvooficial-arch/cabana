@@ -1,11 +1,11 @@
 import React from 'react';
-import { Calendar } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { openBookingEngine, BookingEngineParams } from '../utils/booking';
 
 export interface BookingButtonProps {
   /**
    * Texto a ser exibido no botão.
-   * Padrão: "RESERVAR AGORA"
+   * Padrão: "RESERVAR PELO WHATSAPP"
    */
   label?: string;
 
@@ -35,7 +35,7 @@ export interface BookingButtonProps {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Se deve ou não exibir o ícone de calendário.
+   * Se deve ou não exibir o ícone do WhatsApp.
    */
   showIcon?: boolean;
 
@@ -61,7 +61,7 @@ export interface BookingButtonProps {
 }
 
 export const BookingButton: React.FC<BookingButtonProps> = ({
-  label = 'RESERVAR AGORA',
+  label = 'RESERVAR PELO WHATSAPP',
   accommodationId,
   accommodationName,
   params,
@@ -143,7 +143,7 @@ export const BookingButton: React.FC<BookingButtonProps> = ({
       onClick={handleClick}
       className={`inline-flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 ${sizeClasses} ${variantClasses} ${className}`}
     >
-      {showIcon && <Calendar className="w-4 h-4 shrink-0" />}
+      {showIcon && <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />}
       <span>{children || label}</span>
     </button>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CalendarDays } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { BookingButton } from './BookingButton';
 
 interface MobileReservationBarProps {
@@ -14,17 +14,17 @@ export const MobileReservationBar: React.FC<MobileReservationBarProps> = () => {
     >
       <div className="pr-3 min-w-0">
         <span className="text-[10px] uppercase tracking-wider text-[#E8D4A2] font-semibold flex items-center gap-1">
-          <CalendarDays className="w-3 h-3 text-[#C29B48]" />
-          Reserva online
+          <MessageCircle className="w-3 h-3 text-[#C29B48]" />
+          Reserva pelo WhatsApp
         </span>
         <span className="text-xs text-white/80 block leading-tight truncate">
-          Consulte datas e valores
+          Atendimento direto
         </span>
       </div>
 
       <BookingButton
         id="mobile-bar-reserve-button"
-        label="VER DATAS"
+        label="RESERVAR"
         variant="compact"
         size="sm"
         className="px-5 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs shrink-0"

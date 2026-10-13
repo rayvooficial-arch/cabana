@@ -22,7 +22,7 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
             Tarifas de alta temporada
           </h2>
           <p className="text-sm sm:text-base text-white/70 leading-relaxed">
-            Valores por diária para dezembro de 2026 e janeiro de 2027. Consulte a disponibilidade no motor de reservas.
+            Valores por diária para dezembro de 2026 e janeiro de 2027. Consulte a disponibilidade pelo WhatsApp.
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
 
                   <BookingButton
                     id={`package-${pkg.id}-cta`}
-                    label="VER DISPONIBILIDADE"
+                    label="RESERVAR PELO WHATSAPP"
                     variant="gold"
                     size="md"
                     className="w-full py-3.5"
@@ -121,7 +121,7 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
         <div className="text-center">
           <BookingButton
             id="pricing-main-cta"
-            label="CONSULTAR DISPONIBILIDADE"
+            label="CONSULTAR PELO WHATSAPP"
             variant="gold"
             size="lg"
             params={{ source: 'pricing_section' }}

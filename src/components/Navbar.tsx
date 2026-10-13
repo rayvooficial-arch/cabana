@@ -55,7 +55,7 @@ export const Navbar: React.FC = () => {
         <div className="hidden sm:block shrink-0">
           <BookingButton
             id="nav-reservation-button"
-            label="VER DISPONIBILIDADE"
+            label="RESERVAR PELO WHATSAPP"
             variant="nav"
             size="sm"
             className="rounded-full"
@@ -88,7 +88,7 @@ export const Navbar: React.FC = () => {
           </nav>
           <BookingButton
             id="mobile-menu-reserve-btn"
-            label="VER DISPONIBILIDADE"
+            label="RESERVAR PELO WHATSAPP"
             variant="gold"
             size="md"
             className="w-full mt-5"

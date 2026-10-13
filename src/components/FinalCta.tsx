@@ -12,11 +12,11 @@ export const FinalCta: React.FC = () => {
           Escolheu sua acomodação?
         </h2>
         <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Confira as datas disponíveis, a tarifa aplicável e as condições da estadia diretamente no motor oficial de reservas.
+          Fale com nossa equipe pelo WhatsApp para conferir as datas disponíveis, a tarifa aplicável e as condições da estadia.
         </p>
         <BookingButton
           id="final-cta-reserve-btn"
-          label="VER DISPONIBILIDADE"
+          label="RESERVAR PELO WHATSAPP"
           variant="gold"
           size="lg"
           className="w-full sm:w-auto"

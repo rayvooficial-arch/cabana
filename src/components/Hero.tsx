@@ -75,7 +75,7 @@ export const Hero: React.FC<HeroProps> = ({ videoUrl = '/herosite.mp4', hasAudio
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-9">
             <BookingButton
               id="hero-reserve-btn"
-              label="VER DISPONIBILIDADE"
+              label="RESERVAR PELO WHATSAPP"
               variant="gold"
               size="md"
               className="w-full sm:w-auto px-8 py-3.5 shadow-lg shadow-black/30 text-xs sm:text-sm"

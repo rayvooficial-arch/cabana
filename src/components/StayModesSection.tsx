@@ -64,7 +64,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
 
             <BookingButton
               id="stay-mode-express-cta"
-              label="VER DATAS E VALORES"
+              label="CONSULTAR PELO WHATSAPP"
               variant="outline"
               size="md"
               className="w-full py-3.5"
@@ -104,12 +104,12 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             </div>
 
             <p className="text-xs text-white/60 mb-6">
-              Os valores variam conforme acomodação e período. Consulte a disponibilidade no motor de reservas.
+              Os valores variam conforme acomodação e período. Consulte a disponibilidade pelo WhatsApp.
             </p>
 
             <BookingButton
               id="stay-mode-conforto-cta"
-              label="VER DATAS E VALORES"
+              label="CONSULTAR PELO WHATSAPP"
               variant="gold"
               size="md"
               className="w-full py-3.5"

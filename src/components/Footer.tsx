@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
 
         <div className="pt-6 border-t border-white/10 text-xs text-white/40 flex flex-col sm:flex-row gap-2 sm:justify-between">
           <span>© {new Date().getFullYear()} Cabana das Mansões.</span>
-          <span>Valores e disponibilidade sujeitos à consulta no motor oficial de reservas.</span>
+          <span>Valores e disponibilidade sujeitos à consulta pelo WhatsApp.</span>
         </div>
       </div>
     </footer>

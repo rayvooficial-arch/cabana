@@ -113,13 +113,13 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
 
           <div className="pt-6 border-t border-[#E3D9CC] flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
             <p className="text-xs text-[#6B746D] max-w-lg">
-              Disponibilidade, tarifa aplicável e condições finais são confirmadas no motor oficial de reservas.
+              Disponibilidade, tarifa aplicável e condições finais são confirmadas pelo WhatsApp.
             </p>
             <BookingButton
               id={`modal-reserve-${accommodation.id}`}
               accommodationId={accommodation.id}
               accommodationName={accommodation.name}
-              label="VER DISPONIBILIDADE"
+              label="RESERVAR PELO WHATSAPP"
               variant="gold"
               size="md"
               className="sm:min-w-56"
