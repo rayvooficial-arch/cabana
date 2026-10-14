@@ -32,3 +32,13 @@
 @media(min-width:1250px){.calendar{min-height:550px}}
 @media(max-width:900px){.calendars{grid-template-columns:1fr;max-width:590px}.calendars .calendar:last-child{grid-column:auto;width:100%}.calendar{min-height:510px}}
 @media(max-width:480px){.calendar{min-height:375px;border-radius:20px}.calendar:before{inset:19px 13px 22px;border-radius:22px}.poster-label{left:26px;font-size:10px;padding:6px 13px;top:10px}.poster-calendar{top:51px;left:7%;width:54%}.calendar .weekdays{font-size:8px;margin-bottom:9px}.calendar .days{gap:2px}.calendar .days button{font-size:9px}.calendar .card-foot{font-size:7px;margin-top:9px}.poster-photo{border-radius:20px}.photo-top{top:9px;right:9px}.photo-bottom{bottom:9px;left:9px}.poster-copy{top:51%;left:38%;right:5%}.poster-month{font-size:43px;margin-bottom:9px}.poster-key{font-size:8px;gap:5px;margin-bottom:11px}.ring{width:19px;height:19px}.reserve-caption{font-size:15px;padding:4px 6px;margin-bottom:5px}.poster-contact{font-size:7px;padding:5px 7px;margin:1px}.poster-detail{font-size:8px;margin-top:7px}.poster-name{font-size:18px;padding:9px 16px}.intro h1{font-size:32px}}
+
+/* Keep lower photograph clear of six-row calendars; red rings mark occupied nights. */
+.calendar .photo-bottom{height:30%;bottom:12px}
+.calendar .days button.free:not(.past){border-color:transparent}
+.calendar .days button.occupied,.calendar .days button.pending{border:2px solid #b52b32;background:#fff2;color:#fff;opacity:1}
+.calendar .days button.occupied.past,.calendar .days button.pending.past{opacity:.7}
+.poster-key .ring{border:2px solid #b52b32}
+.legend .occupied,.legend .pending{background:transparent;border:2px solid #b52b32}
+.legend .free{background:#e3eddd;border:0}
+@media(max-width:480px){.calendar .photo-bottom{height:30%;bottom:9px}.calendar .days button.occupied,.calendar .days button.pending{border-width:1.5px}.poster-key{font-size:8px}}
