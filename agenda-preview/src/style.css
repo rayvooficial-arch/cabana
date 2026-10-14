@@ -46,3 +46,11 @@
 /* Compact accommodation labels */
 .poster-name{font-size:18px;line-height:1.25;padding:9px 18px;max-width:48%;border-radius:25px;bottom:10px}
 @media(max-width:480px){.poster-name{font-size:13px;line-height:1.3;padding:7px 12px;max-width:48%;bottom:9px}}
+
+/* Explicit compact labels across phones and tablet-width browser viewports. */
+@media(max-width:900px){
+ .calendar h3.poster-name{font-family:Arial,sans-serif!important;font-size:12px!important;font-weight:500;line-height:1.25!important;letter-spacing:0;white-space:nowrap;width:auto;max-width:58%!important;padding:6px 11px!important;border-radius:16px!important;bottom:12px!important;right:12px}
+}
+@media(max-width:480px){
+ .calendar h3.poster-name{font-size:10px!important;padding:5px 9px!important;bottom:12px!important;right:12px}
+}
