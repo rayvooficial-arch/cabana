@@ -42,3 +42,7 @@
 .legend .occupied,.legend .pending{background:transparent;border:2px solid #b52b32}
 .legend .free{background:#e3eddd;border:0}
 @media(max-width:480px){.calendar .photo-bottom{height:30%;bottom:9px}.calendar .days button.occupied,.calendar .days button.pending{border-width:1.5px}.poster-key{font-size:8px}}
+
+/* Compact accommodation labels */
+.poster-name{font-size:18px;line-height:1.25;padding:9px 18px;max-width:48%;border-radius:25px;bottom:10px}
+@media(max-width:480px){.poster-name{font-size:13px;line-height:1.3;padding:7px 12px;max-width:48%;bottom:9px}}
