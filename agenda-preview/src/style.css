@@ -66,3 +66,11 @@
 }
 
 .auth-card{max-width:450px;margin:60px auto;padding:30px;background:#fff;border-radius:18px}.auth-card h1{font-size:32px}.auth-card form{display:flex;flex-direction:column;gap:18px}.session-bar{text-align:right;max-width:1440px;margin:auto;padding:12px 48px}
+/* Crosses mark unavailable nights while preserving the date number. */
+.calendar .days button.occupied,.calendar .days button.pending{position:relative;border:0!important;background:transparent;color:#fff;opacity:1;isolation:isolate}
+.calendar .days button.occupied:after,.calendar .days button.pending:after{content:"×";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:bold 36px Arial,sans-serif;color:#b52b32;opacity:.85;pointer-events:none;z-index:-1}
+.poster-key .ring{border:0;border-radius:0;display:flex;align-items:center;justify-content:center}
+.poster-key .ring:after{content:"×";color:#b52b32;font:bold 28px Arial,sans-serif}
+.legend .occupied,.legend .pending{border:0;border-radius:0;width:12px;height:12px;position:relative;background:transparent}
+.legend .occupied:after,.legend .pending:after{content:"×";position:absolute;left:0;top:-5px;font:bold 20px Arial,sans-serif;color:#b52b32}
+@media(max-width:480px){.calendar .days button.occupied:after,.calendar .days button.pending:after{font-size:25px}.poster-key .ring:after{font-size:22px}}
