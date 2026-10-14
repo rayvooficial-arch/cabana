@@ -1,0 +1,13 @@
+import {useState,useEffect} from 'react';
+import {supabase} from './backend';
+import Agenda from './Agenda';
+export default function App(){
+ const admin=location.pathname==='/admin';
+ const [authorized,setAuthorized]=useState(false),[loading,setLoading]=useState(admin),[email,setEmail]=useState(''),[password,setPassword]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false);
+ useEffect(()=>{if(!admin)return;if(!supabase){setLoading(false);return;}
+ let active=true;async function verify(){try{const r=await supabase!.rpc('agenda_is_admin');if(active){setAuthorized(!r.error&&r.data===true);setLoading(false);}}catch{if(active){setAuthorized(false);setLoading(false);}}}
+ verify();const {data}=supabase.auth.onAuthStateChange(()=>{setAuthorized(false);setLoading(true);setTimeout(verify,0)});return()=>{active=false;data.subscription.unsubscribe();};},[]);
+ async function login(e:any){e.preventDefault();if(!supabase)return;setBusy(true);setError('');try{const r=await supabase.auth.signInWithPassword({email:email.trim(),password});setPassword('');if(r.error)throw Error('Não foi possível entrar. Confira o e-mail e a senha.');const role=await supabase.rpc('agenda_is_admin');if(role.error||role.data!==true){await supabase.auth.signOut();throw Error('Esta conta não possui acesso administrativo.');}setAuthorized(true);}catch(e:any){setError(e.message);}finally{setBusy(false);}}
+ if(admin&&!authorized)return <main><header><a className="brand" href="/">Cabana das Mansões</a><a href="/">Ver agenda pública</a></header><section className="auth-card"><p className="eyebrow">ACESSO RESTRITO</p><h1>Administração</h1>{loading?<p>Verificando acesso…</p>:!supabase?<p>O login está sendo configurado. A administração está bloqueada até a conexão do banco de dados.</p>:<form onSubmit={login}><label>E-mail<input type="email" required autoComplete="username" value={email} onChange={e=>setEmail(e.target.value)}/></label><label>Senha<input type="password" required autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)}/></label>{error&&<p role="alert" className="error">{error}</p>}<button disabled={busy}>{busy?'Entrando…':'Entrar'}</button><p>Somente administradores autorizados podem acessar.</p></form>}</section></main>;
+ return <>{admin&&<div className="session-bar"><button onClick={()=>supabase?.auth.signOut()}>Sair da administração</button></div>}<Agenda/></>;
+}

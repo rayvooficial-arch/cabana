@@ -64,3 +64,5 @@
 @media(max-width:480px){
  .calendar h3.poster-name{font-size:13px!important;min-height:42px;padding:11px 14px!important}
 }
+
+.auth-card{max-width:450px;margin:60px auto;padding:30px;background:#fff;border-radius:18px}.auth-card h1{font-size:32px}.auth-card form{display:flex;flex-direction:column;gap:18px}.session-bar{text-align:right;max-width:1440px;margin:auto;padding:12px 48px}
