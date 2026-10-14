@@ -79,3 +79,20 @@
 .calendar .days button.occupied,.calendar .days button.pending{color:transparent!important;border:0!important}
 .calendar .days button.occupied:after,.calendar .days button.pending:after{content:"×";z-index:1!important;color:#a51d26!important;opacity:1!important;font-size:30px;font-weight:700;line-height:1}
 @media(max-width:480px){.calendar .days button.occupied:after,.calendar .days button.pending:after{font-size:23px}}
+
+.print-heading,.print-footer{display:none}.pdf-actions{display:flex;align-items:center;gap:15px;margin-top:15px}.pdf-actions p{font-size:12px}
+@media print{
+ @page{size:A4 portrait;margin:12mm}
+ html,body{background:white!important;color:#273b32!important;margin:0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ main{max-width:none!important;padding:0!important}
+ header,.intro,.toolbar,.message,.login,.search,.reservations,.session-bar,.pdf-actions,footer,.overlay{display:none!important}
+ .print-heading{display:block;margin:0 0 8mm}.print-heading h1{font-size:22px;margin:0 0 6px}.print-heading p{font-size:11px;margin:2px 0}
+ .calendars{display:block!important;max-width:none!important;margin:0!important}
+ .calendars .calendar,.calendars .calendar:last-child{width:160mm!important;height:160mm!important;min-height:160mm!important;aspect-ratio:auto!important;margin:0 auto 20mm!important;break-inside:avoid;page-break-inside:avoid;border-radius:24px!important;overflow:hidden!important;break-after:page;page-break-after:always}
+ .calendars .calendar:last-child{break-after:auto;page-break-after:auto;margin-bottom:10mm!important}
+ .calendar h3.poster-name{top:auto!important;bottom:10px!important;left:auto!important;right:12px!important;width:auto!important;max-width:52%!important;min-height:0!important;font:18px Georgia,serif!important;padding:9px 18px!important;border-radius:25px!important;display:block!important}
+ .poster-calendar{top:67px!important}.poster-label{font-size:14px!important;padding:8px 20px!important;left:38px!important}
+ .poster-month{font-size:58px!important}.poster-key{font-size:11px!important}.reserve-caption{font-size:20px!important}.poster-contact{font-size:10px!important}.poster-detail{font-size:10px!important}
+ .calendar .weekdays{font-size:11px!important}.calendar .days button{font-size:12px!important;max-height:none!important}.calendar .days button.occupied:after,.calendar .days button.pending:after{font-size:30px!important}
+ .print-footer{display:block;font-size:10px;text-align:center;margin-top:5mm}
+}
