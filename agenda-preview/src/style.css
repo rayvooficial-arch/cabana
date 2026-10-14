@@ -74,3 +74,8 @@
 .legend .occupied,.legend .pending{border:0;border-radius:0;width:12px;height:12px;position:relative;background:transparent}
 .legend .occupied:after,.legend .pending:after{content:"×";position:absolute;left:0;top:-5px;font:bold 20px Arial,sans-serif;color:#b52b32}
 @media(max-width:480px){.calendar .days button.occupied:after,.calendar .days button.pending:after{font-size:25px}.poster-key .ring:after{font-size:22px}}
+
+/* Render the red cross above the calendar cell on every screen size. */
+.calendar .days button.occupied,.calendar .days button.pending{color:transparent!important;border:0!important}
+.calendar .days button.occupied:after,.calendar .days button.pending:after{content:"×";z-index:1!important;color:#a51d26!important;opacity:1!important;font-size:30px;font-weight:700;line-height:1}
+@media(max-width:480px){.calendar .days button.occupied:after,.calendar .days button.pending:after{font-size:23px}}
