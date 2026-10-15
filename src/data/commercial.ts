@@ -363,13 +363,13 @@ export const SPECIAL_PACKAGES: SpecialPackage[] = [
     id: 'pacote-reveillon',
     name: 'Réveillon',
     period: '30 de dezembro a 02 de janeiro',
-    minimumNights: 3,
+    minimumNights: 2,
     rates: {
       cabanas: { express: 1790, conforto: 1910 },
       casa: { express: 2690, conforto: 2870 },
     },
     highlightBadge: 'Virada de Ano Exclusiva',
-    note: 'Mínimo de 3 diárias. Valores por diária.',
+    note: 'Mínimo de 2 diárias. Valores por diária.',
   },
 ];
 
@@ -490,3 +490,4 @@ export const CINEMA_GUIDE = {
     },
   ],
 };
+
