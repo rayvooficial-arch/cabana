@@ -75,10 +75,6 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
                 <article key={pkg.id} className="rounded-3xl bg-[#1c3224] border border-[#C29B48]/40 p-6 sm:p-8">
                   <div className="flex items-start justify-between gap-4 mb-5">
                     <div>
-                      <span className="text-xs text-[#E8D4A2] flex items-center gap-1.5 mb-2">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {pkg.period}
-                      </span>
                       <h4 className="font-serif text-2xl font-bold">{pkg.name}</h4>
                     </div>
                     <span className="rounded-full bg-[#C29B48]/15 border border-[#C29B48]/30 px-3 py-1 text-[10px] uppercase tracking-wider text-[#E8D4A2] text-right">
@@ -131,3 +127,4 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
     </section>
   );
 };
+
