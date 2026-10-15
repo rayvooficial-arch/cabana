@@ -124,7 +124,7 @@ export const PendingBookingModal: React.FC = () => {
       cursor.setDate(cursor.getDate() + 1);
     }
 
-    if (includesNewYear && nights < 3) return 'O pacote de Réveillon exige o mínimo de 3 diárias.';
+    if (includesNewYear && nights < 2) return 'O pacote de Réveillon exige o mínimo de 2 diárias.';
     if (includesChristmas && nights < 2) return 'O pacote de Natal exige o mínimo de 2 diárias.';
     return '';
   }, [checkIn, nights]);
@@ -317,3 +317,4 @@ export const PendingBookingModal: React.FC = () => {
     </div>
   );
 };
+
