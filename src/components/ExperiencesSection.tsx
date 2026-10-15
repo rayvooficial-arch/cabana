@@ -250,6 +250,12 @@ const galleries: GalleryGroup[] = [
   },
 ];
 
+const galleriesInDisplayOrder = [
+  galleries[5],
+  ...galleries.slice(1, 5),
+  galleries[0],
+];
+
 const otherExperiences = [
   { title: 'Churrasqueiras', icon: Utensils },
   { title: 'Áreas verdes', icon: Trees },
@@ -353,7 +359,7 @@ export const ExperiencesSection: React.FC = () => (
         <p className="text-sm sm:text-base text-[#526048] leading-relaxed max-w-2xl">Explore as fotos de cada experiência diretamente nos cartões.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
-        {galleries.map((group) => <ExperienceCard key={group.title} group={group} />)}
+        {galleriesInDisplayOrder.map((group) => <ExperienceCard key={group.title} group={group} />)}
       </div>
       <div className="mt-6 sm:mt-8 flex flex-wrap gap-2">
         {otherExperiences.map(({ title, icon: Icon }) => (
@@ -365,3 +371,4 @@ export const ExperiencesSection: React.FC = () => (
     </div>
   </section>
 );
+
