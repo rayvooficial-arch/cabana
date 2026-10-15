@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Bath, Compass, Film, Heart, Volume2, VolumeX } from 'lucide-react';
+import { Compass, Volume2, VolumeX } from 'lucide-react';
 import { BookingButton } from './BookingButton';
 
 interface HeroProps {
@@ -69,10 +69,9 @@ export const Hero: React.FC<HeroProps> = ({ videoUrl = '/herosite.mp4', hasAudio
         </div>
       </div>
 
-      <div className="w-full bg-[#14241A] border-t border-white/10 px-4 sm:px-6 py-8 sm:py-10">
+      <div className="w-full bg-[#14241A] border-t border-white/10 px-4 sm:px-6 py-6 sm:py-7">
         <div className="max-w-5xl mx-auto">
-          {/* Botões de Ação (Disponibilidade e Acomodações) posicionados acima dos demais componentes */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-9">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <BookingButton
               id="hero-reserve-btn"
               label="ESCOLHER DATAS"
@@ -90,23 +89,9 @@ export const Hero: React.FC<HeroProps> = ({ videoUrl = '/herosite.mp4', hasAudio
               <span>Ver acomodações</span>
             </a>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
-            {[
-              { icon: Bath, title: 'Hidromassagem', text: 'Espaços privativos' },
-              { icon: Film, title: 'Cinema 100″', text: 'Ao ar livre' },
-              { icon: Heart, title: 'Fazendinha', text: 'Mini animais' },
-              { icon: Compass, title: 'Natureza', text: 'Áreas de descanso' },
-            ].map(({ icon: Icon, title, text }) => (
-              <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center hover:border-white/20 transition-colors">
-                <Icon className="w-5 h-5 text-[#C29B48] mx-auto mb-2" />
-                <strong className="block text-sm text-white font-semibold">{title}</strong>
-                <span className="text-[11px] text-white/60">{text}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
   );
 };
+
