@@ -178,48 +178,23 @@ export interface ExperienceAddon {
 
 export const EXPERIENCES_AND_BASKETS: ExperienceAddon[] = [
   {
-    id: 'fogareiro-premium',
-    name: 'Experiência Fogareiro Premium',
-    emotionalCopy:
-      'Uma noite ao redor do fogo, acompanhada de vinho, frios, frutas, chocolate e marshmallows.',
-    subtitle:
-      'Uma experiência criada para tornar sua noite na Cabana das Mansões ainda mais especial.',
-    price: 300,
-    forGuests: 'Para 2 pessoas',
-    isHighlight: true,
-    ctaText: 'QUERO ADICIONAR ESSA EXPERIÊNCIA',
-    items: [
-      'Vinho suave OU espumante — 375 ml',
-      'Tábua de frios selecionados',
-      'Queijo Brie',
-      'Salame',
-      'Torradinhas artesanais',
-      'Frutas da estação: morango, uva e maçã',
-      'Chocolate fino — 100 g',
-      'Marshmallows',
-      'Palitos para assar',
-      'Água com gás',
-      'Lembrança Cabana das Mansões',
-    ],
-  },
-  {
     id: 'cafe-express',
     name: 'Cesta Café da Manhã Express',
     emotionalCopy:
       'Comece o dia com praticidade, leveza e sabor no seu próprio ritmo.',
-    subtitle:
-      'Uma opção prática para começar o dia sem precisar preparar tudo.',
-    price: 150,
+    price: 180,
     forGuests: 'Para 2 pessoas',
     items: [
       '1 caixa de bolacha amanteigada importada',
-      '1 garrafa de suco de uva integral',
+      '1 garrafa de leite',
+      '1 garrafa de suco',
       '2 frutas da estação',
       '2 chipas',
-      '8 mini pães de queijo',
+      'Mini pães de queijo',
       '1 croissant',
+      '2 pães doces',
       '2 iogurtes gregos',
-      '2 cápsulas de café 100% arábica',
+      '2 sachês de cappuccino',
     ],
   },
   {
@@ -227,95 +202,103 @@ export const EXPERIENCES_AND_BASKETS: ExperienceAddon[] = [
     name: 'Cesta Boas-Vindas',
     emotionalCopy:
       'Um carinho especial esperando por você no momento exato da sua chegada.',
-    subtitle:
-      'Mimo acolhedor para inaugurar sua experiência na Cabana das Mansões.',
-    price: 100,
+    price: 150,
     forGuests: 'Para 2 pessoas',
-    note: 'Itens oficiais da recepção preparados com o carinho da propriedade.',
-  },
-  {
-    id: 'guloseimas',
-    name: 'Cesta de Guloseimas',
-    emotionalCopy:
-      'Momentos doces para acompanhar suas noites de cinema e descanso sob as estrelas.',
-    subtitle:
-      'Seleção de delícias para compartilhar a dois ou em família.',
-    price: 80,
-    forGuests: 'Para 2 pessoas',
-    note: 'Seleção especial para tornar sua estadia ainda mais saborosa.',
-  },
-  {
-    id: 'cafe-cabana',
-    name: 'Cesta Café da Manhã da Cabana',
-    emotionalCopy:
-      'Um banquete matinal completo com receitas caseiras e o legítimo afeto do campo.',
-    subtitle:
-      'Mesa farta e generosa para compartilhar com a família ou amigos.',
-    price: 350,
-    forGuests: 'Para 4 pessoas',
-    categories: [
-      {
-        categoryTitle: 'Pães e Salgados',
-        items: [
-          '4 croissants amanteigados',
-          '4 enroladinhos de presunto e queijo',
-          '4 esfihas de carne',
-          '1 pão artesanal de fazenda',
-        ],
-      },
-      {
-        categoryTitle: 'Bolo Artesanal',
-        items: [
-          '1 bolo artesanal fresco (sabores: laranja, fubá, cenoura ou chocolate)',
-        ],
-      },
-      {
-        categoryTitle: 'Acompanhamentos Nobres',
-        items: [
-          'Manteiga de primeira linha',
-          'Geleia artesanal',
-          'Requeijão cremoso',
-          'Mel puro',
-          'Doce de leite artesanal',
-        ],
-      },
-      {
-        categoryTitle: 'Bebidas',
-        items: [
-          'Café gourmet especial em grãos',
-          'Leite fresco — 1 litro',
-          'Suco natural de laranja',
-        ],
-      },
-      {
-        categoryTitle: 'Frutas da Estação',
-        items: ['Uvas', 'Morangos', 'Mamão', 'Banana', 'Maçã'],
-      },
-      {
-        categoryTitle: 'Frios & Complementos',
-        items: ['Granola artesanal', 'Iogurte natural', 'Queijo', 'Presunto'],
-      },
+    items: [
+      'Marshmallows',
+      'Chocolates',
+      'Pipoca doce',
+      'Bolinhos',
+      'Pão de mel',
+      'Fini',
+      'Suco',
+      'Amendoim',
+      'Batata chips',
+      'Doritos',
     ],
   },
   {
-    id: 'cafe-colonial-premium',
-    name: 'Cesta Café Colonial Premium',
+    id: 'dia-fazendeiro',
+    name: 'Dia de Fazendeiro(a)',
     emotionalCopy:
-      'A mais completa e refinada experiência matinal da Cabana das Mansões.',
-    subtitle:
-      'Uma celebração gastronômica com itens do café da cabana somados a iguarias nobres.',
-    price: null, // NÃO inventar preço (não fornecido no briefing)
-    priceFormatted: 'Consultar valor',
-    forGuests: 'Para 4 pessoas',
-    extraItems: [
-      'Todos os itens da Cesta Café da Manhã da Cabana inclusos',
-      'Mini pão de queijo quentinho',
-      'Queijo Brie',
-      'Salame italiano',
-      'Mix nobre de castanhas',
-      'Biscoitos amanteigados artesanais',
-      'Mini waffles OU panquecas',
+      'Uma experiência divertida para as crianças conhecerem de perto a vida no campo.',
+    price: null,
+    priceFormatted: 'A partir de R$ 70 por pessoa',
+    forGuests: 'Experiência na natureza',
+    items: [
+      'Visita guiada à fazendinha',
+      'Contato com a natureza',
+      'Conhecimento sobre os animais',
+      'Passeio pelos piquetes e casinha',
+      'Alimentação e carinho nos animais',
     ],
+  },
+  {
+    id: 'pescador-profissional',
+    name: 'Pescador Profissional',
+    emotionalCopy:
+      'Para quem quer viver uma verdadeira pescaria no campo.',
+    subtitle: 'Produtos alugados para a atividade de pesque e solte.',
+    price: null,
+    priceFormatted: 'A partir de R$ 100 por pessoa',
+    forGuests: 'Experiência na natureza',
+    items: [
+      'Vara profissional',
+      'Iscas especiais para cada tipo de peixe',
+      'Ficha de registro de capturas',
+    ],
+  },
+  {
+    id: 'cinema-em-familia',
+    name: 'Cinema em Família',
+    emotionalCopy:
+      'Uma noite de filme, aconchego e conexão familiar.',
+    price: null,
+    priceFormatted: 'A partir de R$ 180 para 2 pessoas · R$ 350 para 4 pessoas',
+    forGuests: 'Experiência em família',
+    items: [
+      'Cinema ao ar livre',
+      'Pipoca',
+      'Doces',
+      'Bebidas',
+      'Mantas e almofadas',
+    ],
+  },
+  {
+    id: 'piquenique-no-campo',
+    name: 'Piquenique no Campo',
+    emotionalCopy: 'Um momento delicioso em meio à natureza.',
+    price: null,
+    priceFormatted: 'A partir de R$ 180 para 2 pessoas · R$ 350 para 4 pessoas',
+    forGuests: 'Experiência em família',
+    items: [
+      'Pães e bolos',
+      'Frutas',
+      'Frios',
+      'Doces',
+      'Bebidas',
+      'Toalha e montagem',
+    ],
+  },
+  {
+    id: 'experiencia-romantica',
+    name: 'Experiência Romântica',
+    emotionalCopy: 'Montamos uma experiência especialmente para você.',
+    subtitle: 'Pedido de casamento, lua de mel, pedido de namoro ou aniversário romântico.',
+    price: null,
+    priceFormatted: 'A partir de R$ 450',
+    forGuests: 'Celebrações a dois',
+    isHighlight: true,
+    items: [
+      'Decoração personalizada',
+      'Flores',
+      'Velas',
+      'Pétalas',
+      'Letreiro especial',
+      'Organização do ambiente',
+      'Aromas',
+    ],
+    note: 'Itens personalizados e fotografia podem ser contratados à parte.',
   },
 ];
 
