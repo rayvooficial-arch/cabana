@@ -96,3 +96,5 @@
  .calendar .weekdays{font-size:11px!important}.calendar .days button{font-size:12px!important;max-height:none!important}.calendar .days button.occupied:after,.calendar .days button.pending:after{font-size:30px!important}
  .print-footer{display:block;font-size:10px;text-align:center;margin-top:5mm}
 }
+
+.mfa-qr{display:block;width:220px;height:220px;background:white;padding:12px;margin:15px auto}.mfa-secret{display:block;overflow-wrap:anywhere;padding:12px;background:#edf1e7;font-size:13px}.auth-card details{margin:15px 0}.auth-card>button.outline{margin-top:20px}
