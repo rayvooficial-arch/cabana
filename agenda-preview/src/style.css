@@ -98,3 +98,49 @@
 }
 
 .mfa-qr{display:block;width:220px;height:220px;background:white;padding:12px;margin:15px auto}.mfa-secret{display:block;overflow-wrap:anywhere;padding:12px;background:#edf1e7;font-size:13px}.auth-card details{margin:15px 0}.auth-card>button.outline{margin-top:20px}
+/* Screen posters use content-sized rows so larger phone fonts cannot cover dates. */
+@media screen {
+ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+ .calendars{align-items:start}
+ .calendars .calendar,.calendars .calendar:last-child{
+  display:grid;grid-template-columns:minmax(0,62fr) minmax(0,32fr);
+  grid-template-rows:auto auto auto auto;gap:16px 6%;
+  padding:18px;aspect-ratio:auto;min-height:0;height:auto;
+  overflow:hidden;margin-bottom:0;border-radius:24px;container-type:inline-size;
+ }
+ .calendar:before{inset:10px;border-radius:18px}
+ .calendar .poster-label{position:relative;inset:auto;grid-column:1;grid-row:1;justify-self:start;max-width:100%;font:12px/1.3 Arial,sans-serif;letter-spacing:.3px;padding:7px 12px;overflow-wrap:anywhere}
+ .calendar .poster-calendar{position:relative;inset:auto;width:100%;min-width:0;grid-column:1;grid-row:2;align-self:start}
+ .calendar .grid{grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+ .calendar .weekdays{font:11px/1.3 Arial,sans-serif;margin-bottom:8px}
+ .calendar .days button{min-width:0;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:1;font:12px/1 Arial,sans-serif;padding:0}
+ .calendar .days button.occupied:after,.calendar .days button.pending:after{font-size:clamp(18px,6cqi,30px)}
+ .calendar .card-foot{font:9px/1.4 Arial,sans-serif;margin:10px 0 0;overflow-wrap:anywhere}
+ .calendar .poster-photo{position:relative;inset:auto;min-width:0;border-radius:18px;align-self:stretch;object-fit:cover}
+ .calendar .photo-top{grid-column:2;grid-row:1 / 3;width:100%;height:100%;max-height:280px}
+ .calendar .photo-bottom{grid-column:1;grid-row:3;width:55%;height:100%;max-height:240px;min-height:150px}
+ .calendar .poster-copy{position:relative;inset:auto;grid-column:1 / 3;grid-row:3;justify-self:end;align-self:center;width:60%;min-width:0;text-align:center}
+ .calendar .poster-month{font:clamp(30px,10cqi,58px)/1.1 Georgia,serif;letter-spacing:-1px;margin:0 0 10px;overflow-wrap:anywhere}
+ .calendar .poster-key{font:10px/1.5 Arial,sans-serif;margin:0 0 12px;gap:6px}
+ .calendar .poster-key .ring{width:20px;height:20px}
+ .calendar .reserve-caption{max-width:100%;font:16px/1.3 Georgia,serif;padding:6px 8px;margin-bottom:8px;overflow-wrap:anywhere}
+ .calendar .poster-contact{max-width:100%;font:10px/1.4 Arial,sans-serif;padding:5px 8px;overflow-wrap:anywhere}
+ .calendar .poster-detail{font:10px/1.5 Arial,sans-serif;margin-top:8px;overflow-wrap:anywhere}
+ .calendar h3.poster-name{
+  position:relative!important;inset:auto!important;grid-column:1 / 3;grid-row:4;
+  width:100%!important;max-width:100%!important;min-height:0!important;
+  margin:0!important;padding:10px 12px!important;border-radius:14px!important;
+  font:500 15px/1.4 Arial,sans-serif!important;letter-spacing:0;
+  white-space:normal!important;overflow-wrap:anywhere;text-align:center;justify-content:center;
+ }
+}
+@media screen and (max-width:480px){
+ .calendars .calendar,.calendars .calendar:last-child{padding:16px;gap:14px 6%}
+ .calendar .poster-label{font-size:10px;padding:6px 9px}
+ .calendar .weekdays{font-size:10px}
+ .calendar .days button{font-size:11px}
+ .calendar .photo-bottom{min-height:140px}
+ .calendar .poster-key{font-size:9px}
+ .calendar .reserve-caption{font-size:14px}
+ .calendar .poster-contact,.calendar .poster-detail{font-size:9px}
+}
