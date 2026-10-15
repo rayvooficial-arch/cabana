@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, Gift } from 'lucide-react';
+import { Coffee, Film, Fish, Gift, Heart, Sandwich, Sprout } from 'lucide-react';
 import { EXPERIENCES_AND_BASKETS } from '../data/commercial';
 import { BookingButton } from './BookingButton';
 
@@ -21,51 +21,74 @@ export const PersonalizeExperienceSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {EXPERIENCES_AND_BASKETS.map((item) => {
-            const previewItems = item.items?.slice(0, 4) || item.extraItems?.slice(0, 4) || [];
-            const Icon = item.id === 'fogareiro-premium' ? Flame : Gift;
+            const includedItems = item.items || item.extraItems || [];
+            const Icon = item.id === 'cafe-express'
+              ? Coffee
+              : item.id === 'boas-vindas'
+                ? Gift
+                : item.id === 'dia-fazendeiro'
+                  ? Sprout
+                  : item.id === 'pescador-profissional'
+                    ? Fish
+                    : item.id === 'cinema-em-familia'
+                      ? Film
+                      : item.id === 'piquenique-no-campo'
+                        ? Sandwich
+                        : Heart;
+            const highlighted = Boolean(item.isHighlight);
 
             return (
               <article
                 key={item.id}
                 className={`rounded-3xl p-6 sm:p-7 border flex flex-col justify-between ${
-                  item.id === 'fogareiro-premium'
+                  highlighted
                     ? 'bg-[#14241A] text-white border-[#C29B48]/40 shadow-xl'
                     : 'bg-white text-[#2C332D] border-[#E8DED1] shadow-sm'
                 }`}
               >
                 <div>
                   <div className="flex items-start justify-between gap-4 mb-4">
-                    <Icon className={`w-5 h-5 ${item.id === 'fogareiro-premium' ? 'text-[#C29B48]' : 'text-[#8A6B2E]'}`} />
+                    <Icon className={`w-5 h-5 ${highlighted ? 'text-[#C29B48]' : 'text-[#8A6B2E]'}`} />
                     <div className="text-right">
-                      <span className={`block text-[10px] uppercase tracking-wider ${item.id === 'fogareiro-premium' ? 'text-white/55' : 'text-[#6B7568]'}`}>
+                      <span className={`block text-[10px] uppercase tracking-wider ${highlighted ? 'text-white/55' : 'text-[#6B7568]'}`}>
                         {item.forGuests}
                       </span>
-                      <strong className={`text-base ${item.id === 'fogareiro-premium' ? 'text-[#E8D4A2]' : 'text-[#14241A]'}`}>
-                        {item.price ? `R$ ${item.price.toLocaleString('pt-BR')}` : item.priceFormatted || 'Consultar valor'}
+                      <strong className={`block max-w-[190px] text-sm sm:text-base leading-snug ${highlighted ? 'text-[#E8D4A2]' : 'text-[#14241A]'}`}>
+                        {item.priceFormatted || (item.price ? `R$ ${item.price.toLocaleString('pt-BR')}` : 'Consultar valor')}
                       </strong>
                     </div>
                   </div>
 
-                  <h3 className={`font-serif text-xl sm:text-2xl font-bold mb-3 ${item.id === 'fogareiro-premium' ? 'text-white' : 'text-[#14241A]'}`}>
+                  <h3 className={`font-serif text-xl sm:text-2xl font-bold mb-2 ${highlighted ? 'text-white' : 'text-[#14241A]'}`}>
                     {item.name}
                   </h3>
 
-                  {previewItems.length > 0 && (
+                  <p className={`text-sm leading-relaxed mb-4 ${highlighted ? 'text-white/75' : 'text-[#526048]'}`}>
+                    {item.emotionalCopy}
+                  </p>
+
+                  {item.subtitle && (
+                    <p className={`text-xs leading-relaxed mb-4 ${highlighted ? 'text-white/60' : 'text-[#6B7568]'}`}>
+                      {item.subtitle}
+                    </p>
+                  )}
+
+                  {includedItems.length > 0 && (
                     <ul className="space-y-2 mb-5">
-                      {previewItems.map((preview) => (
+                      {includedItems.map((included) => (
                         <li
-                          key={preview}
-                          className={`text-sm flex items-start gap-2 ${item.id === 'fogareiro-premium' ? 'text-white/70' : 'text-[#526048]'}`}
+                          key={included}
+                          className={`text-sm flex items-start gap-2 ${highlighted ? 'text-white/70' : 'text-[#526048]'}`}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-[#C29B48] mt-2 shrink-0" />
-                          <span>{preview}</span>
+                          <span>{included}</span>
                         </li>
                       ))}
                     </ul>
                   )}
 
                   {item.note && (
-                    <p className={`text-xs leading-relaxed mb-5 ${item.id === 'fogareiro-premium' ? 'text-white/55' : 'text-[#6B7568]'}`}>
+                    <p className={`text-xs leading-relaxed mb-5 ${highlighted ? 'text-white/55' : 'text-[#6B7568]'}`}>
                       {item.note}
                     </p>
                   )}
@@ -74,7 +97,7 @@ export const PersonalizeExperienceSection: React.FC = () => {
                 <BookingButton
                   id={`addon-${item.id}-cta`}
                   label="ESCOLHER DATAS"
-                  variant={item.id === 'fogareiro-premium' ? 'gold' : 'outline'}
+                  variant={highlighted ? 'gold' : 'outline'}
                   size="sm"
                   className="w-full py-3"
                   params={{ experienceId: item.id, source: 'addon_card' }}
@@ -91,3 +114,4 @@ export const PersonalizeExperienceSection: React.FC = () => {
     </section>
   );
 };
+
