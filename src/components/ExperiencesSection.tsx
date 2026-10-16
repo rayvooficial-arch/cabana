@@ -212,11 +212,6 @@ const galleries: GalleryGroup[] = [
         src: '/fazendinha-mini-porcos.webp',
       },
       {
-        title: 'Porquinho-da-índia',
-        caption: 'Pequeno, curioso e cheio de personalidade',
-        src: '/fazendinha-porquinho-india-preto-branco.webp',
-      },
-      {
         title: 'Mini cabras',
         caption: 'Companheiras brincalhonas no abrigo de madeira',
         src: '/fazendinha-mini-cabras.webp',
@@ -225,11 +220,6 @@ const galleries: GalleryGroup[] = [
         title: 'Mini cavalo',
         caption: 'O charme da vida no campo bem de perto',
         src: '/fazendinha-mini-cavalo.webp',
-      },
-      {
-        title: 'Patos da fazendinha',
-        caption: 'O grupo descansando junto em seu espaço',
-        src: '/fazendinha-patos.webp',
       },
       {
         title: 'Patos no lago',
