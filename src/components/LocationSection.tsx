@@ -3,10 +3,9 @@ import { propertyAddress } from '../data/pricingAndInfo';
 import { MapPin, Navigation, Compass, ExternalLink } from 'lucide-react';
 
 export const LocationSection: React.FC = () => {
-  const encodedAddress = encodeURIComponent(
-    'Rua Bom Retiro, Quadra 26, Lote 13, Chácara das Mansões'
-  );
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+  const mapsUrl = 'https://www.google.com/maps?cid=12164538055808619586';
+  const mapEmbedUrl =
+    'https://maps.google.com/maps?q=Cabana+das+Mans%C3%B5es%2C+Campo+Grande+-+MS&ll=-20.6828469,-54.5829894&z=17&output=embed';
 
   return (
     <section id="como-chegar" className="py-24 bg-[#F3ECE2] text-[#2C332D]">
@@ -84,7 +83,7 @@ export const LocationSection: React.FC = () => {
               height="100%"
               className="flex-1 min-h-[380px] w-full border-0 grayscale contrast-125 opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
               loading="lazy"
-              src="https://maps.google.com/maps?q=Chacara+das+Mansões&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              src={mapEmbedUrl}
             />
             <div className="bg-[#14241A] px-6 py-3 text-white text-xs flex items-center justify-between">
               <span className="text-white/80">
@@ -100,3 +99,4 @@ export const LocationSection: React.FC = () => {
     </section>
   );
 };
+
