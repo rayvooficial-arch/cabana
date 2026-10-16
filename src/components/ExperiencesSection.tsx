@@ -232,6 +232,11 @@ const galleries: GalleryGroup[] = [
         src: '/fazendinha-patos.webp',
       },
       {
+        title: 'Patos no lago',
+        caption: 'A dupla aproveitando um passeio tranquilo pela água',
+        src: '/fazendinha-patos-lago.webp',
+      },
+      {
         title: 'Coelhinhos',
         caption: 'Uma dupla tranquila em meio ao verde',
         src: '/fazendinha-coelhos.webp',
@@ -240,6 +245,11 @@ const galleries: GalleryGroup[] = [
         title: 'Galinhas-d’angola',
         caption: 'Beleza e tradição do campo no galinheiro',
         src: '/fazendinha-galinhas-angola.webp',
+      },
+      {
+        title: 'Galinhas da fazendinha',
+        caption: 'As moradoras curiosas do galinheiro bem de perto',
+        src: '/fazendinha-galinhas-livres.webp',
       },
       {
         title: 'Porquinho-da-índia de pelo longo',
