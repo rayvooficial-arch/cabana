@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Camera, ChevronLeft, ChevronRight, Heart, Users } from 'lucide-react';
+import { Camera, ChevronLeft, ChevronRight, Download, Heart, Users } from 'lucide-react';
 import { Accommodation } from '../types';
 
 export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation }> = ({ accommodation }) => {
@@ -54,6 +54,15 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
           decoding="async"
         />
         <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
+        <a
+          href={photo.url}
+          download
+          aria-label={`Baixar foto: ${photo.title}`}
+          className="absolute top-4 right-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/70 px-3 py-2 text-xs font-semibold text-white shadow-sm backdrop-blur-sm transition-colors hover:bg-black/90"
+        >
+          <Download className="w-3.5 h-3.5 text-[#E8D4A2]" />
+          Baixar foto
+        </a>
         <div className="absolute top-4 left-4 flex gap-2 flex-wrap pointer-events-none">
           <span className="inline-flex items-center gap-1.5 bg-[#14241A]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
             <Users className="w-3.5 h-3.5 text-[#C29B48]" />
@@ -105,3 +114,4 @@ export const AccommodationCardCarousel: React.FC<{ accommodation: Accommodation 
     </div>
   );
 };
+
