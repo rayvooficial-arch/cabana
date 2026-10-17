@@ -1,6 +1,33 @@
 import React, { useRef, useState } from 'react';
-import { Compass, Volume2, VolumeX } from 'lucide-react';
+import { Bath, Compass, Film, Heart, ShieldCheck, Volume2, VolumeX } from 'lucide-react';
 import { BookingButton } from './BookingButton';
+
+const heroShortcuts = [
+  {
+    title: 'Privacidade',
+    subtitle: 'Cabanas exclusivas',
+    href: '#acomodacoes',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Relaxamento',
+    subtitle: 'Hidromassagens e spa',
+    href: '#hidromassagens',
+    icon: Bath,
+  },
+  {
+    title: 'Fazendinha',
+    subtitle: 'Mini animais dóceis',
+    href: '#fazendinha',
+    icon: Heart,
+  },
+  {
+    title: 'Cinema 100”',
+    subtitle: 'Ao ar livre',
+    href: '#cinema-ao-ar-livre',
+    icon: Film,
+  },
+];
 
 interface HeroProps {
   onOpenBooking?: () => void;
@@ -88,6 +115,26 @@ export const Hero: React.FC<HeroProps> = ({ videoUrl = '/herosite.mp4', hasAudio
               <Compass className="w-4 h-4 text-[#C29B48]" />
               <span>Ver acomodações</span>
             </a>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mt-5">
+            {heroShortcuts.map(({ title, subtitle, href, icon: Icon }) => (
+              <a
+                key={title}
+                href={href}
+                className="group rounded-2xl border border-white/15 bg-white/[0.04] hover:bg-white/[0.09] hover:border-[#C29B48]/55 px-3 py-3.5 sm:px-4 sm:py-4 text-center transition-all duration-300 cursor-pointer"
+              >
+                <span className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#C29B48]/15 text-[#D6B35B] group-hover:bg-[#C29B48]/25 group-hover:scale-105 transition-all">
+                  <Icon className="h-4 w-4" />
+                </span>
+                <strong className="block font-serif text-sm sm:text-base text-[#FAF7F2] leading-tight">
+                  {title}
+                </strong>
+                <span className="block mt-1 text-[9px] sm:text-[10px] uppercase tracking-[0.08em] text-white/55">
+                  {subtitle}
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
