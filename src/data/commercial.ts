@@ -281,6 +281,26 @@ export const EXPERIENCES_AND_BASKETS: ExperienceAddon[] = [
     ],
   },
   {
+    id: 'experiencia-romantica',
+    name: 'Experiência Romântica',
+    emotionalCopy: 'Montamos uma experiência especialmente para você.',
+    subtitle: 'Pedido de casamento, lua de mel, pedido de namoro ou aniversário romântico.',
+    price: null,
+    priceFormatted: 'A partir de R$ 450',
+    forGuests: 'Celebrações a dois',
+    isHighlight: true,
+    items: [
+      'Decoração personalizada',
+      'Flores',
+      'Velas',
+      'Pétalas',
+      'Letreiro especial',
+      'Organização do ambiente',
+      'Aromas',
+    ],
+    note: 'Itens personalizados e fotografia podem ser contratados à parte.',
+  },
+  {
     id: 'noite-do-fogareiro',
     name: 'Noite do Fogareiro',
     emotionalCopy:
@@ -302,26 +322,6 @@ export const EXPERIENCES_AND_BASKETS: ExperienceAddon[] = [
     ],
     note:
       'Entregamos sua cesta prontinha. Você escolhe quando acender o fogareiro, preparar seus petiscos e aproveitar cada instante. Ideal para casais, famílias e momentos especiais.',
-  },
-  {
-    id: 'experiencia-romantica',
-    name: 'Experiência Romântica',
-    emotionalCopy: 'Montamos uma experiência especialmente para você.',
-    subtitle: 'Pedido de casamento, lua de mel, pedido de namoro ou aniversário romântico.',
-    price: null,
-    priceFormatted: 'A partir de R$ 450',
-    forGuests: 'Celebrações a dois',
-    isHighlight: true,
-    items: [
-      'Decoração personalizada',
-      'Flores',
-      'Velas',
-      'Pétalas',
-      'Letreiro especial',
-      'Organização do ambiente',
-      'Aromas',
-    ],
-    note: 'Itens personalizados e fotografia podem ser contratados à parte.',
   },
   {
     id: 'pacote-escola',
