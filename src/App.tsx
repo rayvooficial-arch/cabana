@@ -2,6 +2,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ExperiencesSection } from './components/ExperiencesSection';
 import { AccommodationsSection } from './components/AccommodationsSection';
+import { AvailabilitySection } from './components/AvailabilitySection';
 import { StayModesSection } from './components/StayModesSection';
 import { PersonalizeExperienceSection } from './components/PersonalizeExperienceSection';
 import { PricingSection } from './components/PricingSection';
@@ -20,6 +21,7 @@ export default function App() {
       <main className="flex-1">
         <Hero videoUrl="/herosite.mp4" hasAudio={false} />
         <AccommodationsSection />
+        <AvailabilitySection />
         <StayModesSection />
         <ExperiencesSection />
         <PersonalizeExperienceSection />
@@ -35,3 +37,4 @@ export default function App() {
     </div>
   );
 }
+
