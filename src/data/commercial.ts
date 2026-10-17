@@ -281,6 +281,29 @@ export const EXPERIENCES_AND_BASKETS: ExperienceAddon[] = [
     ],
   },
   {
+    id: 'noite-do-fogareiro',
+    name: 'Noite do Fogareiro',
+    emotionalCopy:
+      'Sabores, aconchego e momentos especiais sob as estrelas.',
+    subtitle:
+      'Uma noite ao redor do fogo, com boas conversas, deliciosos petiscos e o céu estrelado como cenário.',
+    price: null,
+    priceFormatted: 'A partir de R$ 300',
+    forGuests: 'Para 2 pessoas',
+    isHighlight: true,
+    items: [
+      'Marshmallows para assar no fogo',
+      'Chocolates selecionados',
+      'Frutas frescas da estação',
+      'Seleção de queijos e frios',
+      'Torradinhas e petiscos',
+      'Espumante e taças',
+      'Kit para acendimento do fogareiro',
+    ],
+    note:
+      'Entregamos sua cesta prontinha. Você escolhe quando acender o fogareiro, preparar seus petiscos e aproveitar cada instante. Ideal para casais, famílias e momentos especiais.',
+  },
+  {
     id: 'experiencia-romantica',
     name: 'Experiência Romântica',
     emotionalCopy: 'Montamos uma experiência especialmente para você.',
