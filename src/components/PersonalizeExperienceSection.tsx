@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coffee, Film, Fish, Gift, GraduationCap, Heart, Sandwich, Sprout } from 'lucide-react';
+import { Coffee, Film, Fish, Flame, Gift, GraduationCap, Heart, Sandwich, Sprout } from 'lucide-react';
 import { BookingButton } from './BookingButton';
 import { useSiteContent } from '../context/SiteContentContext';
 
@@ -35,9 +35,11 @@ export const PersonalizeExperienceSection: React.FC = () => {
                       ? Film
                       : item.id === 'piquenique-no-campo'
                         ? Sandwich
-                      : item.id === 'pacote-escola'
-                        ? GraduationCap
-                        : Heart;
+                        : item.id === 'noite-do-fogareiro'
+                          ? Flame
+                          : item.id === 'pacote-escola'
+                            ? GraduationCap
+                            : Heart;
             const highlighted = Boolean(item.isHighlight);
 
             return (
