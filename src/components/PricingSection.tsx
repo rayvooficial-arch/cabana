@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Star } from 'lucide-react';
+import { Calendar, CalendarDays, Leaf, Sparkles, Star } from 'lucide-react';
 import { SPECIAL_PACKAGES, SEASONAL_RATES } from '../data/commercial';
 import { BookingButton } from './BookingButton';
 
@@ -25,6 +25,32 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
             Valores por diária para dezembro de 2026 e janeiro de 2027. Consulte a disponibilidade pelo WhatsApp.
           </p>
         </div>
+
+        <aside className="mb-10 sm:mb-12 rounded-3xl border border-[#C29B48]/40 bg-white/5 p-6 sm:p-8" aria-labelledby="informacoes-tarifas">
+          <h3 id="informacoes-tarifas" className="font-serif text-2xl sm:text-3xl font-bold text-[#E8D4A2] mb-6">
+            Informações importantes sobre as tarifas
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+            <div className="flex items-start gap-3">
+              <Leaf className="w-5 h-5 text-[#C29B48] shrink-0 mt-0.5" />
+              <p className="text-sm text-white/75 leading-relaxed">
+                Os valores de segunda a quarta-feira são válidos para períodos regulares de baixa temporada.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <CalendarDays className="w-5 h-5 text-[#C29B48] shrink-0 mt-0.5" />
+              <p className="text-sm text-white/75 leading-relaxed">
+                Feriados, datas comemorativas e os meses de dezembro e janeiro possuem tarifas diferenciadas, inclusive para hospedagens de segunda a quarta-feira.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <Sparkles className="w-5 h-5 text-[#C29B48] shrink-0 mt-0.5" />
+              <p className="text-sm text-white/75 leading-relaxed">
+                Para esses períodos, consulte nossa equipe e solicite um orçamento personalizado para as datas desejadas.
+              </p>
+            </div>
+          </div>
+        </aside>
 
         <div className="mb-10">
           <div className="flex items-center gap-2 mb-5">
