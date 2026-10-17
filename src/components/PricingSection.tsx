@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, CalendarDays, Leaf, Sparkles, Star } from 'lucide-react';
-import { SPECIAL_PACKAGES, SEASONAL_RATES } from '../data/commercial';
 import { BookingButton } from './BookingButton';
+import { useSiteContent } from '../context/SiteContentContext';
 
 interface PricingSectionProps {
   onOpenBooking?: (accommodationId?: string) => void;
@@ -11,6 +11,8 @@ const formatBRL = (value: number | null) =>
   value === null ? 'Sob consulta' : value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
 export const PricingSection: React.FC<PricingSectionProps> = () => {
+  const { content } = useSiteContent();
+  const { seasonalRates: SEASONAL_RATES, specialPackages: SPECIAL_PACKAGES } = content;
   return (
     <section id="tarifario" className="py-20 sm:py-24 bg-[#14241A] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

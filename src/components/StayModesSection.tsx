@@ -1,15 +1,16 @@
 import React from 'react';
 import { Check, Info, PackageCheck } from 'lucide-react';
-import { STAY_MODES } from '../data/commercial';
 import { BookingButton } from './BookingButton';
+import { useSiteContent } from '../context/SiteContentContext';
 
 interface StayModesSectionProps {
   onOpenBooking?: (accommodationId?: string) => void;
 }
 
 export const StayModesSection: React.FC<StayModesSectionProps> = () => {
-  const express = STAY_MODES.express;
-  const conforto = STAY_MODES.conforto;
+  const { content } = useSiteContent();
+  const express = content.stayModes.express;
+  const conforto = content.stayModes.conforto;
 
   return (
     <section id="modalidades" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">

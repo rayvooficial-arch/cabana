@@ -13,6 +13,7 @@ import {
   Utensils,
   Waves,
 } from 'lucide-react';
+import { useSiteContent } from '../context/SiteContentContext';
 
 interface GalleryPhoto {
   title: string;
@@ -367,7 +368,14 @@ const ExperienceCard: React.FC<{ group: GalleryGroup }> = ({ group }) => {
   );
 };
 
-export const ExperiencesSection: React.FC = () => (
+export const ExperiencesSection: React.FC = () => {
+  const { content } = useSiteContent();
+  const managedGalleries: GalleryGroup[] = content.experienceGalleries.map((group) => ({
+    ...group,
+    icon: galleries.find((item) => item.id === group.id)?.icon ?? Heart,
+  }));
+
+  return (
   <section id="estrutura" className="py-16 sm:py-20 bg-[#F3ECE2] text-[#2C332D]">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mb-8 sm:mb-10">
@@ -376,7 +384,7 @@ export const ExperiencesSection: React.FC = () => (
         <p className="text-sm sm:text-base text-[#526048] leading-relaxed max-w-2xl">Explore as fotos de cada experiência diretamente nos cartões.</p>
       </div>
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6">
-        {galleriesInDisplayOrder.map((group) => <ExperienceCard key={group.title} group={group} />)}
+        {managedGalleries.map((group) => <ExperienceCard key={group.id} group={group} />)}
       </div>
       <div className="mt-6 sm:mt-8 flex flex-wrap gap-2">
         {otherExperiences.map(({ title, icon: Icon }) => (
@@ -387,5 +395,6 @@ export const ExperiencesSection: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 

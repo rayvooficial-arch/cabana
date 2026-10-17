@@ -1,9 +1,10 @@
 import React from 'react';
 import { Coffee, Film, Fish, Gift, GraduationCap, Heart, Sandwich, Sprout } from 'lucide-react';
-import { EXPERIENCES_AND_BASKETS } from '../data/commercial';
 import { BookingButton } from './BookingButton';
+import { useSiteContent } from '../context/SiteContentContext';
 
 export const PersonalizeExperienceSection: React.FC = () => {
+  const { content } = useSiteContent();
   return (
     <section id="personalize-experiencia" className="py-20 sm:py-24 bg-[#F3ECE2] text-[#2C332D]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,7 +21,7 @@ export const PersonalizeExperienceSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-          {EXPERIENCES_AND_BASKETS.map((item) => {
+          {content.experiencesAndBaskets.map((item) => {
             const includedItems = item.items || item.extraItems || [];
             const Icon = item.id === 'cafe-express'
               ? Coffee

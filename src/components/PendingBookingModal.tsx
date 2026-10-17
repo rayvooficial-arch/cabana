@@ -5,9 +5,8 @@ import {
   createBookingWhatsAppLink,
   registerPendingBookingListener,
 } from '../utils/booking';
-import { accommodations } from '../data/accommodations';
-import { PRICING_CONFIG, PUBLIC_AVAILABILITY_URL } from '../config/constants';
-import { SEASONAL_RATES, SPECIAL_PACKAGES } from '../data/commercial';
+import { PUBLIC_AVAILABILITY_URL } from '../config/constants';
+import { useSiteContent } from '../context/SiteContentContext';
 
 type StayMode = 'express' | 'conforto';
 
@@ -48,6 +47,8 @@ function isHighSeason(date: Date): boolean {
 }
 
 export const PendingBookingModal: React.FC = () => {
+  const { content } = useSiteContent();
+  const { accommodations, stayModes, seasonalRates: SEASONAL_RATES, specialPackages: SPECIAL_PACKAGES } = content;
   const [isOpen, setIsOpen] = useState(false);
   const [currentParams, setCurrentParams] = useState<BookingEngineParams | null>(null);
   const [accommodationId, setAccommodationId] = useState('');
@@ -80,7 +81,7 @@ export const PendingBookingModal: React.FC = () => {
       setError('');
       setIsOpen(true);
     });
-  }, []);
+  }, [accommodations]);
 
   const estimate = useMemo(() => {
     if (!selectedAccommodation || nights <= 0) return 0;
@@ -98,11 +99,11 @@ export const PendingBookingModal: React.FC = () => {
       } else if (isHighSeason(cursor)) {
         nightlyRate = SEASONAL_RATES.rates[stayMode][propertyType];
       } else {
-        const rate = PRICING_CONFIG[stayMode][propertyType];
+        const rate = stayModes[stayMode].pricing[propertyType];
         const dayOfWeek = cursor.getDay();
         nightlyRate = dayOfWeek >= 1 && dayOfWeek <= 3
-          ? (rate.weekdayPrice as number)
-          : (rate.weekendPrice as number);
+          ? (rate.weekday as number)
+          : (rate.weekend as number);
       }
 
       total += nightlyRate;
@@ -110,7 +111,7 @@ export const PendingBookingModal: React.FC = () => {
     }
 
     return total;
-  }, [checkIn, nights, selectedAccommodation, stayMode]);
+  }, [checkIn, nights, selectedAccommodation, stayMode, stayModes, SEASONAL_RATES, SPECIAL_PACKAGES]);
 
   const minimumStayWarning = useMemo(() => {
     if (!checkIn || nights <= 0) return '';

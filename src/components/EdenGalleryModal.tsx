@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { EDEN_PHOTOS, accommodations } from '../data/accommodations';
+import { EDEN_PHOTOS } from '../data/accommodations';
 import { AccommodationPhotoItem } from '../types';
 import { BookingButton } from './BookingButton';
 import {
@@ -11,6 +11,7 @@ import {
   Calendar,
   Maximize2,
 } from 'lucide-react';
+import { useSiteContent } from '../context/SiteContentContext';
 
 interface EdenGalleryModalProps {
   isOpen: boolean;
@@ -25,11 +26,12 @@ export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({
   initialIndex = 0,
   accommodationId = 'eden',
 }) => {
+  const { content } = useSiteContent();
   const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
 
-  const accommodation = accommodations.find((item) => item.id === accommodationId)!;
+  const accommodation = content.accommodations.find((item) => item.id === accommodationId)!;
   const photos: AccommodationPhotoItem[] = accommodation.detailedPhotos || EDEN_PHOTOS;
   const currentPhoto = photos[currentIndex] || photos[0];
 
@@ -247,3 +249,4 @@ export const EdenGalleryModal: React.FC<EdenGalleryModalProps> = ({
     </div>
   );
 };
+

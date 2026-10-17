@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { accommodations } from '../data/accommodations';
-import { PRICING_CONFIG } from '../config/constants';
 import { BookingButton } from './BookingButton';
 import { AccommodationCardCarousel } from './AccommodationCardCarousel';
 import { CalendarDays, Check, Sparkles } from 'lucide-react';
 import { trackAccommodationCatalogView } from '../utils/metaPixel';
+import { useSiteContent } from '../context/SiteContentContext';
 
 const formatPrice = (value: number) => value.toLocaleString('pt-BR');
 
 export const AccommodationsSection: React.FC = () => {
+  const { content } = useSiteContent();
+  const { accommodations, stayModes } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const viewTrackedRef = useRef(false);
 
@@ -49,11 +50,11 @@ export const AccommodationsSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {accommodations.map((acc) => {
             const isHouse = acc.id === 'pedacinho-do-ceu';
-            const comfortPricing = isHouse
-              ? PRICING_CONFIG.conforto.casa
-              : PRICING_CONFIG.conforto.cabanas;
+            const propertyType = isHouse ? 'casa' : 'cabanas';
+            const comfortPricing = stayModes.conforto.pricing[propertyType];
+            const expressPricing = stayModes.express.pricing[propertyType];
             const hasComfortPrice =
-              comfortPricing.weekdayPrice !== null && comfortPricing.weekendPrice !== null;
+              comfortPricing.weekday !== null && comfortPricing.weekend !== null;
 
             return (
               <article
@@ -102,14 +103,14 @@ export const AccommodationsSection: React.FC = () => {
                           <div>
                             <span className="block text-[11px] text-white/65 mb-1">Segunda a quarta</span>
                             <strong className="font-serif text-xl text-white">
-                              R$ {formatPrice(comfortPricing.weekdayPrice as number)}
+                              R$ {formatPrice(comfortPricing.weekday as number)}
                             </strong>
                             <span className="text-[11px] text-white/60"> / diária</span>
                           </div>
                           <div className="border-l border-white/20 pl-3">
                             <span className="block text-[11px] text-white/65 mb-1">Quinta a domingo</span>
                             <strong className="font-serif text-xl text-white">
-                              R$ {formatPrice(comfortPricing.weekendPrice as number)}
+                              R$ {formatPrice(comfortPricing.weekend as number)}
                             </strong>
                             <span className="text-[11px] text-white/60"> / diária</span>
                           </div>
@@ -140,14 +141,14 @@ export const AccommodationsSection: React.FC = () => {
                         <div>
                           <span className="block text-[11px] text-[#6B746D] mb-1">Segunda a quarta</span>
                           <strong className="font-serif text-xl text-[#14241A]">
-                            R$ {acc.weekdayPrice.toLocaleString('pt-BR')}
+                            R$ {(expressPricing.weekday ?? acc.weekdayPrice).toLocaleString('pt-BR')}
                           </strong>
                           <span className="text-[11px] text-[#6B746D]"> / diária</span>
                         </div>
                         <div className="border-l border-[#DDD2C5] pl-3">
                           <span className="block text-[11px] text-[#6B746D] mb-1">Quinta a domingo</span>
                           <strong className="font-serif text-xl text-[#14241A]">
-                            R$ {acc.weekendPrice.toLocaleString('pt-BR')}
+                            R$ {(expressPricing.weekend ?? acc.weekendPrice).toLocaleString('pt-BR')}
                           </strong>
                           <span className="text-[11px] text-[#6B746D]"> / diária</span>
                         </div>
