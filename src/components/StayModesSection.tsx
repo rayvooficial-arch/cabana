@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, PackageCheck } from 'lucide-react';
+import { Check, Info, PackageCheck } from 'lucide-react';
 import { STAY_MODES } from '../data/commercial';
 import { BookingButton } from './BookingButton';
 
@@ -117,7 +117,25 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             />
           </article>
         </div>
+
+        <aside className="mt-6 sm:mt-8 rounded-2xl border border-[#D6C49C] bg-[#F3ECE2] p-5 sm:p-6" aria-label="Observação sobre os itens disponíveis">
+          <div className="flex items-start gap-3">
+            <Info className="w-5 h-5 text-[#8A6B2E] mt-0.5 shrink-0" />
+            <div>
+              <h3 className="text-sm font-bold text-[#14241A]">
+                Itens não perecíveis e de apoio
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#526048]">
+                Conforme a modalidade contratada, podem estar disponíveis: sal fino, sal de parrilla, azeite de oliva extravirgem, vinagre de vinho tinto, pimenta, açúcar, adoçante, café, milho de pipoca, detergente, esponja, guardanapos, papel-toalha e pano de prato.
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-[#8A6B2E]">
+                A disponibilidade e a composição desses produtos variam conforme a modalidade escolhida.
+              </p>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
   );
 };
+
