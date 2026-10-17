@@ -9,6 +9,7 @@
 // Formato internacional sem caracteres especiais (ex: 5567999999999)
 export const WHATSAPP_NUMBER = '5567999356608';
 export const WHATSAPP_NUMBER_FORMATTED = '(67) 99935-6608';
+export const PUBLIC_AVAILABILITY_URL = 'https://agenda-cabana-mansoes.vercel.app/';
 
 // Nome e slogan da marca
 export const BRAND_NAME = 'Cabana das Mansões';
@@ -64,3 +65,4 @@ export const PRICING_CONFIG = {
     cribAvailable: true, // Berço sob solicitação gratuito
   },
 };
+
