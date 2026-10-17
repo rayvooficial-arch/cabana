@@ -265,10 +265,16 @@ const galleriesInDisplayOrder = [
   galleries[0],
 ];
 
-const otherExperiences = [
-  { title: 'Churrasqueiras', icon: Utensils },
-  { title: 'Áreas verdes', icon: Trees },
-];
+const galleryIcons = {
+  Bath,
+  Film,
+  Waves,
+  Flame,
+  Baby,
+  Heart,
+  Utensils,
+  Trees,
+};
 
 const photoStyle = (
   photo: GalleryPhoto,
@@ -372,7 +378,7 @@ export const ExperiencesSection: React.FC = () => {
   const { content } = useSiteContent();
   const managedGalleries: GalleryGroup[] = content.experienceGalleries.map((group) => ({
     ...group,
-    icon: galleries.find((item) => item.id === group.id)?.icon ?? Heart,
+    icon: galleryIcons[group.iconName] ?? Heart,
   }));
 
   return (
@@ -385,13 +391,6 @@ export const ExperiencesSection: React.FC = () => {
       </div>
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6">
         {managedGalleries.map((group) => <ExperienceCard key={group.id} group={group} />)}
-      </div>
-      <div className="mt-6 sm:mt-8 flex flex-wrap gap-2">
-        {otherExperiences.map(({ title, icon: Icon }) => (
-          <span key={title} className="inline-flex items-center gap-2 rounded-full border border-[#D9CDBE] bg-white/70 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#445247]">
-            <Icon className="w-4 h-4 text-[#8B6A2F]" /> {title}
-          </span>
-        ))}
       </div>
     </div>
   </section>
