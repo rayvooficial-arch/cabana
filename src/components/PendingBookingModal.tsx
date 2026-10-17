@@ -1,12 +1,12 @@
 import React, { FormEvent, useEffect, useMemo, useState } from 'react';
-import { CalendarDays, MessageCircle, Users, X } from 'lucide-react';
+import { CalendarCheck, CalendarDays, ExternalLink, MessageCircle, Users, X } from 'lucide-react';
 import {
   BookingEngineParams,
   createBookingWhatsAppLink,
   registerPendingBookingListener,
 } from '../utils/booking';
 import { accommodations } from '../data/accommodations';
-import { PRICING_CONFIG } from '../config/constants';
+import { PRICING_CONFIG, PUBLIC_AVAILABILITY_URL } from '../config/constants';
 import { SEASONAL_RATES, SPECIAL_PACKAGES } from '../data/commercial';
 
 type StayMode = 'express' | 'conforto';
@@ -196,6 +196,22 @@ export const PendingBookingModal: React.FC = () => {
         </header>
 
         <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5">
+          <a
+            href={PUBLIC_AVAILABILITY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between gap-3 rounded-2xl border border-[#D6C49C] bg-[#F3ECE2] px-4 py-3.5 text-[#14241A] transition-colors hover:border-[#8B6A2F] hover:bg-[#EEE3D4]"
+          >
+            <span className="flex items-center gap-3">
+              <CalendarCheck className="h-5 w-5 shrink-0 text-[#8B6A2F]" />
+              <span>
+                <strong className="block text-sm">Confira a agenda antes de escolher</strong>
+                <span className="block text-xs font-normal text-[#6B746D]">Veja as noites disponíveis de cada acomodação.</span>
+              </span>
+            </span>
+            <ExternalLink className="h-4 w-4 shrink-0 text-[#8B6A2F]" />
+          </a>
+
           <div className="grid sm:grid-cols-2 gap-4">
             <label className="text-sm font-semibold text-[#14241A]">
               Acomodação
