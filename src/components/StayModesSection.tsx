@@ -155,9 +155,6 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
               <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-[#8A6B2E]">
                 A disponibilidade e a composição desses produtos variam conforme a modalidade escolhida.
               </p>
-              <p className="mt-2 text-xs font-semibold text-[#7A4F20]">
-                Em feriados e datas comemorativas, as tarifas podem sofrer alterações. Consulte o valor aplicável ao período desejado.
-              </p>
             </div>
           </div>
         </aside>
