@@ -15,6 +15,29 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
   return (
     <section id="modalidades" className="py-20 sm:py-24 bg-[#FAF7F2] text-[#2C332D]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <aside className="mb-10 sm:mb-12 rounded-3xl border border-[#D6C49C] bg-[#F3ECE2] p-6 sm:p-8" aria-labelledby="informacoes-tarifas">
+          <h3 id="informacoes-tarifas" className="font-serif text-2xl sm:text-3xl font-bold text-[#14241A] mb-6">
+            Informações importantes sobre nossas tarifas
+          </h3>
+          <div className="space-y-5 text-sm text-[#526048] leading-relaxed">
+            <p>
+              <strong className="text-[#14241A]">Tarifas de segunda a quarta-feira:</strong>{' '}
+              os valores promocionais são válidos exclusivamente para períodos regulares de baixa temporada.
+            </p>
+            <p>
+              <strong className="text-[#14241A]">Feriados, datas comemorativas e alta temporada:</strong>{' '}
+              possuem tarifas especiais, incluindo os meses de dezembro e janeiro, independentemente do dia da semana.
+            </p>
+            <p>
+              <strong className="text-[#14241A]">Planejando sua hospedagem para essas datas?</strong>{' '}
+              Entre em contato com nossa equipe e solicite um orçamento personalizado.
+            </p>
+            <p className="text-[#2C332D]">
+              Será um prazer ajudar você a planejar momentos especiais em nosso SPA em meio à natureza!
+            </p>
+          </div>
+        </aside>
+
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6B2E]">
             Modalidades de hospedagem
