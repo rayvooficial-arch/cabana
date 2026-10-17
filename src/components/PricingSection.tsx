@@ -58,24 +58,24 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
             <h3 className="font-serif text-2xl font-bold">Dezembro e janeiro</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6">
             {([
               { name: 'Temporada Express', rates: SEASONAL_RATES.rates.express },
               { name: 'Temporada Conforto', rates: SEASONAL_RATES.rates.conforto },
             ] as const).map((mode) => (
-              <article key={mode.name} className="rounded-3xl bg-white/5 border border-[#C29B48]/30 p-6 sm:p-8">
-                <span className="block text-xs uppercase tracking-[0.16em] text-[#E8D4A2] mb-2">
+              <article key={mode.name} className="rounded-xl sm:rounded-3xl bg-white/5 border border-[#C29B48]/30 p-3 sm:p-8">
+                <span className="block text-[9px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.16em] text-[#E8D4A2] mb-2">
                   {SEASONAL_RATES.schedule}
                 </span>
-                <h4 className="font-serif text-2xl font-bold mb-5">{mode.name}</h4>
-                <div className="space-y-4 text-sm">
-                  <div className="flex items-end justify-between gap-4 pb-4 border-b border-white/10">
+                <h4 className="font-serif text-base sm:text-2xl font-bold mb-4 sm:mb-5 leading-tight">{mode.name}</h4>
+                <div className="space-y-3 sm:space-y-4 text-[10px] sm:text-sm">
+                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-1 sm:gap-4 pb-3 sm:pb-4 border-b border-white/10">
                     <strong>Cabanas Éden e Manancial</strong>
-                    <span className="text-right text-[#E8D4A2] font-bold">{formatBRL(mode.rates.cabanas)} / diária</span>
+                    <span className="text-[#E8D4A2] font-bold sm:text-right">{formatBRL(mode.rates.cabanas)} / diária</span>
                   </div>
-                  <div className="flex items-end justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-1 sm:gap-4">
                     <strong>Casa Pedacinho do Céu</strong>
-                    <span className="text-right text-[#E8D4A2] font-bold">{formatBRL(mode.rates.casa)} / diária</span>
+                    <span className="text-[#E8D4A2] font-bold sm:text-right">{formatBRL(mode.rates.casa)} / diária</span>
                   </div>
                 </div>
               </article>
@@ -90,7 +90,7 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
             <h3 className="font-serif text-2xl font-bold">Natal e Réveillon</h3>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6">
             {SPECIAL_PACKAGES.map((pkg) => {
               const accommodations = [
                 { name: 'Cabanas Éden e Manancial', rates: pkg.rates.cabanas },
@@ -98,26 +98,26 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
               ];
 
               return (
-                <article key={pkg.id} className="rounded-3xl bg-[#1c3224] border border-[#C29B48]/40 p-6 sm:p-8">
-                  <div className="flex items-start justify-between gap-4 mb-5">
+                <article key={pkg.id} className="rounded-xl sm:rounded-3xl bg-[#1c3224] border border-[#C29B48]/40 p-3 sm:p-8">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-4 sm:mb-5">
                     <div>
-                      <h4 className="font-serif text-2xl font-bold">{pkg.name}</h4>
+                      <h4 className="font-serif text-lg sm:text-2xl font-bold">{pkg.name}</h4>
                     </div>
-                    <span className="rounded-full bg-[#C29B48]/15 border border-[#C29B48]/30 px-3 py-1 text-[10px] uppercase tracking-wider text-[#E8D4A2] text-right">
+                    <span className="self-start rounded-full bg-[#C29B48]/15 border border-[#C29B48]/30 px-2 sm:px-3 py-1 text-[8px] sm:text-[10px] uppercase tracking-wider text-[#E8D4A2]">
                       Mínimo de {pkg.minimumNights} diárias
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
                     {accommodations.map((accommodation) => (
-                      <div key={accommodation.name} className="rounded-2xl bg-white/5 border border-white/10 p-4">
-                        <strong className="block text-sm mb-3">{accommodation.name}</strong>
-                        <div className="space-y-2 text-xs">
-                          <div className="flex justify-between gap-3">
+                      <div key={accommodation.name} className="rounded-lg sm:rounded-2xl bg-white/5 border border-white/10 p-2.5 sm:p-4">
+                        <strong className="block text-[10px] sm:text-sm mb-2 sm:mb-3">{accommodation.name}</strong>
+                        <div className="space-y-2 text-[9px] sm:text-xs">
+                          <div className="flex flex-col sm:flex-row sm:justify-between gap-0.5 sm:gap-3">
                             <span className="text-white/60">Express</span>
                             <strong className="text-[#E8D4A2]">{formatBRL(accommodation.rates.express)} / diária</strong>
                           </div>
-                          <div className="flex justify-between gap-3">
+                          <div className="flex flex-col sm:flex-row sm:justify-between gap-0.5 sm:gap-3">
                             <span className="text-white/60">Conforto</span>
                             <strong className="text-[#E8D4A2]">{formatBRL(accommodation.rates.conforto)} / diária</strong>
                           </div>
@@ -131,7 +131,7 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
                     label="ESCOLHER DATAS"
                     variant="gold"
                     size="md"
-                    className="w-full py-3.5"
+                    className="w-full px-2 py-2.5 sm:px-4 sm:py-3.5 text-[10px] sm:text-xs"
                     params={{ rateCode: pkg.id, source: 'special_package' }}
                   />
                 </article>
