@@ -306,7 +306,7 @@ const ExperienceCard: React.FC<{ group: GalleryGroup }> = ({ group }) => {
   };
 
   return (
-    <article id={group.id} className="scroll-mt-24 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#14241A] text-white border border-[#294132] shadow-sm flex flex-col">
+    <article id={group.id} className="scroll-mt-24 rounded-xl sm:rounded-3xl overflow-hidden bg-[#14241A] text-white border border-[#294132] shadow-sm flex flex-col">
       <div
         className={`relative ${group.mediaAspect ?? 'aspect-[9/10]'} bg-[#0c1710] overflow-hidden touch-pan-y`}
         onTouchStart={(event) => { start.current = { x: event.touches[0].clientX, y: event.touches[0].clientY }; }}
@@ -322,32 +322,32 @@ const ExperienceCard: React.FC<{ group: GalleryGroup }> = ({ group }) => {
         <div aria-hidden="true" style={photoStyle(photo)} className="absolute -inset-5 blur-xl opacity-50 scale-110" />
         <div role="img" aria-label={`${group.title}: ${item.title}`} style={photoStyle(photo, 'contain')} className="absolute inset-0" />
         <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
-        <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-black/65 border border-white/20 px-2.5 py-1.5 text-xs font-semibold">
-          <Images className="w-3.5 h-3.5" /> {index + 1} de {group.photos.length}
+        <span className="absolute top-2 right-2 sm:top-3 sm:right-3 inline-flex items-center gap-1 rounded-full bg-black/65 border border-white/20 px-2 py-1 text-[10px] sm:px-2.5 sm:py-1.5 sm:text-xs font-semibold">
+          <Images className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> {index + 1} de {group.photos.length}
         </span>
-        <button type="button" disabled={index === 0} onClick={() => move(-1)} aria-label={`Foto anterior de ${group.title}`} className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
-          <ChevronLeft className="w-6 h-6" />
+        <button type="button" disabled={index === 0} onClick={() => move(-1)} aria-label={`Foto anterior de ${group.title}`} className="absolute left-1.5 sm:left-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/70 border border-white/20 flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
-        <button type="button" disabled={index === group.photos.length - 1} onClick={() => move(1)} aria-label={`Próxima foto de ${group.title}`} className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
-          <ChevronRight className="w-6 h-6" />
+        <button type="button" disabled={index === group.photos.length - 1} onClick={() => move(1)} aria-label={`Próxima foto de ${group.title}`} className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/70 border border-white/20 flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 
-      <div className="p-4 sm:p-5 flex-1 border-t border-white/10">
-        <div className="flex items-center gap-2 text-[#E8D4A2] mb-2">
-          <Icon className="w-5 h-5" />
-          <span className="text-[11px] font-semibold uppercase tracking-widest">{group.title}</span>
+      <div className="p-3 sm:p-5 flex-1 border-t border-white/10">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-[#E8D4A2] mb-1.5 sm:mb-2">
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+          <span className="text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider sm:tracking-widest line-clamp-2">{group.title}</span>
         </div>
-        <h3 className="font-serif text-lg sm:text-xl font-bold leading-snug">{item.title}</h3>
-        <p className="text-sm text-white/75 mt-1 leading-relaxed">{item.caption}</p>
+        <h3 className="font-serif text-sm sm:text-xl font-bold leading-snug line-clamp-3">{item.title}</h3>
+        <p className="text-[11px] sm:text-sm text-white/75 mt-1 leading-relaxed line-clamp-3">{item.caption}</p>
       </div>
-      <div ref={strip} className="flex gap-2 px-4 py-3 overflow-x-auto bg-[#0c1710] border-t border-white/10" style={{ scrollbarWidth: 'thin' }} aria-label={`Miniaturas de ${group.title}`}>
+      <div ref={strip} className="flex gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 overflow-x-auto bg-[#0c1710] border-t border-white/10" style={{ scrollbarWidth: 'thin' }} aria-label={`Miniaturas de ${group.title}`}>
         {group.photos.map((image, thumbIndex) => {
           const thumbPhoto = thumbIndex === 0 && group.coverSrc
             ? { ...image, src: group.coverSrc, position: group.coverPosition, size: group.coverSize }
             : image;
           return (
-            <button key={`${image.title}-${thumbIndex}`} type="button" onClick={() => select(thumbIndex)} aria-label={`Ver foto ${thumbIndex + 1}: ${image.title}`} aria-current={thumbIndex === index ? 'true' : undefined} className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${thumbIndex === index ? 'border-[#C29B48] ring-1 ring-[#C29B48]' : 'border-white/20 opacity-65 hover:opacity-100'}`}>
+            <button key={`${image.title}-${thumbIndex}`} type="button" onClick={() => select(thumbIndex)} aria-label={`Ver foto ${thumbIndex + 1}: ${image.title}`} aria-current={thumbIndex === index ? 'true' : undefined} className={`shrink-0 w-12 h-9 sm:w-16 sm:h-12 rounded-md sm:rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${thumbIndex === index ? 'border-[#C29B48] ring-1 ring-[#C29B48]' : 'border-white/20 opacity-65 hover:opacity-100'}`}>
               <span role="img" aria-label={image.title} style={photoStyle(thumbPhoto, group.mediaAspect === 'aspect-square' ? 'contain' : 'cover')} className="block w-full h-full bg-[#0c1710]" />
             </button>
           );
@@ -365,7 +365,7 @@ export const ExperiencesSection: React.FC = () => (
         <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#14241A] mt-2 mb-3">Veja o que você encontra por aqui</h2>
         <p className="text-sm sm:text-base text-[#526048] leading-relaxed max-w-2xl">Explore as fotos de cada experiência diretamente nos cartões.</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+      <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6">
         {galleriesInDisplayOrder.map((group) => <ExperienceCard key={group.title} group={group} />)}
       </div>
       <div className="mt-6 sm:mt-8 flex flex-wrap gap-2">
