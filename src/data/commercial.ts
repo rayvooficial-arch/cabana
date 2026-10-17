@@ -300,6 +300,28 @@ export const EXPERIENCES_AND_BASKETS: ExperienceAddon[] = [
     ],
     note: 'Itens personalizados e fotografia podem ser contratados à parte.',
   },
+  {
+    id: 'pacote-escola',
+    name: 'Pacote Escola – Aprender em Meio à Natureza',
+    emotionalCopy:
+      'Uma experiência educativa que une lazer, contato com a natureza e aprendizado.',
+    subtitle: 'Ideal para Educação Infantil, Ensino Fundamental e projetos pedagógicos.',
+    price: null,
+    priceFormatted: 'Consulte valores e condições',
+    forGuests: 'Grupos escolares',
+    ctaText: 'CONSULTAR CONDIÇÕES',
+    items: [
+      'Visita guiada pela propriedade',
+      'Interação com os animais da fazendinha',
+      'Experiência de coleta de ovos das galinhas poedeiras',
+      'Conhecendo a horta e o pomar',
+      'Atividade de pesque e solte',
+      'Espaço para lanche ou piquenique',
+      'Cenários para fotos da turma',
+    ],
+    note:
+      'Invista em uma experiência educativa inesquecível. Para consultar valores, disponibilidade e condições especiais para grupos escolares, entre em contato com nossa equipe. Teremos prazer em preparar uma experiência especial para sua escola!',
+  },
 ];
 
 export interface SpecialPackage {
