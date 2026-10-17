@@ -22,6 +22,7 @@ interface GalleryPhoto {
 }
 
 interface GalleryGroup {
+  id: string;
   title: string;
   shortDescription: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -34,6 +35,7 @@ interface GalleryGroup {
 
 const galleries: GalleryGroup[] = [
   {
+    id: 'hidromassagens',
     title: 'Hidromassagens',
     shortDescription: 'Privativas nas acomodações',
     icon: Bath,
@@ -63,6 +65,7 @@ const galleries: GalleryGroup[] = [
     ],
   },
   {
+    id: 'cinema-ao-ar-livre',
     title: 'Cinema ao ar livre',
     shortDescription: 'Telão em meio à natureza',
     icon: Film,
@@ -94,6 +97,7 @@ const galleries: GalleryGroup[] = [
     ],
   },
   {
+    id: 'pesque-e-solte',
     title: 'Pesque e solte',
     shortDescription: 'Pesca recreativa no lago',
     icon: Waves,
@@ -130,6 +134,7 @@ const galleries: GalleryGroup[] = [
     ],
   },
   {
+    id: 'fogueira-e-descanso',
     title: 'Fogueira e descanso',
     shortDescription: 'Fogo, balanços e área verde',
     icon: Flame,
@@ -156,6 +161,7 @@ const galleries: GalleryGroup[] = [
     ],
   },
   {
+    id: 'playground-campinho-redario',
     title: 'Playground, campinho e redário',
     shortDescription: 'Diversão e descanso ao ar livre',
     icon: Baby,
@@ -195,6 +201,7 @@ const galleries: GalleryGroup[] = [
     ],
   },
   {
+    id: 'fazendinha',
     title: 'Fazendinha',
     shortDescription: 'Mini animais e contato com a natureza',
     icon: Heart,
@@ -299,7 +306,7 @@ const ExperienceCard: React.FC<{ group: GalleryGroup }> = ({ group }) => {
   };
 
   return (
-    <article className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#14241A] text-white border border-[#294132] shadow-sm flex flex-col">
+    <article id={group.id} className="scroll-mt-24 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#14241A] text-white border border-[#294132] shadow-sm flex flex-col">
       <div
         className={`relative ${group.mediaAspect ?? 'aspect-[9/10]'} bg-[#0c1710] overflow-hidden touch-pan-y`}
         onTouchStart={(event) => { start.current = { x: event.touches[0].clientX, y: event.touches[0].clientY }; }}
