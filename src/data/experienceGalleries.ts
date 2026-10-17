@@ -83,15 +83,15 @@ export const DEFAULT_EXPERIENCE_GALLERIES: ExperienceGallery[] = [
   {
     id: 'churrasqueiras', title: 'Churrasqueiras', shortDescription: 'Estruturas para preparar refeições ao ar livre', iconName: 'Utensils', mediaAspect: 'aspect-square', coverSrc: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/churrasqueiras/whatsapp-image-2026-10-17-at-16-02-466-1792269162208.jpeg',
     photos: [
-      { title: 'Churrasqueira no deck', caption: 'Estrutura completa e coberta para preparar refeições ao ar livre', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/churrasqueiras/whatsapp-image-2026-10-17-at-16-02-466-1792269162208.jpeg' },
-      { title: 'Churrasqueira portátil', caption: 'Opção prática junto à área verde e à fazendinha', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/churrasqueiras/02-churrasqueira-portatil-1792269361053.jpg' },
-      { title: 'Churrasqueira grande', caption: 'Amplo espaço para o preparo das refeições durante a estadia', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/churrasqueiras/03-churrasqueira-grande-1792269423100.jpg' },
+      { title: 'Churrasqueira no deck', caption: 'Estrutura completa e coberta para preparar refeições ao ar livre', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/churrasqueiras/whatsapp-image-2026-10-17-at-16-02-466-1792269162208.jpeg', size: 'cover', position: 'center 58%' },
+      { title: 'Churrasqueira portátil', caption: 'Opção prática junto à área verde e à fazendinha', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/churrasqueiras/02-churrasqueira-portatil-1792269361053.jpg', size: 'cover', position: 'center 62%' },
+      { title: 'Churrasqueira grande', caption: 'Amplo espaço para o preparo das refeições durante a estadia', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/churrasqueiras/03-churrasqueira-grande-1792269423100.jpg', size: 'cover', position: 'center 56%' },
     ],
   },
   {
     id: 'areas-verdes', title: 'Áreas verdes', shortDescription: 'Jardins, caminhos e espaços de descanso', iconName: 'Trees', mediaAspect: 'aspect-square', coverSrc: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/areas-verdes/01-fogareiro-jardim-1792269444494.jpg',
     photos: [
-      { title: 'Área verde com fogareiro', caption: 'Jardim arborizado com caminhos e espaço para aproveitar o fogareiro', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/areas-verdes/01-fogareiro-jardim-1792269444494.jpg' },
+      { title: 'Área verde com fogareiro', caption: 'Jardim arborizado com caminhos e espaço para aproveitar o fogareiro', src: 'https://gkylxuplxvauxejxeorn.supabase.co/storage/v1/object/public/site-media/experiencias/areas-verdes/01-fogareiro-jardim-1792269444494.jpg', size: 'cover', position: 'center 64%' },
     ],
   },
 ];
