@@ -60,29 +60,6 @@ export const PricingSection: React.FC<PricingSectionProps> = () => {
           <p className="text-center text-xs text-white/50 mt-4">{SEASONAL_RATES.period}</p>
         </div>
 
-        <aside className="mb-10 sm:mb-12 rounded-3xl border border-[#C29B48]/40 bg-white/5 p-6 sm:p-8" aria-labelledby="informacoes-tarifas">
-          <h3 id="informacoes-tarifas" className="font-serif text-2xl sm:text-3xl font-bold text-[#E8D4A2] mb-6">
-            Informações importantes sobre nossas tarifas
-          </h3>
-          <div className="space-y-5 text-sm text-white/75 leading-relaxed">
-            <p>
-              <strong className="text-white">Tarifas de segunda a quarta-feira:</strong>{' '}
-              os valores promocionais são válidos exclusivamente para períodos regulares de baixa temporada.
-            </p>
-            <p>
-              <strong className="text-white">Feriados, datas comemorativas e alta temporada:</strong>{' '}
-              possuem tarifas especiais, incluindo os meses de dezembro e janeiro, independentemente do dia da semana.
-            </p>
-            <p>
-              <strong className="text-white">Planejando sua hospedagem para essas datas?</strong>{' '}
-              Entre em contato com nossa equipe e solicite um orçamento personalizado.
-            </p>
-            <p className="text-white/85">
-              Será um prazer ajudar você a planejar momentos especiais em nosso SPA em meio à natureza!
-            </p>
-          </div>
-        </aside>
-
         <div className="mb-10">
           <div className="flex items-center gap-2 mb-5">
             <Calendar className="w-4 h-4 text-[#C29B48]" />
