@@ -23,6 +23,7 @@ export interface BookingInquiryDetails {
   estimatedValue: number;
   stayMode: 'express' | 'conforto';
   stayModeName: string;
+  selectedAddOns?: string[];
 }
 
 /**
@@ -112,10 +113,20 @@ export function createBookingWhatsAppLink(
   inquiry: BookingInquiryDetails,
   params?: BookingEngineParams,
 ): string {
+  const selectedAddOns = inquiry.selectedAddOns ?? [];
   const optionalDetails = [
     params?.rateCode ? `🎉 Pacote de interesse: ${params.rateCode}` : null,
-    params?.experienceId ? `🎁 Adicional de interesse: ${params.experienceId}` : null,
+    selectedAddOns.length === 0 && params?.experienceId
+      ? `🎁 Adicional de interesse: ${params.experienceId}`
+      : null,
   ].filter(Boolean);
+
+  const addOnDetails = selectedAddOns.length > 0
+    ? [
+        '🎁 Cestas e experiências de interesse:',
+        ...selectedAddOns.map((item) => `• ${item}`),
+      ]
+    : [];
 
   const message = [
     `Olá! Vim pelo site da ${BRAND_NAME} e gostaria de consultar disponibilidade:`,
@@ -129,6 +140,7 @@ export function createBookingWhatsAppLink(
     `👥 Hóspedes: ${inquiry.guests} pessoa(s)`,
     `💰 Valor Estimado: R$ ${inquiry.estimatedValue.toLocaleString('pt-BR')}`,
     ...optionalDetails,
+    ...addOnDetails,
     '',
     'Vocês têm disponibilidade para essas datas?',
   ].join('\n');
@@ -147,3 +159,4 @@ export function openBookingEngine(params?: BookingEngineParams): void {
 
   triggerPendingBooking(params);
 }
+
