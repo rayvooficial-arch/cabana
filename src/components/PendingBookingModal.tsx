@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect, useMemo, useState } from 'react';
-import { CalendarCheck, CalendarDays, ExternalLink, MessageCircle, Users, X } from 'lucide-react';
+import { CalendarCheck, CalendarDays, ExternalLink, Gift, MessageCircle, Users, X } from 'lucide-react';
 import {
   BookingEngineParams,
   createBookingWhatsAppLink,
@@ -48,7 +48,13 @@ function isHighSeason(date: Date): boolean {
 
 export const PendingBookingModal: React.FC = () => {
   const { content } = useSiteContent();
-  const { accommodations, stayModes, seasonalRates: SEASONAL_RATES, specialPackages: SPECIAL_PACKAGES } = content;
+  const {
+    accommodations,
+    stayModes,
+    experiencesAndBaskets,
+    seasonalRates: SEASONAL_RATES,
+    specialPackages: SPECIAL_PACKAGES,
+  } = content;
   const [isOpen, setIsOpen] = useState(false);
   const [currentParams, setCurrentParams] = useState<BookingEngineParams | null>(null);
   const [accommodationId, setAccommodationId] = useState('');
@@ -57,6 +63,7 @@ export const PendingBookingModal: React.FC = () => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(2);
+  const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>([]);
   const [error, setError] = useState('');
 
   const today = useMemo(() => formatInputDate(new Date()), []);
@@ -78,10 +85,30 @@ export const PendingBookingModal: React.FC = () => {
       setCheckIn('');
       setCheckOut('');
       setGuests(2);
+      setSelectedAddOnIds(
+        params?.experienceId && experiencesAndBaskets.some((item) => item.id === params.experienceId)
+          ? [params.experienceId]
+          : [],
+      );
       setError('');
       setIsOpen(true);
     });
-  }, [accommodations]);
+  }, [accommodations, experiencesAndBaskets]);
+
+  const selectedAddOnNames = useMemo(
+    () => experiencesAndBaskets
+      .filter((item) => selectedAddOnIds.includes(item.id))
+      .map((item) => item.name),
+    [experiencesAndBaskets, selectedAddOnIds],
+  );
+
+  const toggleAddOn = (id: string) => {
+    setSelectedAddOnIds((current) => (
+      current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id]
+    ));
+  };
 
   const estimate = useMemo(() => {
     if (!selectedAccommodation || nights <= 0) return 0;
@@ -160,6 +187,7 @@ export const PendingBookingModal: React.FC = () => {
         estimatedValue: estimate,
         stayMode,
         stayModeName: stayMode === 'express' ? 'Temporada Express' : 'Temporada Conforto',
+        selectedAddOns: selectedAddOnNames,
       },
       currentParams || undefined,
     );
@@ -302,6 +330,47 @@ export const PendingBookingModal: React.FC = () => {
               />
             </div>
           </label>
+
+          <fieldset className="rounded-2xl border border-[#D8CCBC] bg-white p-4">
+            <legend className="px-1 text-sm font-semibold text-[#14241A]">
+              Cestas e experiências <span className="font-normal text-[#6B746D]">(opcional)</span>
+            </legend>
+            <p className="mb-3 flex items-center gap-2 text-xs text-[#6B746D]">
+              <Gift className="h-4 w-4 shrink-0 text-[#8B6A2F]" />
+              Selecione uma ou mais opções para consultar junto com a reserva.
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {experiencesAndBaskets.map((item) => {
+                const checked = selectedAddOnIds.includes(item.id);
+                return (
+                  <label
+                    key={item.id}
+                    className={`flex cursor-pointer items-start gap-2.5 rounded-xl border px-3 py-2.5 text-xs transition-colors ${
+                      checked
+                        ? 'border-[#8B6A2F] bg-[#F3ECE2] text-[#14241A]'
+                        : 'border-[#E8DED1] bg-[#FAF7F2] text-[#526048] hover:border-[#C9B78F]'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={() => toggleAddOn(item.id)}
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-[#1C5335]"
+                    />
+                    <span>
+                      <strong className="block font-semibold">{item.name}</strong>
+                      <span className="mt-0.5 block text-[10px] text-[#7A817B]">
+                        {item.priceFormatted || (item.price ? `R$ ${item.price.toLocaleString('pt-BR')}` : 'Consultar valor')}
+                      </span>
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+            <p className="mt-3 text-[11px] text-[#6B746D]">
+              Valores e disponibilidade dos adicionais serão confirmados pela equipe.
+            </p>
+          </fieldset>
 
           {nights > 0 && selectedAccommodation && (
             <div className="rounded-2xl border border-[#D6C49C] bg-[#F3ECE2] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
