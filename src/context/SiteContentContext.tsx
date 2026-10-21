@@ -33,10 +33,18 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
 
 function mergeContent(content: Partial<SiteContent> | null): SiteContent {
   if (!content) return DEFAULT_SITE_CONTENT;
+  const publishedAddOns = content.experiencesAndBaskets || [];
+  const publishedAddOnIds = new Set(publishedAddOns.map((item) => item.id));
+  const missingDefaultAddOns = DEFAULT_SITE_CONTENT.experiencesAndBaskets.filter(
+    (item) => !publishedAddOnIds.has(item.id),
+  );
+
   return {
     accommodations: content.accommodations?.length ? content.accommodations : DEFAULT_SITE_CONTENT.accommodations,
     stayModes: content.stayModes?.express && content.stayModes?.conforto ? content.stayModes : DEFAULT_SITE_CONTENT.stayModes,
-    experiencesAndBaskets: content.experiencesAndBaskets?.length ? content.experiencesAndBaskets : DEFAULT_SITE_CONTENT.experiencesAndBaskets,
+    experiencesAndBaskets: publishedAddOns.length
+      ? [...publishedAddOns, ...missingDefaultAddOns]
+      : DEFAULT_SITE_CONTENT.experiencesAndBaskets,
     seasonalRates: content.seasonalRates?.rates ? content.seasonalRates : DEFAULT_SITE_CONTENT.seasonalRates,
     specialPackages: content.specialPackages?.length ? content.specialPackages : DEFAULT_SITE_CONTENT.specialPackages,
     experienceGalleries: content.experienceGalleries?.length ? content.experienceGalleries : DEFAULT_SITE_CONTENT.experienceGalleries,
