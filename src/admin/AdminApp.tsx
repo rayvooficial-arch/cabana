@@ -1,7 +1,8 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import {
   ArrowDown, ArrowLeft, ArrowUp, BedDouble, CheckCircle2, CircleDollarSign,
-  Eye, ImagePlus, LayoutDashboard, Loader2, LogOut, PackageOpen, Save, Trash2,
+  CircleHelp, Eye, ImagePlus, LayoutDashboard, Loader2, LogOut, PackageOpen,
+  Plus, Save, SlidersHorizontal, Trash2,
 } from 'lucide-react';
 import { DEFAULT_SITE_CONTENT, SiteContent } from '../context/SiteContentContext';
 import {
@@ -9,7 +10,7 @@ import {
   restoreAdminSession, uploadSiteMedia,
 } from '../lib/siteBackend';
 
-type Tab = 'inicio' | 'acomodacoes' | 'tarifas' | 'extras' | 'galerias';
+type Tab = 'inicio' | 'acomodacoes' | 'modalidades' | 'tarifas' | 'extras' | 'galerias' | 'duvidas';
 
 const cloneDefaults = (): SiteContent => structuredClone(DEFAULT_SITE_CONTENT);
 const asLines = (items?: string[]) => (items || []).join('\n');
@@ -133,9 +134,11 @@ export const AdminApp: React.FC = () => {
   const tabs: Array<{ id: Tab; label: string; icon: React.ComponentType<{ className?: string }> }> = [
     { id: 'inicio', label: 'Visão geral', icon: LayoutDashboard },
     { id: 'acomodacoes', label: 'Acomodações', icon: BedDouble },
+    { id: 'modalidades', label: 'Express e Conforto', icon: SlidersHorizontal },
     { id: 'tarifas', label: 'Tarifas', icon: CircleDollarSign },
     { id: 'extras', label: 'Cestas e experiências', icon: PackageOpen },
     { id: 'galerias', label: 'Galerias de lazer', icon: ImagePlus },
+    { id: 'duvidas', label: 'Perguntas frequentes', icon: CircleHelp },
   ];
 
   const movePhoto = (galleryIndex: number, photoIndex: number, direction: -1 | 1) => {
@@ -144,6 +147,14 @@ export const AdminApp: React.FC = () => {
     const next = structuredClone(draft);
     const photos = next.experienceGalleries[galleryIndex].photos;
     [photos[photoIndex], photos[nextIndex]] = [photos[nextIndex], photos[photoIndex]];
+    setDraft(next);
+  };
+
+  const moveFaq = (faqIndex: number, direction: -1 | 1) => {
+    const nextIndex = faqIndex + direction;
+    if (nextIndex < 0 || nextIndex >= draft.faqs.length) return;
+    const next = structuredClone(draft);
+    [next.faqs[faqIndex], next.faqs[nextIndex]] = [next.faqs[nextIndex], next.faqs[faqIndex]];
     setDraft(next);
   };
 
@@ -173,6 +184,8 @@ export const AdminApp: React.FC = () => {
               ['Fotos das acomodações', draft.accommodations.reduce((sum, item) => sum + (item.detailedPhotos?.length || 0), 0), 'acomodacoes' as Tab],
               ['Cestas e experiências', draft.experiencesAndBaskets.length, 'extras' as Tab],
               ['Galerias de lazer', draft.experienceGalleries.length, 'galerias' as Tab],
+              ['Perguntas frequentes', draft.faqs.length, 'duvidas' as Tab],
+              ['Modalidades de hospedagem', 2, 'modalidades' as Tab],
             ].map(([label, value, target]) => <button key={label} onClick={() => setTab(target as Tab)} className="rounded-2xl border border-[#DED2C4] bg-white p-5 text-left shadow-sm hover:shadow-md"><strong className="block font-serif text-3xl">{value}</strong><span className="mt-1 block text-sm text-[#526048]">{label}</span></button>)}
             <div className="sm:col-span-2 lg:col-span-4 rounded-3xl bg-[#14241A] p-6 text-white"><h3 className="font-serif text-2xl font-bold">Como funciona</h3><p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/70">Edite os campos, envie ou organize as fotos e depois clique em “Publicar alterações”. O site público recebe o conteúdo sem precisar de uma nova implantação.</p></div>
           </section>}
@@ -182,6 +195,27 @@ export const AdminApp: React.FC = () => {
             <div className="grid gap-4 md:grid-cols-2"><Field label="Nome" value={acc.name} onChange={(e) => { const next=structuredClone(draft); next.accommodations[index].name=e.target.value; setDraft(next); }} /><Field label="Capacidade" value={acc.capacity} onChange={(e) => { const next=structuredClone(draft); next.accommodations[index].capacity=e.target.value; setDraft(next); }} /><div className="md:col-span-2"><Field label="Frase de destaque" value={acc.tagline} onChange={(e) => { const next=structuredClone(draft); next.accommodations[index].tagline=e.target.value; setDraft(next); }} /></div><div className="md:col-span-2"><TextArea label="Descrição" value={acc.description} onChange={(e) => { const next=structuredClone(draft); next.accommodations[index].description=e.target.value; setDraft(next); }} /></div><div className="md:col-span-2"><TextArea label="Destaques — um por linha" value={asLines(acc.highlightBadges)} onChange={(e) => { const next=structuredClone(draft); next.accommodations[index].highlightBadges=fromLines(e.target.value); setDraft(next); }} /></div></div>
             <div className="mt-6 border-t border-[#E8DED1] pt-5"><div className="mb-3 flex items-center justify-between"><strong>Galeria ({acc.detailedPhotos?.length || 0})</strong><label className="cursor-pointer rounded-xl bg-[#14241A] px-4 py-2.5 text-xs font-bold text-white"><input type="file" accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" disabled={Boolean(uploading)} onChange={(e) => { const file=e.target.files?.[0]; if(file) void uploadAccommodation(file,index); e.currentTarget.value=''; }} />{uploading === `acc-${acc.id}` ? 'Enviando...' : 'Adicionar foto'}</label></div><div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">{(acc.detailedPhotos || []).map((photo, photoIndex) => <div key={`${photo.url}-${photoIndex}`} className="group relative overflow-hidden rounded-xl bg-[#10251A]"><img src={photo.url} alt={photo.title} className="aspect-square w-full object-contain" /><button aria-label="Remover foto" onClick={() => { const next=structuredClone(draft); next.accommodations[index].detailedPhotos?.splice(photoIndex,1); next.accommodations[index].galleryImages=next.accommodations[index].detailedPhotos?.map((p)=>p.url)||[]; setDraft(next); }} className="absolute right-1.5 top-1.5 rounded-full bg-red-700 p-1.5 text-white"><Trash2 className="h-3.5 w-3.5" /></button><input value={photo.title} onChange={(e)=>{const next=structuredClone(draft); if(next.accommodations[index].detailedPhotos) next.accommodations[index].detailedPhotos![photoIndex].title=e.target.value; setDraft(next);}} className="w-full bg-black/70 px-2 py-1.5 text-[10px] text-white outline-none" /></div>)}</div></div>
           </section>)}</div>}
+
+          {tab === 'modalidades' && <div className="space-y-6">
+            {(['express', 'conforto'] as const).map((mode) => {
+              const stayMode = draft.stayModes[mode];
+              const list = mode === 'express' ? stayMode.guestMustBring : (stayMode.includedItems || []);
+              return <section key={mode} className="rounded-3xl border border-[#DED2C4] bg-white p-5 shadow-sm sm:p-7">
+                <div className="mb-5">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#9C7A36]">Modalidade de hospedagem</span>
+                  <h3 className="font-serif text-2xl font-bold">{stayMode.name}</h3>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Field label="Nome da modalidade" value={stayMode.name} onChange={(event) => { const next = structuredClone(draft); next.stayModes[mode].name = event.target.value; setDraft(next); }} />
+                  <Field label="Frase de destaque" value={stayMode.tagline} onChange={(event) => { const next = structuredClone(draft); next.stayModes[mode].tagline = event.target.value; setDraft(next); }} />
+                  <div className="md:col-span-2"><TextArea label="Descrição principal" value={stayMode.explanation} onChange={(event) => { const next = structuredClone(draft); next.stayModes[mode].explanation = event.target.value; setDraft(next); }} /></div>
+                  <div className="md:col-span-2"><TextArea label="Observação final" value={mode === 'conforto' ? (stayMode.optionalNote || '') : stayMode.concept} onChange={(event) => { const next = structuredClone(draft); if (mode === 'conforto') next.stayModes[mode].optionalNote = event.target.value; else next.stayModes[mode].concept = event.target.value; setDraft(next); }} /></div>
+                  <div className="md:col-span-2"><TextArea label={mode === 'express' ? 'O hóspede leva — um item por linha' : 'Itens inclusos — um item por linha'} value={asLines(list)} onChange={(event) => { const next = structuredClone(draft); if (mode === 'express') next.stayModes[mode].guestMustBring = fromLines(event.target.value); else next.stayModes[mode].includedItems = fromLines(event.target.value); setDraft(next); }} /></div>
+                </div>
+                <p className="mt-4 rounded-xl bg-[#F3ECE2] px-4 py-3 text-xs leading-relaxed text-[#526048]">Os valores continuam sendo editados na área “Tarifas”.</p>
+              </section>;
+            })}
+          </div>}
 
           {tab === 'tarifas' && <div className="space-y-6">
             {(['express', 'conforto'] as const).map((mode) => (
@@ -214,6 +248,27 @@ export const AdminApp: React.FC = () => {
           {tab === 'extras' && <div className="space-y-5">{draft.experiencesAndBaskets.map((item,index)=><section key={item.id} className="rounded-3xl border border-[#DED2C4] bg-white p-5 sm:p-7"><div className="grid gap-4 md:grid-cols-2"><Field label="Nome" value={item.name} onChange={(e)=>{const next=structuredClone(draft); next.experiencesAndBaskets[index].name=e.target.value; setDraft(next);}} /><Field label="Valor exibido" value={item.priceFormatted || (item.price ? String(item.price) : '')} placeholder="Ex.: R$ 180 ou Consulte valores" onChange={(e)=>{const next=structuredClone(draft); next.experiencesAndBaskets[index].price=null; next.experiencesAndBaskets[index].priceFormatted=e.target.value; setDraft(next);}} /><div className="md:col-span-2"><TextArea label="Texto de apresentação" value={item.emotionalCopy} onChange={(e)=>{const next=structuredClone(draft); next.experiencesAndBaskets[index].emotionalCopy=e.target.value; setDraft(next);}} /></div><div className="md:col-span-2"><TextArea label="Itens — um por linha" value={asLines(item.items)} onChange={(e)=>{const next=structuredClone(draft); next.experiencesAndBaskets[index].items=fromLines(e.target.value); setDraft(next);}} /></div></div></section>)}</div>}
 
           {tab === 'galerias' && <div className="space-y-6">{draft.experienceGalleries.map((gallery,galleryIndex)=><section key={gallery.id} className="rounded-3xl border border-[#DED2C4] bg-white p-5 sm:p-7"><div className="mb-5 flex flex-wrap items-center justify-between gap-3"><div><span className="text-xs font-bold uppercase tracking-wider text-[#9C7A36]">Galeria de lazer</span><h3 className="font-serif text-2xl font-bold">{gallery.title}</h3></div><label className="cursor-pointer rounded-xl bg-[#14241A] px-4 py-2.5 text-xs font-bold text-white"><input type="file" accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" disabled={Boolean(uploading)} onChange={(e)=>{const file=e.target.files?.[0]; if(file) void uploadExperience(file,galleryIndex); e.currentTarget.value='';}} />{uploading === `gallery-${gallery.id}` ? 'Enviando...' : 'Adicionar foto'}</label></div><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">{gallery.photos.map((photo,photoIndex)=><div key={`${photo.src}-${photoIndex}`} className="overflow-hidden rounded-xl border border-[#DED2C4] bg-[#10251A]"><img src={photo.src} alt={photo.title} className="aspect-square w-full object-contain" /><div className="flex items-center justify-between bg-white p-1.5"><button aria-label="Mover para trás" disabled={photoIndex===0} onClick={()=>movePhoto(galleryIndex,photoIndex,-1)} className="rounded p-1 disabled:opacity-25"><ArrowUp className="h-4 w-4 -rotate-90" /></button><button aria-label="Remover" onClick={()=>{const next=structuredClone(draft); next.experienceGalleries[galleryIndex].photos.splice(photoIndex,1); setDraft(next);}} className="rounded p-1 text-red-700"><Trash2 className="h-4 w-4" /></button><button aria-label="Mover para frente" disabled={photoIndex===gallery.photos.length-1} onClick={()=>movePhoto(galleryIndex,photoIndex,1)} className="rounded p-1 disabled:opacity-25"><ArrowDown className="h-4 w-4 -rotate-90" /></button></div><input value={photo.title} onChange={(e)=>{const next=structuredClone(draft); next.experienceGalleries[galleryIndex].photos[photoIndex].title=e.target.value; setDraft(next);}} className="w-full border-t border-[#DED2C4] bg-white px-2 py-2 text-[11px] outline-none" /></div>)}</div></section>)}</div>}
+
+          {tab === 'duvidas' && <div className="space-y-5">
+            <div className="flex flex-col gap-3 rounded-2xl border border-[#DED2C4] bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div><h3 className="font-serif text-xl font-bold">Dúvidas exibidas no site</h3><p className="mt-1 text-sm text-[#526048]">Edite, organize ou adicione perguntas e respostas.</p></div>
+              <button type="button" onClick={() => { const next = structuredClone(draft); next.faqs.push({ id: `faq-${Date.now()}`, question: 'Nova pergunta', answer: 'Digite a resposta.' }); setDraft(next); }} className="flex items-center justify-center gap-2 rounded-xl bg-[#14241A] px-4 py-3 text-sm font-bold text-white"><Plus className="h-4 w-4" /> Adicionar pergunta</button>
+            </div>
+            {draft.faqs.map((faq, faqIndex) => <section key={faq.id} className="rounded-3xl border border-[#DED2C4] bg-white p-5 shadow-sm sm:p-7">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#9C7A36]">Pergunta {faqIndex + 1}</span>
+                <div className="flex items-center gap-1">
+                  <button type="button" aria-label="Mover pergunta para cima" disabled={faqIndex === 0} onClick={() => moveFaq(faqIndex, -1)} className="rounded-lg border border-[#DED2C4] p-2 disabled:opacity-30"><ArrowUp className="h-4 w-4" /></button>
+                  <button type="button" aria-label="Mover pergunta para baixo" disabled={faqIndex === draft.faqs.length - 1} onClick={() => moveFaq(faqIndex, 1)} className="rounded-lg border border-[#DED2C4] p-2 disabled:opacity-30"><ArrowDown className="h-4 w-4" /></button>
+                  <button type="button" aria-label="Remover pergunta" disabled={draft.faqs.length === 1} onClick={() => { const next = structuredClone(draft); next.faqs.splice(faqIndex, 1); setDraft(next); }} className="rounded-lg border border-red-200 p-2 text-red-700 disabled:opacity-30"><Trash2 className="h-4 w-4" /></button>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <Field label="Pergunta" value={faq.question} onChange={(event) => { const next = structuredClone(draft); next.faqs[faqIndex].question = event.target.value; setDraft(next); }} />
+                <TextArea label="Resposta" value={faq.answer} onChange={(event) => { const next = structuredClone(draft); next.faqs[faqIndex].answer = event.target.value; setDraft(next); }} />
+              </div>
+            </section>)}
+          </div>}
         </div>
       </main>
     </div>

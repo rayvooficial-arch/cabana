@@ -55,7 +55,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             <div className="flex items-start justify-between gap-4 mb-5">
               <div>
                 <span className="text-[11px] uppercase tracking-wider font-bold text-[#8A6B2E]">
-                  Mais econômica
+                  {express.tagline}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#14241A] mt-1">
                   {express.name}
@@ -65,7 +65,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             </div>
 
             <p className="text-sm text-[#526048] leading-relaxed mb-6">
-              A acomodação é entregue limpa, organizada e equipada. Você leva o seu próprio enxoval e os alimentos e bebidas que pretende consumir.
+              {express.explanation}
             </p>
 
             <div className="rounded-2xl bg-[#FAF7F2] border border-[#E8DED1] p-4 mb-6">
@@ -83,7 +83,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             </div>
 
             <p className="text-xs text-[#6B7568] mb-6">
-              Itens básicos de chegada ficam disponíveis na acomodação, conforme a modalidade contratada.
+              {express.concept}
             </p>
 
             <BookingButton
@@ -100,7 +100,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             <div className="flex items-start justify-between gap-4 mb-5">
               <div>
                 <span className="text-[11px] uppercase tracking-wider font-bold text-[#E8D4A2]">
-                  Tudo preparado
+                  {conforto.tagline}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold mt-1">
                   {conforto.name}
@@ -110,7 +110,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             </div>
 
             <p className="text-sm text-white/75 leading-relaxed mb-6">
-              Você chega com a acomodação preparada, incluindo roupas de cama, mesa e banho. Basta trazer seus itens pessoais e alimentos perecíveis.
+              {conforto.explanation}
             </p>
 
             <div className="rounded-2xl bg-white/5 border border-white/10 p-4 mb-6">
@@ -128,7 +128,7 @@ export const StayModesSection: React.FC<StayModesSectionProps> = () => {
             </div>
 
             <p className="text-xs text-white/60 mb-6">
-              Os valores variam conforme acomodação e período. Consulte a disponibilidade pelo WhatsApp.
+              {conforto.optionalNote || conforto.concept}
             </p>
 
             <BookingButton

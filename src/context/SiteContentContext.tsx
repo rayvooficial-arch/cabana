@@ -10,6 +10,7 @@ import {
   StayMode,
 } from '../data/commercial';
 import { DEFAULT_EXPERIENCE_GALLERIES, ExperienceGallery } from '../data/experienceGalleries';
+import { DEFAULT_FAQS, FaqItem } from '../data/faqs';
 import { Accommodation } from '../types';
 import { loadPublishedContent } from '../lib/siteBackend';
 
@@ -20,6 +21,7 @@ export interface SiteContent {
   seasonalRates: typeof SEASONAL_RATES;
   specialPackages: SpecialPackage[];
   experienceGalleries: ExperienceGallery[];
+  faqs: FaqItem[];
 }
 
 export const DEFAULT_SITE_CONTENT: SiteContent = {
@@ -29,6 +31,7 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
   seasonalRates: SEASONAL_RATES,
   specialPackages: SPECIAL_PACKAGES,
   experienceGalleries: DEFAULT_EXPERIENCE_GALLERIES,
+  faqs: DEFAULT_FAQS,
 };
 
 function mergeContent(content: Partial<SiteContent> | null): SiteContent {
@@ -48,6 +51,7 @@ function mergeContent(content: Partial<SiteContent> | null): SiteContent {
     seasonalRates: content.seasonalRates?.rates ? content.seasonalRates : DEFAULT_SITE_CONTENT.seasonalRates,
     specialPackages: content.specialPackages?.length ? content.specialPackages : DEFAULT_SITE_CONTENT.specialPackages,
     experienceGalleries: content.experienceGalleries?.length ? content.experienceGalleries : DEFAULT_SITE_CONTENT.experienceGalleries,
+    faqs: content.faqs?.length ? content.faqs : DEFAULT_SITE_CONTENT.faqs,
   };
 }
 
