@@ -324,6 +324,28 @@ export const EXPERIENCES_AND_BASKETS: ExperienceAddon[] = [
       'Entregamos sua cesta prontinha. Você escolhe quando acender o fogareiro, preparar seus petiscos e aproveitar cada instante. Ideal para casais, famílias e momentos especiais.',
   },
   {
+    id: 'pacote-dia-de-spa',
+    name: 'Pacote Dia de SPA',
+    emotionalCopy:
+      'Um dia para desacelerar, relaxar e cuidar de você em um ambiente acolhedor cercado pela natureza.',
+    subtitle:
+      'Escolha os tratamentos que mais combinam com você e monte seu pacote de SPA conforme seus desejos.',
+    price: null,
+    priceFormatted: 'Valores sob consulta',
+    forGuests: 'SPA das Mansões',
+    isHighlight: true,
+    ctaText: 'CONSULTAR DISPONIBILIDADE',
+    items: [
+      'Massagem relaxante corporal — alívio das tensões e sensação de bem-estar',
+      'SPA dos pés — escalda-pés aromático, esfoliação, hidratação e massagem',
+      'Massagem facial relaxante — suavidade, descanso e renovação',
+      'SPA a dois — tranquilidade, conexão e bem-estar para casais',
+      'Kits de autocuidado — sais de banho, escalda-pés, óleos aromáticos e cuidados especiais',
+    ],
+    note:
+      'Atendimentos realizados por profissionais parceiros, mediante agendamento antecipado e conforme disponibilidade. Entre em contato para conhecer as opções e reservar sua experiência.',
+  },
+  {
     id: 'pacote-escola',
     name: 'Pacote Escola – Aprender em Meio à Natureza',
     emotionalCopy:

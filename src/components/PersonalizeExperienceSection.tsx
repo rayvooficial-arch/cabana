@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coffee, Film, Fish, Flame, Gift, GraduationCap, Heart, Sandwich, Sprout } from 'lucide-react';
+import { Coffee, Film, Fish, Flame, Gift, GraduationCap, Heart, Sandwich, Sparkles, Sprout } from 'lucide-react';
 import { BookingButton } from './BookingButton';
 import { useSiteContent } from '../context/SiteContentContext';
 
@@ -37,6 +37,8 @@ export const PersonalizeExperienceSection: React.FC = () => {
                         ? Sandwich
                         : item.id === 'noite-do-fogareiro'
                           ? Flame
+                          : item.id === 'pacote-dia-de-spa'
+                            ? Sparkles
                           : item.id === 'pacote-escola'
                             ? GraduationCap
                             : Heart;
