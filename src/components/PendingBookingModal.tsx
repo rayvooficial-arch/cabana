@@ -203,8 +203,8 @@ export const PendingBookingModal: React.FC = () => {
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md overflow-y-auto"
       onClick={(event) => event.target === event.currentTarget && setIsOpen(false)}
     >
-      <div className="relative w-full max-w-2xl rounded-3xl overflow-hidden bg-[#FAF7F2] shadow-2xl border border-[#C29B48]/40">
-        <header className="relative bg-[#14241A] px-5 py-5 sm:px-7 sm:py-6 text-white">
+      <div className="relative flex max-h-[calc(100dvh-1.5rem)] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-[#C29B48]/40 bg-[#FAF7F2] shadow-2xl sm:max-h-[calc(100dvh-3rem)]">
+        <header className="relative shrink-0 bg-[#14241A] px-5 py-5 text-white sm:px-7 sm:py-6">
           <button
             type="button"
             onClick={() => setIsOpen(false)}
@@ -224,7 +224,10 @@ export const PendingBookingModal: React.FC = () => {
           </p>
         </header>
 
-        <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5">
+        <form
+          onSubmit={handleSubmit}
+          className="min-h-0 flex-1 space-y-5 overflow-y-auto overscroll-contain p-5 sm:p-7"
+        >
           <a
             href={PUBLIC_AVAILABILITY_URL}
             target="_blank"
@@ -339,7 +342,10 @@ export const PendingBookingModal: React.FC = () => {
               <Gift className="h-4 w-4 shrink-0 text-[#8B6A2F]" />
               Selecione uma ou mais opções para consultar junto com a reserva.
             </p>
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div
+              className="grid max-h-64 gap-2 overflow-y-auto overscroll-contain pr-1 sm:grid-cols-2"
+              aria-label="Opções de cestas e experiências"
+            >
               {experiencesAndBaskets.map((item) => {
                 const checked = selectedAddOnIds.includes(item.id);
                 return (
