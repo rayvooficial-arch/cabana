@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Bath, Compass, Film, Heart, ShieldCheck, Volume2, VolumeX } from 'lucide-react';
+import { Bath, CalendarDays, Film, Heart, ShieldCheck, Volume2, VolumeX } from 'lucide-react';
 import { BookingButton } from './BookingButton';
 
 const heroShortcuts = [
@@ -108,12 +108,14 @@ export const Hero: React.FC<HeroProps> = ({ videoUrl = '/herosite.mp4', hasAudio
             />
 
             <a
-              href="#acomodacoes"
-              id="hero-explore-accommodations-btn"
+              href="https://agenda-cabana-mansoes.vercel.app/"
+              id="hero-availability-calendar-btn"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-[#FAF7F2] border border-white/25 hover:border-white/40 font-semibold text-xs sm:text-sm uppercase tracking-wider backdrop-blur-md transition-all duration-300 cursor-pointer shadow-md"
             >
-              <Compass className="w-4 h-4 text-[#C29B48]" />
-              <span>Ver acomodações</span>
+              <CalendarDays className="w-4 h-4 text-[#C29B48]" />
+              <span>Ver agenda</span>
             </a>
           </div>
 
