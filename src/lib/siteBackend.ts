@@ -21,13 +21,30 @@ async function request<T>(path: string, init: RequestInit = {}, token?: string):
     },
   });
 
+  const responseText = await response.text();
+
   if (!response.ok) {
-    const payload = await response.json().catch(() => null) as { message?: string; error_description?: string } | null;
+    const payload = responseText
+      ? (() => {
+          try {
+            return JSON.parse(responseText) as { message?: string; error_description?: string };
+          } catch {
+            return null;
+          }
+        })()
+      : null;
     throw new Error(payload?.error_description || payload?.message || 'Não foi possível concluir a operação.');
   }
 
-  if (response.status === 204) return undefined as T;
-  return response.json() as Promise<T>;
+  // PostgREST pode confirmar gravações com 200/201 e corpo vazio quando
+  // `Prefer: return=minimal` é usado. Nesse caso, não há JSON para interpretar.
+  if (!responseText.trim()) return undefined as T;
+
+  try {
+    return JSON.parse(responseText) as T;
+  } catch {
+    throw new Error('O servidor retornou uma resposta inválida. Tente novamente.');
+  }
 }
 
 export async function loginAdmin(email: string, password: string): Promise<AdminSession> {
