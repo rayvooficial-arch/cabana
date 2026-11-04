@@ -14,7 +14,6 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { label: 'Acomodações', href: '#acomodacoes' },
-    { label: 'Disponibilidade', href: '#disponibilidade' },
     { label: 'Modalidades', href: '#modalidades' },
     { label: 'Lazer', href: '#estrutura' },
     { label: 'Adicionais', href: '#personalize-experiencia' },
