@@ -114,6 +114,21 @@ export const PersonalizeExperienceSection: React.FC = () => {
           })}
         </div>
 
+        <aside className="mx-auto mt-8 max-w-4xl rounded-2xl border border-[#C29B48]/35 bg-[#14241A] px-5 py-5 text-center shadow-lg sm:mt-10 sm:rounded-3xl sm:px-8 sm:py-7">
+          <p className="text-sm leading-relaxed text-white/85 sm:text-base">
+            ✨️🌿 Para que cada detalhe seja preparado com todo o carinho e cuidado que você merece,
+            solicitamos que os pedidos de Experiências e Cestas sejam realizados com antecedência
+            mínima de <strong className="text-[#E8D4A2]">48 horas (2 dias)</strong> da data desejada.
+          </p>
+          <p className="mt-3 text-sm font-semibold leading-relaxed text-[#E8D4A2] sm:text-base">
+            ✨ Pedidos sujeitos à disponibilidade e confirmação da nossa equipe.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/85 sm:text-base">
+            Planeje seus momentos especiais com antecedência e permita-nos tornar sua estadia ainda
+            mais inesquecível! ❤️
+          </p>
+        </aside>
+
         <p className="text-center text-xs text-[#6B7568] mt-8">
           Valores e disponibilidade dos adicionais podem variar. Confirme no momento da reserva.
         </p>
