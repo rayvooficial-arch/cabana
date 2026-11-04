@@ -108,14 +108,12 @@ export const Hero: React.FC<HeroProps> = ({ videoUrl = '/herosite.mp4', hasAudio
             />
 
             <a
-              href="https://agenda-cabana-mansoes.vercel.app/"
-              id="hero-availability-calendar-btn"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#tarifario"
+              id="hero-high-season-btn"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-[#FAF7F2] border border-white/25 hover:border-white/40 font-semibold text-xs sm:text-sm uppercase tracking-wider backdrop-blur-md transition-all duration-300 cursor-pointer shadow-md"
             >
               <CalendarDays className="w-4 h-4 text-[#C29B48]" />
-              <span>Ver agenda</span>
+              <span>Alta temporada</span>
             </a>
           </div>
 
